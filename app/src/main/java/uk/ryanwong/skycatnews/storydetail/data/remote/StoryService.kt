@@ -8,7 +8,7 @@ import uk.ryanwong.skycatnews.storydetail.data.remote.model.StoryDTO
 
 interface StoryService {
 
-    suspend fun getStory(storyId: Int): StoryDTO
+    suspend fun getStory(storyId: Int): Result<StoryDTO>
 
     companion object {
         const val BASE_URL = "http://192.168.1.1/"
