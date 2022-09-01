@@ -1,8 +1,10 @@
 package uk.ryanwong.skycatnews
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
+@HiltAndroidApp
 class SkyCatNewsApp : Application() {
 
     override fun onCreate() {
