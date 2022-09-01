@@ -13,6 +13,10 @@ import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.newslist.data.remote.FakeNewsListService
+import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.newslist.data.remote.NewsListService
+import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.storydetail.data.remote.FakeStoryService
+import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.storydetail.data.remote.StoryService
 import javax.inject.Singleton
 
 @Module
@@ -32,5 +36,15 @@ object DataModule {
                 )
             }
         }
+    }
+
+    @Provides
+    fun provideNewsListService(): NewsListService {
+        return FakeNewsListService()
+    }
+
+    @Provides
+    fun provideStoryService(): StoryService {
+        return FakeStoryService()
     }
 }
