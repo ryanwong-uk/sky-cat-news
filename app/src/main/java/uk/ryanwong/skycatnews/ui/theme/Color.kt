@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022. Ryan Wong (hello@ryanwong.co.uk)
+ */
+
 package uk.ryanwong.skycatnews.ui.theme
 
 import androidx.compose.ui.graphics.Color
