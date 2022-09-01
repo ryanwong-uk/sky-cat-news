@@ -1,17 +1,21 @@
 package uk.ryanwong.skycatnews
 
-import org.junit.Test
+import io.kotest.core.spec.style.FreeSpec
+import io.kotest.matchers.shouldBe
 
-import org.junit.Assert.*
+class ExampleUnitTest : FreeSpec() {
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
-class ExampleUnitTest {
-    @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    init {
+        "First sample unit test - to be removed soon" {
+            // Given
+            val one = 1
+            val two = 2
+
+            // When
+            val three = one + two
+
+            // Then
+            three shouldBe 3
+        }
     }
 }
