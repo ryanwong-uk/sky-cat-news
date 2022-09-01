@@ -4,6 +4,7 @@
 
 package uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.newslist.data.remote
 
+import uk.ryanwong.skycatnews.BuildConfig
 import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsListDTO
 
 interface NewsListService {
@@ -11,7 +12,7 @@ interface NewsListService {
     suspend fun getAllItems(): Result<NewsListDTO>
 
     companion object {
-        const val BASE_URL = "http://192.168.1.1/"
+        const val BASE_URL = BuildConfig.DEFAULT_BASE_URL
     }
 
     sealed class Endpoints(val url: String) {
