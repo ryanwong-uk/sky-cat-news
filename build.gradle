@@ -5,6 +5,7 @@ buildscript {
         kotest_version = '5.4.2'
         hilt_version = '2.43.2'
         ktor_version = '2.1.0'
+        room_version = '2.4.3'
     }
     dependencies {
         classpath 'org.jlleitschuh.gradle:ktlint-gradle:11.0.0'
