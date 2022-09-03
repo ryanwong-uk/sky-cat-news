@@ -13,103 +13,103 @@ import uk.ryanwong.skycatnews.newslist.data.remote.model.UrlDTO
 internal object NewsListServiceTestData {
 
     const val mockJsonResponse = """{
-    "title": "Sky Cat News",
-    "data": [
-    {
-        "id": "1",
-        "type": "story",
-        "headline": "Story Headline",
-        "teaserText": "Story teaser text",
-        "creationDate": "2020-11-18T00:00:00Z",
-        "modifiedDate": "2020-11-19T00:00:00Z",
-        "teaserImage": {
-        "_links": {
-        "url": {
-        "href": "",
-        "templated": true,
-        "type": "image/jpeg"
-    }
-    },
-        "accessibilityText": "Image content description"
-    }
-    },
-    {
-        "id": "2",
-        "type": "story",
-        "headline": "Story Headline",
-        "teaserText": "Story teaser text",
-        "creationDate": "2020-11-18T00:00:00Z",
-        "modifiedDate": "2020-11-19T00:00:00Z",
-        "teaserImage": {
-        "_links": {
-        "url": {
-        "href": "",
-        "templated": true,
-        "type": "image/jpeg"
-    }
-    },
-        "accessibilityText": "Image content description"
-    }
-    },
-    {
-        "type": "advert",
-        "url": "advert/url"
-    },
-    {
-        "id": "3",
-        "type": "weblink",
-        "headline": "Weblink headline",
-        "weblinkUrl": "weblink url",
-        "creationDate": "2020-11-18T00:00:00Z",
-        "modifiedDate": "2020-11-19T00:00:00Z",
-        "teaserImage": {
-        "_links": {
-        "url": {
-        "href": "",
-        "templated": true,
-        "type": "image/jpeg"
-    }
-    },
-        "accessibilityText": "Image content description"
-    }
-    },
-    {
-        "id": "4",
-        "type": "story",
-        "headline": "Story headline",
-        "teaserText": "Story teaser text",
-        "creationDate": "2020-11-18T00:00:00Z",
-        "modifiedDate": "2020-11-19T00:00:00Z",
-        "teaserImage": {
-        "_links": {
-        "url": {
-        "href": "",
-        "templated": true,
-        "type": "image/jpeg"
-    }
-    },
-        "accessibilityText": "Image content description"
-    }
-    },
-    {
-        "id": "5",
-        "type": "weblink",
-        "headline": "Weblink headline",
-        "weblinkUrl": "",
-        "creationDate": "2020-11-18T00:00:00Z",
-        "modifiedDate": "2020-11-19T00:00:00Z",
-        "teaserImage": {
-        "_links": {
-        "url": {
-        "href": "",
-        "templated": true,
-        "type": "image/jpeg"
-    }
-    },
-        "accessibilityText": "Image content description"
-    }
-    }
-    ]
+   "title":"Sky Cat News",
+   "data":[
+      {
+         "id":"1",
+         "type":"story",
+         "headline":"Story Headline",
+         "teaserText":"Story teaser text",
+         "creationDate":"2020-11-18T00:00:00Z",
+         "modifiedDate":"2020-11-19T00:00:00Z",
+         "teaserImage":{
+            "_links":{
+               "url":{
+                  "href":"",
+                  "templated":true,
+                  "type":"image/jpeg"
+               }
+            },
+            "accessibilityText":"Image content description"
+         }
+      },
+      {
+         "id":"2",
+         "type":"story",
+         "headline":"Story Headline",
+         "teaserText":"Story teaser text",
+         "creationDate":"2020-11-18T00:00:00Z",
+         "modifiedDate":"2020-11-19T00:00:00Z",
+         "teaserImage":{
+            "_links":{
+               "url":{
+                  "href":"",
+                  "templated":true,
+                  "type":"image/jpeg"
+               }
+            },
+            "accessibilityText":"Image content description"
+         }
+      },
+      {
+         "type":"advert",
+         "url":"advert/url"
+      },
+      {
+         "id":"3",
+         "type":"weblink",
+         "headline":"Weblink headline",
+         "weblinkUrl":"weblink url",
+         "creationDate":"2020-11-18T00:00:00Z",
+         "modifiedDate":"2020-11-19T00:00:00Z",
+         "teaserImage":{
+            "_links":{
+               "url":{
+                  "href":"",
+                  "templated":true,
+                  "type":"image/jpeg"
+               }
+            },
+            "accessibilityText":"Image content description"
+         }
+      },
+      {
+         "id":"4",
+         "type":"story",
+         "headline":"Story headline",
+         "teaserText":"Story teaser text",
+         "creationDate":"2020-11-18T00:00:00Z",
+         "modifiedDate":"2020-11-19T00:00:00Z",
+         "teaserImage":{
+            "_links":{
+               "url":{
+                  "href":"",
+                  "templated":true,
+                  "type":"image/jpeg"
+               }
+            },
+            "accessibilityText":"Image content description"
+         }
+      },
+      {
+         "id":"5",
+         "type":"weblink",
+         "headline":"Weblink headline",
+         "weblinkUrl":"",
+         "creationDate":"2020-11-18T00:00:00Z",
+         "modifiedDate":"2020-11-19T00:00:00Z",
+         "teaserImage":{
+            "_links":{
+               "url":{
+                  "href":"",
+                  "templated":true,
+                  "type":"image/jpeg"
+               }
+            },
+            "accessibilityText":"Image content description"
+         }
+      }
+   ]
 }
 """
 
