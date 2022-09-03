@@ -6,11 +6,14 @@ package uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.newslist.data.local.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 
-@Entity(tableName = "news_items")
+@Entity(
+    tableName = "news_items",
+    primaryKeys = ["list_id", "news_id"]
+)
 data class NewsItemEntity(
-    @PrimaryKey
+    @ColumnInfo(name = "list_id")
+    val listId: Int,
     @ColumnInfo(name = "news_id")
     val newsId: Int,
     val type: String,
