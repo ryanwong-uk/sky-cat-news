@@ -2,14 +2,14 @@
  * Copyright (c) 2022. Ryan Wong (hello@ryanwong.co.uk)
  */
 
-package uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.newslist.data.local
+package uk.ryanwong.skycatnews.newslist.data.local
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.newslist.data.local.model.NewsItemEntity
-import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.newslist.data.local.model.NewsListEntity
+import uk.ryanwong.skycatnews.newslist.data.local.model.NewsItemEntity
+import uk.ryanwong.skycatnews.newslist.data.local.model.NewsListEntity
 
 @Dao
 interface NewsListDao {

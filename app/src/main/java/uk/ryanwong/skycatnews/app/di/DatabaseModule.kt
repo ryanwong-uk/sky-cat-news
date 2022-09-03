@@ -2,7 +2,7 @@
  * Copyright (c) 2022. Ryan Wong (hello@ryanwong.co.uk)
  */
 
-package uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.di
+package uk.ryanwong.skycatnews.di
 
 import android.content.Context
 import androidx.room.Room
@@ -12,8 +12,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import uk.ryanwong.skycatnews.R
-import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.app.database.LocalDatabase
-import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.app.database.LocalDatabaseImpl
+import uk.ryanwong.skycatnews.app.database.LocalDatabase
+import uk.ryanwong.skycatnews.app.database.LocalDatabaseImpl
 import javax.inject.Singleton
 
 @Module

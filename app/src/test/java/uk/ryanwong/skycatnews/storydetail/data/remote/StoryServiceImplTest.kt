@@ -21,8 +21,6 @@ import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.Json
 import uk.ryanwong.skycatnews.storydetail.data.remote.model.StoryDTO
-import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.storydetail.data.remote.StoryService
-import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.storydetail.data.remote.StoryServiceImpl
 
 @OptIn(ExperimentalCoroutinesApi::class)
 internal class StoryServiceImplTest : FreeSpec() {

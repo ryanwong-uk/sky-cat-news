@@ -21,8 +21,6 @@ import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.Json
 import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsListDTO
-import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.newslist.data.remote.NewsListService
-import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.newslist.data.remote.NewsListServiceImpl
 
 @OptIn(ExperimentalCoroutinesApi::class)
 internal class NewsListServiceImplTest : FreeSpec() {

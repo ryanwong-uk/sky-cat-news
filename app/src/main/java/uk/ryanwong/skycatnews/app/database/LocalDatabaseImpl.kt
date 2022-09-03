@@ -2,16 +2,16 @@
  * Copyright (c) 2022. Ryan Wong (hello@ryanwong.co.uk)
  */
 
-package uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.app.database
+package uk.ryanwong.skycatnews.app.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.newslist.data.local.NewsListDao
-import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.newslist.data.local.model.NewsItemEntity
-import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.newslist.data.local.model.NewsListEntity
-import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.storydetail.data.local.StoryDao
-import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.storydetail.data.local.model.ContentEntity
-import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.storydetail.data.local.model.StoryEntity
+import uk.ryanwong.skycatnews.newslist.data.local.NewsListDao
+import uk.ryanwong.skycatnews.newslist.data.local.model.NewsItemEntity
+import uk.ryanwong.skycatnews.newslist.data.local.model.NewsListEntity
+import uk.ryanwong.skycatnews.storydetail.data.local.StoryDao
+import uk.ryanwong.skycatnews.storydetail.data.local.model.ContentEntity
+import uk.ryanwong.skycatnews.storydetail.data.local.model.StoryEntity
 
 @Database(
     entities = [
