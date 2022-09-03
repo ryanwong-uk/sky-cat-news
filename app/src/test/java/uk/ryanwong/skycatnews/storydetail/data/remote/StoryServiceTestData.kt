@@ -10,7 +10,7 @@ import uk.ryanwong.skycatnews.storydetail.data.remote.model.StoryDTO
 
 object StoryServiceTestData {
 
-    val mockJsonResponse = """{
+    const val mockJsonResponse = """{
   "id": "1",
   "headline": "Cat story headline",
   "heroImage": {

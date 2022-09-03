@@ -12,7 +12,7 @@ import uk.ryanwong.skycatnews.newslist.data.remote.model.UrlDTO
 
 internal object NewsListServiceTestData {
 
-    val mockJsonResponse = """{
+    const val mockJsonResponse = """{
     "title": "Sky Cat News",
     "data": [
     {
