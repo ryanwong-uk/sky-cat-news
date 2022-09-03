@@ -15,9 +15,9 @@ data class ContentEntity(
     val sequenceId: Int,
     @ColumnInfo(name = "story_id")
     val storyId: Int,
+    val type: String,
+    val url: String,
     @ColumnInfo(name = "accessibility_text")
     val accessibilityText: String,
     val text: String,
-    val type: String,
-    val url: String,
 )
