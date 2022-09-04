@@ -18,6 +18,7 @@ import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsListDto
 import uk.ryanwong.skycatnews.newslist.domain.model.NewsList
 import java.net.ConnectException
 import java.net.UnknownHostException
+import uk.ryanwong.skycatnews.app.exception.RemoteSourceFailedWithNoCacheException
 
 class NewsListRepositoryImpl(
     private val newsListService: NewsListService,
@@ -44,7 +45,7 @@ class NewsListRepositoryImpl(
                         -> {
                             val newsList = getNewsListFromLocalDatabase()
                             if (newsList.isEmpty()) {
-                                throw Exception("Error receiving data from server. No cached content available.")
+                                throw RemoteSourceFailedWithNoCacheException()
                             } else {
                                 return@runCatching newsList
                             }
