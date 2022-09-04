@@ -18,7 +18,7 @@ import io.ktor.utils.io.ByteReadChannel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.Json
-import uk.ryanwong.skycatnews.storydetail.data.remote.model.StoryDTO
+import uk.ryanwong.skycatnews.storydetail.data.remote.model.StoryDto
 
 @OptIn(ExperimentalCoroutinesApi::class)
 internal class StoryServiceImplTest : FreeSpec() {
@@ -51,7 +51,7 @@ internal class StoryServiceImplTest : FreeSpec() {
 
     init {
         "getStory" - {
-            "Should return StoryDTO if API request is successful" {
+            "Should return StoryDto if API request is successful" {
                 runTest {
                     // Given
                     setupDataSource(
@@ -61,15 +61,15 @@ internal class StoryServiceImplTest : FreeSpec() {
                     )
 
                     // When
-                    val storyDTO = storyService.getStory(storyId = 1)
+                    val storyDto = storyService.getStory(storyId = 1)
 
                     // Then
-                    storyDTO.isSuccess shouldBe true
-                    storyDTO.getOrNull() shouldBe StoryServiceTestData.mockStoryDTO
+                    storyDto.isSuccess shouldBe true
+                    storyDto.getOrNull() shouldBe StoryServiceTestData.mockStoryDto
                 }
             }
 
-            "Should return an empty StoryDTO object if API request is successful with empty body" {
+            "Should return an empty StoryDto object if API request is successful with empty body" {
                 runTest {
                     // Given
                     setupDataSource(
@@ -79,11 +79,11 @@ internal class StoryServiceImplTest : FreeSpec() {
                     )
 
                     // When
-                    val storyDTO = storyService.getStory(storyId = 1)
+                    val storyDto = storyService.getStory(storyId = 1)
 
                     // Then
-                    storyDTO.isSuccess shouldBe true
-                    storyDTO.getOrNull() shouldBe StoryDTO()
+                    storyDto.isSuccess shouldBe true
+                    storyDto.getOrNull() shouldBe StoryDto()
                 }
             }
 
@@ -97,11 +97,11 @@ internal class StoryServiceImplTest : FreeSpec() {
                     )
 
                     // When
-                    val storyDTO = storyService.getStory(storyId = 1)
+                    val storyDto = storyService.getStory(storyId = 1)
 
                     // Then
-                    storyDTO.isFailure shouldBe true
-                    storyDTO.exceptionOrNull() shouldBe Exception("Bad Gateway")
+                    storyDto.isFailure shouldBe true
+                    storyDto.exceptionOrNull() shouldBe Exception("Bad Gateway")
                 }
             }
         }

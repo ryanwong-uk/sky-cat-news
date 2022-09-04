@@ -39,13 +39,13 @@ data class NewsItemEntity(
     val teaserImageAccessibilityText: String?,
 ) {
     companion object {
-        fun fromDTO(listId: Int, newsItemDTO: List<NewsItemDto>?): List<NewsItemEntity>? {
-            return newsItemDTO?.mapNotNull { newsItem ->
+        fun fromDto(listId: Int, newsItemDto: List<NewsItemDto>?): List<NewsItemEntity>? {
+            return newsItemDto?.mapNotNull { newsItem ->
                 with(newsItem) {
-                    id?.let {
+                    id?.let { newsId ->
                         NewsItemEntity(
                             listId = listId,
-                            newsId = id,
+                            newsId = newsId,
                             type = type,
                             headline = headline,
                             creationDate = creationDate,

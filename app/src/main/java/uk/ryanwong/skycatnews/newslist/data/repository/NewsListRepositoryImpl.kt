@@ -54,8 +54,8 @@ class NewsListRepositoryImpl(
                         }
                     }
                 } else {
-                    networkResult.getOrNull()?.let { newsListDTO ->
-                        updateLocalDatabase(newsListDTO = newsListDTO)
+                    networkResult.getOrNull()?.let { newsListDto ->
+                        updateLocalDatabase(newsListDto = newsListDto)
                     }
                     return@runCatching getNewsListFromLocalDatabase()
                 }
@@ -70,18 +70,18 @@ class NewsListRepositoryImpl(
         return NewsList.fromEntity(title = title, newsItemEntities = newsItemEntities)
     }
 
-    private suspend fun updateLocalDatabase(newsListDTO: NewsListDto) {
+    private suspend fun updateLocalDatabase(newsListDto: NewsListDto) {
         newsListDao.insertNewsListTitle(
             newsListEntity = NewsListEntity(
                 listId = listId,
-                title = newsListDTO.title,
+                title = newsListDto.title,
             )
         )
 
         // Cleaning up DB first, as we are not using paging and the API behaviour is not clearly defined
         newsListDao.deleteNewsItems(listId = listId)
 
-        NewsItemEntity.fromDTO(listId = listId, newsItemDTO = newsListDTO.news)?.let { newsItems ->
+        NewsItemEntity.fromDto(listId = listId, newsItemDto = newsListDto.news)?.let { newsItems ->
             newsListDao.insertNewsItems(
                 newsItems = newsItems,
             )

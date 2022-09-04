@@ -52,7 +52,7 @@ internal class NewsListServiceImplTest : FreeSpec() {
     init {
 
         "getAllItems" - {
-            "Should return NewsListDTO if API request is successful" {
+            "Should return NewsListDto if API request is successful" {
                 runTest {
                     // Given
                     setupDataSource(
@@ -62,15 +62,15 @@ internal class NewsListServiceImplTest : FreeSpec() {
                     )
 
                     // When
-                    val newsListDTO = newsListService.getAllItems()
+                    val newsListDto = newsListService.getAllItems()
 
                     // Then
-                    newsListDTO.isSuccess shouldBe true
-                    newsListDTO.getOrNull() shouldBe NewsListServiceTestData.mockNewsListDto
+                    newsListDto.isSuccess shouldBe true
+                    newsListDto.getOrNull() shouldBe NewsListServiceTestData.mockNewsListDto
                 }
             }
 
-            "Should return an empty NewsListDTO object if API request is successful with empty body" {
+            "Should return an empty NewsListDto object if API request is successful with empty body" {
                 runTest {
                     // Given
                     setupDataSource(
@@ -80,11 +80,11 @@ internal class NewsListServiceImplTest : FreeSpec() {
                     )
 
                     // When
-                    val newsListDTO = newsListService.getAllItems()
+                    val newsListDto = newsListService.getAllItems()
 
                     // Then
-                    newsListDTO.isSuccess shouldBe true
-                    newsListDTO.getOrNull() shouldBe NewsListDto()
+                    newsListDto.isSuccess shouldBe true
+                    newsListDto.getOrNull() shouldBe NewsListDto()
                 }
             }
 
@@ -98,11 +98,11 @@ internal class NewsListServiceImplTest : FreeSpec() {
                     )
 
                     // When
-                    val newsListDTO = newsListService.getAllItems()
+                    val newsListDto = newsListService.getAllItems()
 
                     // Then
-                    newsListDTO.isFailure shouldBe true
-                    newsListDTO.exceptionOrNull() shouldBe Exception("Bad Gateway")
+                    newsListDto.isFailure shouldBe true
+                    newsListDto.exceptionOrNull() shouldBe Exception("Bad Gateway")
                 }
             }
         }

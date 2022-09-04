@@ -5,11 +5,11 @@
 package uk.ryanwong.skycatnews.storydetail.data.remote
 
 import uk.ryanwong.skycatnews.BuildConfig
-import uk.ryanwong.skycatnews.storydetail.data.remote.model.StoryDTO
+import uk.ryanwong.skycatnews.storydetail.data.remote.model.StoryDto
 
 interface StoryService {
 
-    suspend fun getStory(storyId: Int): Result<StoryDTO>
+    suspend fun getStory(storyId: Int): Result<StoryDto>
 
     companion object {
         const val BASE_URL = BuildConfig.DEFAULT_BASE_URL

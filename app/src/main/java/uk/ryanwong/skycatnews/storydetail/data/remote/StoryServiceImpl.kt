@@ -11,13 +11,13 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.http.appendPathSegments
 import kotlinx.coroutines.CancellationException
 import uk.ryanwong.skycatnews.except
-import uk.ryanwong.skycatnews.storydetail.data.remote.model.StoryDTO
+import uk.ryanwong.skycatnews.storydetail.data.remote.model.StoryDto
 
 class StoryServiceImpl(
     private val httpClient: HttpClient,
 ) : StoryService {
 
-    override suspend fun getStory(storyId: Int): Result<StoryDTO> {
+    override suspend fun getStory(storyId: Int): Result<StoryDto> {
         return Result.runCatching {
 
             val response = httpClient.get(StoryService.Endpoints.GetAllItems.url) {
@@ -28,8 +28,8 @@ class StoryServiceImpl(
 
             when (response.status) {
                 HttpStatusCode.OK -> {
-                    val body: StoryDTO? = response.body()
-                    body ?: StoryDTO()
+                    val body: StoryDto? = response.body()
+                    body ?: StoryDto()
                 }
                 else -> {
                     throw Exception(response.status.description)

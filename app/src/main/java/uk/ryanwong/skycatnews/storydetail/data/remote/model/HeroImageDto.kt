@@ -7,9 +7,7 @@ package uk.ryanwong.skycatnews.storydetail.data.remote.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ContentDTO(
+data class HeroImageDto(
     val accessibilityText: String? = null,
-    val text: String? = null,
-    val type: String? = null,
-    val url: String? = null,
+    val imageUrl: String? = null,
 )
