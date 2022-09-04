@@ -8,15 +8,17 @@ enum class NewsType {
     UNKNOWN,
     STORY,
     ADVERT,
-    WEBLINK,
-}
+    WEBLINK;
 
-fun NewsType.parse(newsType: String?): NewsType {
-    return newsType?.let {
-        try {
-            NewsType.valueOf(it)
-        } catch (e: IllegalArgumentException) {
-            NewsType.UNKNOWN
+    companion object {
+        fun parse(newsType: String?): NewsType {
+            return newsType?.let {
+                try {
+                    NewsType.valueOf(it)
+                } catch (e: IllegalArgumentException) {
+                    NewsType.UNKNOWN
+                }
+            } ?: NewsType.UNKNOWN
         }
-    } ?: NewsType.UNKNOWN
+    }
 }
