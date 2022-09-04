@@ -17,17 +17,17 @@ interface StoryDao {
     suspend fun getStory(storyId: Int): StoryEntity?
 
     @Query("SELECT * FROM contents WHERE story_id = :storyId order by sequence_id ASC")
-    suspend fun getContent(storyId: Int): List<ContentEntity>
+    suspend fun getContents(storyId: Int): List<ContentEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertStory(story: StoryEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertContent(content: List<ContentEntity>)
+    suspend fun insertContents(contents: List<ContentEntity>)
 
     @Query("DELETE FROM stories WHERE story_id = :storyId ")
     suspend fun deleteStory(storyId: Int)
 
     @Query("DELETE FROM contents WHERE story_id = :storyId ")
-    suspend fun deleteContent(storyId: Int)
+    suspend fun deleteContents(storyId: Int)
 }
