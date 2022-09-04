@@ -11,5 +11,5 @@ import kotlinx.serialization.Serializable
 data class NewsListDto(
     @SerialName(value = "data")
     val news: List<NewsItemDto>? = null,
-    val title: String? = null,
+    val title: String,
 )

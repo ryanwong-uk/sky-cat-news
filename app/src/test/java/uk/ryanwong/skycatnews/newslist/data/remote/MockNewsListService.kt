@@ -10,7 +10,7 @@ internal class MockNewsListService : NewsListService {
     var mockGetAllItemsResponseException: Exception? = null
     var mockGetAllItemsResponse: Result<NewsListDto>? = null
 
-    override suspend fun getAllItems(): Result<NewsListDto> {
+    override suspend fun getAllItems(): Result<NewsListDto?> {
         mockGetAllItemsResponseException?.let { throw it }
         return mockGetAllItemsResponse ?: throw Exception("mock response not defined")
     }

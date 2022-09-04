@@ -16,15 +16,14 @@ class NewsListServiceImpl(
     private val httpClient: HttpClient,
 ) : NewsListService {
 
-    override suspend fun getAllItems(): Result<NewsListDto> {
+    override suspend fun getAllItems(): Result<NewsListDto?> {
         return Result.runCatching {
 
             val response = httpClient.get(NewsListService.Endpoints.GetAllItems.url)
 
             when (response.status) {
                 HttpStatusCode.OK -> {
-                    val body: NewsListDto? = response.body()
-                    body ?: NewsListDto()
+                    return@runCatching response.body<NewsListDto?>()
                 }
                 else -> {
                     throw Exception(response.status.description)

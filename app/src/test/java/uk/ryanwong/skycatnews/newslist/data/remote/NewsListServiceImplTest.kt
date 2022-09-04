@@ -70,7 +70,7 @@ internal class NewsListServiceImplTest : FreeSpec() {
                 }
             }
 
-            "Should return an empty NewsListDto object if API request is successful with empty body" {
+            "Should return null if API request is successful with empty body" {
                 runTest {
                     // Given
                     setupDataSource(
@@ -84,7 +84,7 @@ internal class NewsListServiceImplTest : FreeSpec() {
 
                     // Then
                     newsListDto.isSuccess shouldBe true
-                    newsListDto.getOrNull() shouldBe NewsListDto()
+                    newsListDto.getOrNull() shouldBe null
                 }
             }
 

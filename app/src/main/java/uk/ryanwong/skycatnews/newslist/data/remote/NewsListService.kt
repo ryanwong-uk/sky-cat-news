@@ -9,7 +9,7 @@ import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsListDto
 
 interface NewsListService {
 
-    suspend fun getAllItems(): Result<NewsListDto>
+    suspend fun getAllItems(): Result<NewsListDto?>
 
     companion object {
         const val BASE_URL = BuildConfig.DEFAULT_BASE_URL

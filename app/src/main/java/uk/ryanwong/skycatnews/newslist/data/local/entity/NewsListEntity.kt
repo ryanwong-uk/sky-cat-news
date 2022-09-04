@@ -13,5 +13,5 @@ data class NewsListEntity(
     @PrimaryKey
     @ColumnInfo(name = "list_id")
     val listId: Int,
-    val title: String?,
+    val title: String,
 )

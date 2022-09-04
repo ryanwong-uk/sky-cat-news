@@ -20,9 +20,9 @@ data class NewsItemEntity(
     val type: String?,
     val headline: String?,
     @ColumnInfo(name = "creation_date")
-    val creationDate: String?,
+    val creationDate: String,
     @ColumnInfo(name = "modified_date")
-    val modifiedDate: String?,
+    val modifiedDate: String,
     val url: String?,
     @ColumnInfo(name = "weblink_url")
     val weblinkUrl: String?,
@@ -39,26 +39,33 @@ data class NewsItemEntity(
     val teaserImageAccessibilityText: String?,
 ) {
     companion object {
-        fun fromDto(listId: Int, newsItemDto: List<NewsItemDto>?): List<NewsItemEntity>? {
-            return newsItemDto?.mapNotNull { newsItem ->
+        fun fromDto(listId: Int, newsItemDtoList: List<NewsItemDto>?): List<NewsItemEntity>? {
+            return newsItemDtoList?.map { newsItem ->
                 with(newsItem) {
-                    id?.let { newsId ->
-                        NewsItemEntity(
-                            listId = listId,
-                            newsId = newsId,
-                            type = type,
-                            headline = headline,
-                            creationDate = creationDate,
-                            modifiedDate = modifiedDate,
-                            url = url,
-                            weblinkUrl = weblinkUrl,
-                            teaserText = teaserText,
-                            teaserImageHref = teaserImage?.links?.url?.href,
-                            teaserImageTemplated = teaserImage?.links?.url?.templated,
-                            teaserImageType = teaserImage?.links?.url?.type,
-                            teaserImageAccessibilityText = teaserImage?.accessibilityText,
-                        )
+
+                    /***
+                     * The type "advert" is not in the current scope, and it does not follow
+                     * the format of story and weblink, we drop them for now.
+                     */
+                    if (id == null || creationDate == null || modifiedDate == null) {
+                        return null
                     }
+
+                    NewsItemEntity(
+                        listId = listId,
+                        newsId = id,
+                        type = type,
+                        headline = headline,
+                        creationDate = creationDate,
+                        modifiedDate = modifiedDate,
+                        url = url,
+                        weblinkUrl = weblinkUrl,
+                        teaserText = teaserText,
+                        teaserImageHref = teaserImage?.links?.url?.href,
+                        teaserImageTemplated = teaserImage?.links?.url?.templated,
+                        teaserImageType = teaserImage?.links?.url?.type,
+                        teaserImageAccessibilityText = teaserImage?.accessibilityText,
+                    )
                 }
             }
         }

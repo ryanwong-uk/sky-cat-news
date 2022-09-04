@@ -82,7 +82,7 @@ class NewsListRepositoryImpl(
         // Cleaning up DB first, as we are not using paging and the API behaviour is not clearly defined
         newsListDao.deleteNewsItems(listId = listId)
 
-        NewsItemEntity.fromDto(listId = listId, newsItemDto = newsListDto.news)?.let { newsItems ->
+        NewsItemEntity.fromDto(listId = listId, newsItemDtoList = newsListDto.news)?.let { newsItems ->
             newsListDao.insertNewsItems(
                 newsItems = newsItems,
             )

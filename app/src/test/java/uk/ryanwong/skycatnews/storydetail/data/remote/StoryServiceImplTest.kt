@@ -69,7 +69,7 @@ internal class StoryServiceImplTest : FreeSpec() {
                 }
             }
 
-            "Should return an empty StoryDto object if API request is successful with empty body" {
+            "Should return an null if API request is successful with empty body" {
                 runTest {
                     // Given
                     setupDataSource(
@@ -83,7 +83,7 @@ internal class StoryServiceImplTest : FreeSpec() {
 
                     // Then
                     storyDto.isSuccess shouldBe true
-                    storyDto.getOrNull() shouldBe StoryDto()
+                    storyDto.getOrNull() shouldBe null
                 }
             }
 
