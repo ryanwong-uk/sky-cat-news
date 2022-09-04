@@ -17,7 +17,7 @@ class StoryServiceImpl(
     private val httpClient: HttpClient,
 ) : StoryService {
 
-    override suspend fun getStory(storyId: Int): Result<StoryDto> {
+    override suspend fun getStory(storyId: Int): Result<StoryDto?> {
         return Result.runCatching {
 
             val response = httpClient.get(StoryService.Endpoints.GetAllItems.url) {
@@ -28,8 +28,7 @@ class StoryServiceImpl(
 
             when (response.status) {
                 HttpStatusCode.OK -> {
-                    val body: StoryDto? = response.body()
-                    body ?: StoryDto()
+                    return@runCatching response.body<StoryDto?>()
                 }
                 else -> {
                     throw Exception(response.status.description)

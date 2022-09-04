@@ -8,10 +8,10 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StoryDto(
-    val id: Int? = null,
+    val id: Int,
     val contents: List<ContentDto>? = null,
-    val creationDate: String? = null,
     val headline: String? = null,
     val heroImage: HeroImageDto? = null,
-    val modifiedDate: String? = null,
+    val creationDate: String,
+    val modifiedDate: String,
 )

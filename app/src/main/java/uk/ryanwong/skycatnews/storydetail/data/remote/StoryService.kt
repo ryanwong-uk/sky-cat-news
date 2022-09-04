@@ -9,7 +9,7 @@ import uk.ryanwong.skycatnews.storydetail.data.remote.model.StoryDto
 
 interface StoryService {
 
-    suspend fun getStory(storyId: Int): Result<StoryDto>
+    suspend fun getStory(storyId: Int): Result<StoryDto?>
 
     companion object {
         const val BASE_URL = BuildConfig.DEFAULT_BASE_URL

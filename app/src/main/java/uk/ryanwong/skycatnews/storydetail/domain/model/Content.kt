@@ -19,7 +19,7 @@ data class Content(
             return contentEntities.map { contentEntity ->
                 Content(
                     accessibilityText = contentEntity.accessibilityText,
-                    text = contentEntity.text,
+                    text = contentEntity.text ?: "",
                     type = StoryContentType.parse(contentEntity.type),
                     url = contentEntity.url
                 )

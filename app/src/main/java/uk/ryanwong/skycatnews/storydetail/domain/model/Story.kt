@@ -13,7 +13,7 @@ data class Story(
     val date: String,
     val headline: String,
     val heroImageAccessibilityText: String?,
-    val heroImageUrl: String,
+    val heroImageUrl: String?,
 ) {
     companion object {
         fun fromEntity(
@@ -25,7 +25,7 @@ data class Story(
                     id = story.storyId,
                     contents = Content.fromEntity(contentEntities = contentEntities),
                     date = story.modifiedDate,
-                    headline = story.headline,
+                    headline = story.headline ?: "",
                     heroImageAccessibilityText = story.heroImageAccessibilityText,
                     heroImageUrl = story.heroImageUrl
                 )

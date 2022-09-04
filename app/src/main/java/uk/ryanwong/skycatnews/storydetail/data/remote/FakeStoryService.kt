@@ -8,7 +8,7 @@ import uk.ryanwong.skycatnews.storydetail.data.remote.model.ContentDto
 import uk.ryanwong.skycatnews.storydetail.data.remote.model.HeroImageDto
 import uk.ryanwong.skycatnews.storydetail.data.remote.model.StoryDto
 
-class FakeStoryService() : StoryService {
+class FakeStoryService : StoryService {
     override suspend fun getStory(storyId: Int): Result<StoryDto> {
         return Result.success(
             StoryDto(
