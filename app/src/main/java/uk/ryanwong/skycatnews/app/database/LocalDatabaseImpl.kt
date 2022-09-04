@@ -24,6 +24,6 @@ import uk.ryanwong.skycatnews.storydetail.data.local.model.StoryEntity
     exportSchema = true
 )
 abstract class LocalDatabaseImpl : LocalDatabase, RoomDatabase() {
-    abstract override fun NewsListDao(): NewsListDao
-    abstract override fun StoryDao(): StoryDao
+    abstract override fun newsListDao(): NewsListDao
+    abstract override fun storyDao(): StoryDao
 }

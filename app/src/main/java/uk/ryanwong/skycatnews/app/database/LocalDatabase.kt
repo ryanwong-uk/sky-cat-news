@@ -8,6 +8,6 @@ import uk.ryanwong.skycatnews.newslist.data.local.NewsListDao
 import uk.ryanwong.skycatnews.storydetail.data.local.StoryDao
 
 interface LocalDatabase {
-    fun NewsListDao(): NewsListDao
-    fun StoryDao(): StoryDao
+    fun newsListDao(): NewsListDao
+    fun storyDao(): StoryDao
 }

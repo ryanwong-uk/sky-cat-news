@@ -17,6 +17,6 @@ object DaoModule {
     @Provides
     fun provideStoryDao(database: LocalDatabase):
         StoryDao {
-        return database.StoryDao()
+        return database.storyDao()
     }
 }

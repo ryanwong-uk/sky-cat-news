@@ -17,6 +17,6 @@ object DaoModule {
     @Provides
     fun provideNewsListDao(database: LocalDatabase):
         NewsListDao {
-        return database.NewsListDao()
+        return database.newsListDao()
     }
 }
