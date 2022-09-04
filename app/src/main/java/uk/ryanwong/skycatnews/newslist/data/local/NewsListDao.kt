@@ -20,14 +20,14 @@ interface NewsListDao {
     suspend fun getNewsList(listId: Int): List<NewsItemEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNewsList(
-        newsListTitle: NewsListEntity,
-        newsItems: List<NewsItemEntity>,
-    )
+    suspend fun insertNewsItems(newsItems: List<NewsItemEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertNewsListTitle(newsListEntity: NewsListEntity)
 
     @Query("DELETE FROM news_list WHERE list_id = :listId ")
     suspend fun deleteListTitle(listId: Int)
 
     @Query("DELETE FROM news_items WHERE list_id = :listId ")
-    suspend fun deleteNewsList(listId: Int)
+    suspend fun deleteNewsItems(listId: Int)
 }

@@ -4,8 +4,10 @@
 
 package uk.ryanwong.skycatnews.newslist.domain.model
 
+import uk.ryanwong.skycatnews.newslist.data.local.model.NewsItemEntity
+
 data class NewsItem(
-    val id: Int,
+    val newsId: Int,
     val headline: String,
     val teaserText: String,
     val modifiedDate: String,
@@ -15,6 +17,20 @@ data class NewsItem(
 ) {
     companion object {
 
-        // TODO: fromDataModel
+        fun fromEntity(newsItemEntities: List<NewsItemEntity>): List<NewsItem> {
+            return newsItemEntities.map { newsItemEntity ->
+                with(newsItemEntity) {
+                    NewsItem(
+                        newsId = newsId,
+                        headline = headline ?: "",
+                        teaserText = teaserText ?: "",
+                        modifiedDate = modifiedDate ?: "",
+                        teaserImageUrl = teaserImageHref ?: "",
+                        type = NewsType.valueOf(type ?: ""),
+                        url = url
+                    )
+                }
+            }
+        }
     }
 }

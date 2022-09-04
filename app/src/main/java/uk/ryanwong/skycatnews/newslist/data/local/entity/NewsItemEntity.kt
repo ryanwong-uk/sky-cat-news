@@ -6,6 +6,7 @@ package uk.ryanwong.skycatnews.newslist.data.local.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsItemDTO
 
 @Entity(
     tableName = "news_items",
@@ -16,24 +17,50 @@ data class NewsItemEntity(
     val listId: Int,
     @ColumnInfo(name = "news_id")
     val newsId: Int,
-    val type: String,
-    val headline: String,
+    val type: String?,
+    val headline: String?,
     @ColumnInfo(name = "creation_date")
-    val creationDate: String,
+    val creationDate: String?,
     @ColumnInfo(name = "modified_date")
-    val modifiedDate: String,
-    val url: String,
+    val modifiedDate: String?,
+    val url: String?,
     @ColumnInfo(name = "weblink_url")
-    val weblinkUrl: String,
+    val weblinkUrl: String?,
 
     @ColumnInfo(name = "teaser_text")
-    val teaserText: String,
+    val teaserText: String?,
     @ColumnInfo(name = "teaser_image_href")
-    val teaserImageHref: String,
+    val teaserImageHref: String?,
     @ColumnInfo(name = "teaser_image_templated")
-    val teaserImageTemplated: Boolean,
+    val teaserImageTemplated: Boolean?,
     @ColumnInfo(name = "teaser_image_type")
-    val teaserImageType: String,
+    val teaserImageType: String?,
     @ColumnInfo(name = "teaser_image_accessibility_text")
-    val teaserImageAccessibilityText: String,
-)
+    val teaserImageAccessibilityText: String?,
+) {
+    companion object {
+        fun fromDTO(listId: Int, newsItemDTO: List<NewsItemDTO>?): List<NewsItemEntity>? {
+            return newsItemDTO?.mapNotNull { newsItem ->
+                with(newsItem) {
+                    id?.let {
+                        NewsItemEntity(
+                            listId = listId,
+                            newsId = id,
+                            type = type,
+                            headline = headline,
+                            creationDate = creationDate,
+                            modifiedDate = modifiedDate,
+                            url = url,
+                            weblinkUrl = weblinkUrl,
+                            teaserText = teaserText,
+                            teaserImageHref = teaserImage?.links?.url?.href,
+                            teaserImageTemplated = teaserImage?.links?.url?.templated,
+                            teaserImageType = teaserImage?.links?.url?.type,
+                            teaserImageAccessibilityText = teaserImage?.accessibilityText,
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
