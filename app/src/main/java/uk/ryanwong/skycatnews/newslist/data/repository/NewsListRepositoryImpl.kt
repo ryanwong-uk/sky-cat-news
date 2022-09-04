@@ -7,8 +7,8 @@ package uk.ryanwong.skycatnews.newslist.data.repository
 import io.ktor.client.plugins.HttpRequestTimeoutException
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import uk.ryanwong.skycatnews.app.di.DispatcherModule
 import uk.ryanwong.skycatnews.except
 import uk.ryanwong.skycatnews.newslist.data.local.NewsListDao
 import uk.ryanwong.skycatnews.newslist.data.local.model.NewsItemEntity
@@ -22,7 +22,7 @@ import java.net.UnknownHostException
 class NewsListRepositoryImpl(
     private val newsListService: NewsListService,
     private val newsListDao: NewsListDao,
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
+    @DispatcherModule.IoDispatcher private val dispatcher: CoroutineDispatcher,
 ) : NewsListRepository {
 
     // For now Sky Cat News is good enough to always assign listId = 1
