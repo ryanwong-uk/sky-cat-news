@@ -16,8 +16,6 @@ import io.ktor.http.headersOf
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.utils.io.ByteReadChannel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.Json
 import uk.ryanwong.skycatnews.storydetail.data.remote.model.StoryDTO
@@ -25,14 +23,8 @@ import uk.ryanwong.skycatnews.storydetail.data.remote.model.StoryDTO
 @OptIn(ExperimentalCoroutinesApi::class)
 internal class StoryServiceImplTest : FreeSpec() {
 
-    private lateinit var scope: TestScope
     private lateinit var httpClient: HttpClient
     private lateinit var storyService: StoryService
-
-    private fun setupDispatcher() {
-        val dispatcher = StandardTestDispatcher()
-        scope = TestScope(dispatcher)
-    }
 
     private fun setupDataSource(status: HttpStatusCode, payload: String, contentType: String) {
         val mockEngine = MockEngine {
@@ -60,8 +52,7 @@ internal class StoryServiceImplTest : FreeSpec() {
     init {
         "getStory" - {
             "Should return StoryDTO if API request is successful" {
-                setupDispatcher()
-                scope.runTest {
+                runTest {
                     // Given
                     setupDataSource(
                         status = HttpStatusCode.OK,
@@ -79,8 +70,7 @@ internal class StoryServiceImplTest : FreeSpec() {
             }
 
             "Should return an empty StoryDTO object if API request is successful with empty body" {
-                setupDispatcher()
-                scope.runTest {
+                runTest {
                     // Given
                     setupDataSource(
                         status = HttpStatusCode.OK,
@@ -98,8 +88,7 @@ internal class StoryServiceImplTest : FreeSpec() {
             }
 
             "Should return null if API request returns HTTP Error" {
-                setupDispatcher()
-                scope.runTest {
+                runTest {
                     // Given
                     setupDataSource(
                         status = HttpStatusCode.BadGateway,
