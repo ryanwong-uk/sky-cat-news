@@ -8,8 +8,8 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class TeaserImageDTO(
+data class TeaserImageDto(
     @SerialName(value = "_links")
-    val links: LinksDTO? = null,
+    val links: LinksDto? = null,
     val accessibilityText: String? = null,
 )

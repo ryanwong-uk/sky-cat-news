@@ -4,11 +4,12 @@
 
 package uk.ryanwong.skycatnews.newslist.data.remote.model
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class UrlDTO(
-    val href: String? = null,
-    val templated: Boolean? = null,
-    val type: String? = null,
+data class NewsListDto(
+    @SerialName(value = "data")
+    val news: List<NewsItemDto>? = null,
+    val title: String? = null,
 )

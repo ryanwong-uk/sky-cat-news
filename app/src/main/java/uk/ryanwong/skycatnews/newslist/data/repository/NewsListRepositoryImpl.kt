@@ -14,7 +14,7 @@ import uk.ryanwong.skycatnews.newslist.data.local.NewsListDao
 import uk.ryanwong.skycatnews.newslist.data.local.model.NewsItemEntity
 import uk.ryanwong.skycatnews.newslist.data.local.model.NewsListEntity
 import uk.ryanwong.skycatnews.newslist.data.remote.NewsListService
-import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsListDTO
+import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsListDto
 import uk.ryanwong.skycatnews.newslist.data.repository.NewsListRepository
 import uk.ryanwong.skycatnews.newslist.domain.model.NewsItem
 import java.net.ConnectException
@@ -70,7 +70,7 @@ class NewsListRepositoryImpl(
         return newsListDao.getNewsListTitle(listId = listId)
     }
 
-    private suspend fun updateLocalDatabase(newsListDTO: NewsListDTO) {
+    private suspend fun updateLocalDatabase(newsListDTO: NewsListDto) {
         newsListDao.insertNewsListTitle(
             newsListEntity = NewsListEntity(
                 listId = listId,

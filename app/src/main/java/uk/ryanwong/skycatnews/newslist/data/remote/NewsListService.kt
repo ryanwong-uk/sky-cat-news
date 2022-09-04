@@ -5,11 +5,11 @@
 package uk.ryanwong.skycatnews.newslist.data.remote
 
 import uk.ryanwong.skycatnews.BuildConfig
-import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsListDTO
+import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsListDto
 
 interface NewsListService {
 
-    suspend fun getAllItems(): Result<NewsListDTO>
+    suspend fun getAllItems(): Result<NewsListDto>
 
     companion object {
         const val BASE_URL = BuildConfig.DEFAULT_BASE_URL

@@ -20,7 +20,7 @@ import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.Json
-import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsListDTO
+import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsListDto
 
 @OptIn(ExperimentalCoroutinesApi::class)
 internal class NewsListServiceImplTest : FreeSpec() {
@@ -75,7 +75,7 @@ internal class NewsListServiceImplTest : FreeSpec() {
 
                     // Then
                     newsListDTO.isSuccess shouldBe true
-                    newsListDTO.getOrNull() shouldBe NewsListServiceTestData.mockNewsListDTO
+                    newsListDTO.getOrNull() shouldBe NewsListServiceTestData.mockNewsListDto
                 }
             }
 
@@ -94,7 +94,7 @@ internal class NewsListServiceImplTest : FreeSpec() {
 
                     // Then
                     newsListDTO.isSuccess shouldBe true
-                    newsListDTO.getOrNull() shouldBe NewsListDTO()
+                    newsListDTO.getOrNull() shouldBe NewsListDto()
                 }
             }
 

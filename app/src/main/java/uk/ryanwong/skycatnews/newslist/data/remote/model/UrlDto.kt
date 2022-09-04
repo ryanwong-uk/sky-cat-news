@@ -7,6 +7,8 @@ package uk.ryanwong.skycatnews.newslist.data.remote.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class LinksDTO(
-    val url: UrlDTO? = null,
+data class UrlDto(
+    val href: String? = null,
+    val templated: Boolean? = null,
+    val type: String? = null,
 )

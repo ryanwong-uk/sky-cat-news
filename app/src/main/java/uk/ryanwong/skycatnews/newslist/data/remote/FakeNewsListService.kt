@@ -4,25 +4,25 @@
 
 package uk.ryanwong.skycatnews.newslist.data.remote
 
-import uk.ryanwong.skycatnews.newslist.data.remote.model.LinksDTO
-import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsItemDTO
-import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsListDTO
-import uk.ryanwong.skycatnews.newslist.data.remote.model.TeaserImageDTO
-import uk.ryanwong.skycatnews.newslist.data.remote.model.UrlDTO
+import uk.ryanwong.skycatnews.newslist.data.remote.model.LinksDto
+import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsItemDto
+import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsListDto
+import uk.ryanwong.skycatnews.newslist.data.remote.model.TeaserImageDto
+import uk.ryanwong.skycatnews.newslist.data.remote.model.UrlDto
 
 class FakeNewsListService : NewsListService {
-    override suspend fun getAllItems(): Result<NewsListDTO> {
+    override suspend fun getAllItems(): Result<NewsListDto> {
         return Result.success(
-            NewsListDTO(
+            NewsListDto(
                 news = listOf(
-                    NewsItemDTO(
+                    NewsItemDto(
                         creationDate = "2020-11-18T00:00:00Z",
                         headline = "Story Headline",
                         id = 1,
                         modifiedDate = "2020-11-19T00:00:00Z",
-                        teaserImage = TeaserImageDTO(
-                            links = LinksDTO(
-                                url = UrlDTO(
+                        teaserImage = TeaserImageDto(
+                            links = LinksDto(
+                                url = UrlDto(
                                     href = "",
                                     templated = true,
                                     type = "image/jpeg"
@@ -35,14 +35,14 @@ class FakeNewsListService : NewsListService {
                         url = null,
                         weblinkUrl = null
                     ),
-                    NewsItemDTO(
+                    NewsItemDto(
                         creationDate = "2020-11-18T00:00:00Z",
                         headline = "Story Headline",
                         id = 2,
                         modifiedDate = "2020-11-19T00:00:00Z",
-                        teaserImage = TeaserImageDTO(
-                            links = LinksDTO(
-                                url = UrlDTO(
+                        teaserImage = TeaserImageDto(
+                            links = LinksDto(
+                                url = UrlDto(
                                     href = "",
                                     templated = true,
                                     type = "image/jpeg"
@@ -55,7 +55,7 @@ class FakeNewsListService : NewsListService {
                         url = null,
                         weblinkUrl = null
                     ),
-                    NewsItemDTO(
+                    NewsItemDto(
                         creationDate = null,
                         headline = null,
                         id = null,
@@ -66,14 +66,14 @@ class FakeNewsListService : NewsListService {
                         url = "advert/url",
                         weblinkUrl = null
                     ),
-                    NewsItemDTO(
+                    NewsItemDto(
                         creationDate = "2020-11-18T00:00:00Z",
                         headline = "Weblink headline",
                         id = 3,
                         modifiedDate = "2020-11-19T00:00:00Z",
-                        teaserImage = TeaserImageDTO(
-                            links = LinksDTO(
-                                url = UrlDTO(
+                        teaserImage = TeaserImageDto(
+                            links = LinksDto(
+                                url = UrlDto(
                                     href = "",
                                     templated = true,
                                     type = "image/jpeg"
@@ -86,14 +86,14 @@ class FakeNewsListService : NewsListService {
                         url = null,
                         weblinkUrl = "weblink url"
                     ),
-                    NewsItemDTO(
+                    NewsItemDto(
                         creationDate = "2020-11-18T00:00:00Z",
                         headline = "Story headline",
                         id = 4,
                         modifiedDate = "2020-11-19T00:00:00Z",
-                        teaserImage = TeaserImageDTO(
-                            links = LinksDTO(
-                                url = UrlDTO(
+                        teaserImage = TeaserImageDto(
+                            links = LinksDto(
+                                url = UrlDto(
                                     href = "",
                                     templated = true,
                                     type = "image/jpeg"
@@ -106,14 +106,14 @@ class FakeNewsListService : NewsListService {
                         url = null,
                         weblinkUrl = null
                     ),
-                    NewsItemDTO(
+                    NewsItemDto(
                         creationDate = "2020-11-18T00:00:00Z",
                         headline = "Weblink headline",
                         id = 5,
                         modifiedDate = "2020-11-19T00:00:00Z",
-                        teaserImage = TeaserImageDTO(
-                            links = LinksDTO(
-                                url = UrlDTO(
+                        teaserImage = TeaserImageDto(
+                            links = LinksDto(
+                                url = UrlDto(
                                     href = "",
                                     templated = true,
                                     type = "image/jpeg"

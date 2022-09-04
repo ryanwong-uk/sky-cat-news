@@ -6,7 +6,7 @@ package uk.ryanwong.skycatnews.newslist.data.local.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsItemDTO
+import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsItemDto
 
 @Entity(
     tableName = "news_items",
@@ -39,7 +39,7 @@ data class NewsItemEntity(
     val teaserImageAccessibilityText: String?,
 ) {
     companion object {
-        fun fromDTO(listId: Int, newsItemDTO: List<NewsItemDTO>?): List<NewsItemEntity>? {
+        fun fromDTO(listId: Int, newsItemDTO: List<NewsItemDto>?): List<NewsItemEntity>? {
             return newsItemDTO?.mapNotNull { newsItem ->
                 with(newsItem) {
                     id?.let {
