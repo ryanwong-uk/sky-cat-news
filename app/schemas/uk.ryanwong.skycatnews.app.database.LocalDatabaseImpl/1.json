@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "c2b612fb93d252eb2fd8724a813335fa",
+    "identityHash": "29cb033c8593d9ec89e82f37211cd780",
     "entities": [
       {
         "tableName": "news_items",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`list_id` INTEGER NOT NULL, `news_id` INTEGER NOT NULL, `type` TEXT, `headline` TEXT, `creation_date` TEXT, `modified_date` TEXT, `url` TEXT, `weblink_url` TEXT, `teaser_text` TEXT, `teaser_image_href` TEXT, `teaser_image_templated` INTEGER, `teaser_image_type` TEXT, `teaser_image_accessibility_text` TEXT, PRIMARY KEY(`list_id`, `news_id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`list_id` INTEGER NOT NULL, `news_id` INTEGER NOT NULL, `type` TEXT, `headline` TEXT, `creation_date` TEXT NOT NULL, `modified_date` TEXT NOT NULL, `url` TEXT, `weblink_url` TEXT, `teaser_text` TEXT, `teaser_image_href` TEXT, `teaser_image_templated` INTEGER, `teaser_image_type` TEXT, `teaser_image_accessibility_text` TEXT, PRIMARY KEY(`list_id`, `news_id`))",
         "fields": [
           {
             "fieldPath": "listId",
@@ -36,13 +36,13 @@
             "fieldPath": "creationDate",
             "columnName": "creation_date",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "modifiedDate",
             "columnName": "modified_date",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "url",
@@ -99,7 +99,7 @@
       },
       {
         "tableName": "news_list",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`list_id` INTEGER NOT NULL, `title` TEXT, PRIMARY KEY(`list_id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`list_id` INTEGER NOT NULL, `title` TEXT NOT NULL, PRIMARY KEY(`list_id`))",
         "fields": [
           {
             "fieldPath": "listId",
@@ -111,7 +111,7 @@
             "fieldPath": "title",
             "columnName": "title",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -125,7 +125,7 @@
       },
       {
         "tableName": "contents",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sequence_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `story_id` INTEGER NOT NULL, `type` TEXT NOT NULL, `url` TEXT NOT NULL, `accessibility_text` TEXT NOT NULL, `text` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sequence_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `story_id` INTEGER NOT NULL, `type` TEXT, `url` TEXT, `accessibility_text` TEXT, `text` TEXT)",
         "fields": [
           {
             "fieldPath": "sequenceId",
@@ -143,25 +143,25 @@
             "fieldPath": "type",
             "columnName": "type",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "url",
             "columnName": "url",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "accessibilityText",
             "columnName": "accessibility_text",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "text",
             "columnName": "text",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -175,7 +175,7 @@
       },
       {
         "tableName": "stories",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`story_id` INTEGER NOT NULL, `headline` TEXT NOT NULL, `hero_image_url` TEXT NOT NULL, `hero_image_accessibility_text` TEXT NOT NULL, `creation_date` TEXT NOT NULL, `modified_date` TEXT NOT NULL, PRIMARY KEY(`story_id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`story_id` INTEGER NOT NULL, `headline` TEXT, `hero_image_url` TEXT, `hero_image_accessibility_text` TEXT, `creation_date` TEXT NOT NULL, `modified_date` TEXT NOT NULL, PRIMARY KEY(`story_id`))",
         "fields": [
           {
             "fieldPath": "storyId",
@@ -187,19 +187,19 @@
             "fieldPath": "headline",
             "columnName": "headline",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "heroImageUrl",
             "columnName": "hero_image_url",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "heroImageAccessibilityText",
             "columnName": "hero_image_accessibility_text",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "creationDate",
@@ -227,7 +227,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c2b612fb93d252eb2fd8724a813335fa')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '29cb033c8593d9ec89e82f37211cd780')"
     ]
   }
 }
