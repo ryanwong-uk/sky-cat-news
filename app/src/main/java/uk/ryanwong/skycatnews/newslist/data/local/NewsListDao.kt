@@ -14,7 +14,7 @@ import uk.ryanwong.skycatnews.newslist.data.local.model.NewsListEntity
 @Dao
 interface NewsListDao {
     @Query("SELECT title FROM news_list WHERE list_id = :listId LIMIT 1")
-    suspend fun getNewsListTitle(listId: Int): String
+    suspend fun getNewsListTitle(listId: Int): String?
 
     @Query("SELECT * FROM news_items WHERE list_id = :listId ORDER BY modified_date DESC")
     suspend fun getNewsList(listId: Int): List<NewsItemEntity>

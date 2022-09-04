@@ -66,7 +66,7 @@ class NewsListRepositoryImpl(
         }
     }
 
-    override suspend fun getNewsListTitle(): String {
+    override suspend fun getNewsListTitle(): String? {
         return newsListDao.getNewsListTitle(listId = listId)
     }
 
@@ -74,7 +74,7 @@ class NewsListRepositoryImpl(
         newsListDao.insertNewsListTitle(
             newsListEntity = NewsListEntity(
                 listId = listId,
-                title = newsListDTO.title ?: "",
+                title = newsListDTO.title,
             )
         )
 

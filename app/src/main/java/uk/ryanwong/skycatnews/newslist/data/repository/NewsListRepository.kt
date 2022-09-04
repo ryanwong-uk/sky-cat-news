@@ -10,5 +10,5 @@ interface NewsListRepository {
 
     suspend fun getNewsList(): Result<List<NewsItem>>
 
-    suspend fun getNewsListTitle(): String
+    suspend fun getNewsListTitle(): String?
 }
