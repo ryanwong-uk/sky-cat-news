@@ -37,7 +37,7 @@ class NewsListRepositoryImpl(
                 if (networkResult.isFailure) {
                     val throwable = networkResult.exceptionOrNull()
                     when (throwable) {
-                        null,
+                        null, // should not happen
                         is UnknownHostException,
                         is ConnectException,
                         is HttpRequestTimeoutException,
