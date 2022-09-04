@@ -16,8 +16,6 @@ import io.ktor.http.headersOf
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.utils.io.ByteReadChannel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.Json
 import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsListDto
@@ -25,14 +23,8 @@ import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsListDto
 @OptIn(ExperimentalCoroutinesApi::class)
 internal class NewsListServiceImplTest : FreeSpec() {
 
-    private lateinit var scope: TestScope
     private lateinit var httpClient: HttpClient
     private lateinit var newsListService: NewsListService
-
-    private fun setupDispatcher() {
-        val dispatcher = StandardTestDispatcher()
-        scope = TestScope(dispatcher)
-    }
 
     private fun setupDataSource(status: HttpStatusCode, payload: String, contentType: String) {
         val mockEngine = MockEngine {
@@ -61,8 +53,7 @@ internal class NewsListServiceImplTest : FreeSpec() {
 
         "getAllItems" - {
             "Should return NewsListDTO if API request is successful" {
-                setupDispatcher()
-                scope.runTest {
+                runTest {
                     // Given
                     setupDataSource(
                         status = HttpStatusCode.OK,
@@ -80,8 +71,7 @@ internal class NewsListServiceImplTest : FreeSpec() {
             }
 
             "Should return an empty NewsListDTO object if API request is successful with empty body" {
-                setupDispatcher()
-                scope.runTest {
+                runTest {
                     // Given
                     setupDataSource(
                         status = HttpStatusCode.OK,
@@ -99,8 +89,7 @@ internal class NewsListServiceImplTest : FreeSpec() {
             }
 
             "Should return null if API request returns HTTP Error" {
-                setupDispatcher()
-                scope.runTest {
+                runTest {
                     // Given
                     setupDataSource(
                         status = HttpStatusCode.BadGateway,
