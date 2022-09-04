@@ -8,7 +8,7 @@ enum class NewsType {
     UNKNOWN,
     STORY,
     ADVERT,
-    WEBLINK
+    WEBLINK,
 }
 
 fun NewsType.parse(newsType: String?): NewsType {

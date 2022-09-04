@@ -2,7 +2,7 @@
  * Copyright (c) 2022. Ryan Wong (hello@ryanwong.co.uk)
  */
 
-package uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.newslist.data.repository
+package uk.ryanwong.skycatnews.newslist.data.repository
 
 import io.ktor.client.plugins.HttpRequestTimeoutException
 import kotlinx.coroutines.CancellationException
@@ -15,8 +15,7 @@ import uk.ryanwong.skycatnews.newslist.data.local.model.NewsItemEntity
 import uk.ryanwong.skycatnews.newslist.data.local.model.NewsListEntity
 import uk.ryanwong.skycatnews.newslist.data.remote.NewsListService
 import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsListDto
-import uk.ryanwong.skycatnews.newslist.data.repository.NewsListRepository
-import uk.ryanwong.skycatnews.newslist.domain.model.NewsItem
+import uk.ryanwong.skycatnews.newslist.domain.model.NewsList
 import java.net.ConnectException
 import java.net.UnknownHostException
 
@@ -30,44 +29,45 @@ class NewsListRepositoryImpl(
     // Hardcoded until API returns more than one lists that comes with their own Ids
     private val listId = 1
 
-    override suspend fun getNewsList(): Result<List<NewsItem>> {
+    override suspend fun getNewsList(): Result<NewsList> {
         return withContext(dispatcher) {
-
-            val networkResult = newsListService.getAllItems().onSuccess { newsListDTO ->
-                updateLocalDatabase(newsListDTO = newsListDTO)
-            }
-
-            val newsList =
-                NewsItem.fromEntity(newsItemEntities = newsListDao.getNewsList(listId = listId))
-
             Result.runCatching {
-                if (networkResult.isSuccess) {
-                    newsList
-                } else {
-                    networkResult.exceptionOrNull()?.let { exception ->
-                        when (exception) {
-                            is UnknownHostException,
-                            is ConnectException,
-                            is HttpRequestTimeoutException,
-                            -> {
-                                if (newsList.isNotEmpty()) {
-                                    newsList
-                                } else {
-                                    throw Exception("Error receiving data from server. No cached content available.")
-                                }
-                            }
-                            else -> {
-                                throw exception
+                val networkResult = newsListService.getAllItems()
+
+                if (networkResult.isFailure) {
+                    val throwable = networkResult.exceptionOrNull()
+                    when (throwable) {
+                        null,
+                        is UnknownHostException,
+                        is ConnectException,
+                        is HttpRequestTimeoutException,
+                        -> {
+                            val newsList = getNewsListFromLocalDatabase()
+                            if (newsList.isEmpty()) {
+                                throw Exception("Error receiving data from server. No cached content available.")
+                            } else {
+                                return@runCatching newsList
                             }
                         }
-                    } ?: newsList
+                        else -> {
+                            throw throwable
+                        }
+                    }
+                } else {
+                    networkResult.getOrNull()?.let { newsListDTO ->
+                        updateLocalDatabase(newsListDTO = newsListDTO)
+                    }
+                    return@runCatching getNewsListFromLocalDatabase()
                 }
             }.except<CancellationException, _>()
         }
     }
 
-    override suspend fun getNewsListTitle(): String? {
-        return newsListDao.getNewsListTitle(listId = listId)
+    private suspend fun getNewsListFromLocalDatabase(): NewsList {
+        val newsItemEntities = newsListDao.getNewsList(listId = listId)
+        val title = newsListDao.getNewsListTitle(listId = listId)
+
+        return NewsList.fromEntity(title = title, newsItemEntities = newsItemEntities)
     }
 
     private suspend fun updateLocalDatabase(newsListDTO: NewsListDto) {
@@ -78,7 +78,7 @@ class NewsListRepositoryImpl(
             )
         )
 
-        // Cleaning up DB first, as we are not using paging and the API behaviour is unknown
+        // Cleaning up DB first, as we are not using paging and the API behaviour is not clearly defined
         newsListDao.deleteNewsItems(listId = listId)
 
         NewsItemEntity.fromDTO(listId = listId, newsItemDTO = newsListDTO.news)?.let { newsItems ->

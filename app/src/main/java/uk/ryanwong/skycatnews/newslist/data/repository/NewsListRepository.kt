@@ -4,11 +4,8 @@
 
 package uk.ryanwong.skycatnews.newslist.data.repository
 
-import uk.ryanwong.skycatnews.newslist.domain.model.NewsItem
+import uk.ryanwong.skycatnews.newslist.domain.model.NewsList
 
 interface NewsListRepository {
-
-    suspend fun getNewsList(): Result<List<NewsItem>>
-
-    suspend fun getNewsListTitle(): String?
+    suspend fun getNewsList(): Result<NewsList>
 }
