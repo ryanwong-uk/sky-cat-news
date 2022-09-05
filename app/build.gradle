@@ -10,6 +10,26 @@ plugins {
 android {
     compileSdk 33
 
+    signingConfigs {
+        release
+    }
+
+    def isRunningOnBitrise = System.getenv("BITRISE") == "true"
+    if (isRunningOnBitrise) {
+        signingConfigs.release.storeFile = file(System.getenv("HOME") + "/keystores/release.jks")
+        signingConfigs.release.storePassword = System.getenv("BITRISEIO_ANDROID_KEYSTORE_PASSWORD")
+        signingConfigs.release.keyAlias = System.getenv("BITRISEIO_ANDROID_KEYSTORE_ALIAS")
+        signingConfigs.release.keyPassword = System.getenv("BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
+
+    } else {
+        Properties keyProps = new Properties()
+        keyProps.load(new FileInputStream(file('../../keystore.properties')))
+        signingConfigs.release.storeFile = file(keyProps["store"])
+        signingConfigs.release.keyAlias = keyProps["alias"]
+        signingConfigs.release.storePassword = keyProps["storePass"]
+        signingConfigs.release.keyPassword = keyProps["pass"]
+    }
+
     defaultConfig {
         applicationId "uk.ryanwong.skycatnews"
         minSdk 23
@@ -22,6 +42,9 @@ android {
             useSupportLibrary true
         }
 
+        // Bundle output filename
+        setProperty("archivesBaseName", "skycatnews-" + versionName + "-" + new Date().format('yyyyMMdd-HHmmss'))
+
         buildConfigField "String", "DEFAULT_BASE_URL", '"http://192.168.1.1"'
 
         javaCompileOptions {
@@ -32,9 +55,33 @@ android {
     }
 
     buildTypes {
-        release {
+        debug {
+            applicationIdSuffix '.debug'
             minifyEnabled false
+
+            signingConfig signingConfigs.release
+            applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    def date = new Date()
+                    def formattedDate = date.format('yyyyMMdd-HHmmss')
+                    outputFileName = "skycatnews-${variant.name}-${variant.versionName}-${formattedDate}.apk"
+                }
+            }
+        }
+
+        release {
+            shrinkResources true
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            signingConfig signingConfigs.release
+            applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    def date = new Date()
+                    def formattedDate = date.format('yyyyMMdd-HHmmss')
+                    outputFileName = "skycatnews-${variant.name}-${variant.versionName}-${formattedDate}.apk"
+                }
+            }
         }
     }
     compileOptions {
@@ -115,6 +162,9 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     testImplementation "androidx.room:room-testing:$room_version"
+
+    // debugImplementation because LeakCanary should only run in debug builds.
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.9.1'
 }
 
 tasks.koverMergedHtmlReport {
