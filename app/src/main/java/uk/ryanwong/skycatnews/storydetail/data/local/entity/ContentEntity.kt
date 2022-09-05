@@ -23,7 +23,7 @@ data class ContentEntity(
     val text: String?,
 ) {
     companion object {
-        fun fromDto(storyId: Int, contentDtoList: List<ContentDto>?): List<ContentEntity>? {
+        fun fromDto(storyId: Int, contentDtoList: List<ContentDto>?): List<ContentEntity> {
             return contentDtoList?.map { content ->
                 with(content) {
                     ContentEntity(
@@ -34,7 +34,7 @@ data class ContentEntity(
                         text = text
                     )
                 }
-            }
+            } ?: emptyList()
         }
     }
 }

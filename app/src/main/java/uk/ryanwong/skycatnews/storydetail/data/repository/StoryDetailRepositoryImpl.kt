@@ -72,9 +72,8 @@ class StoryDetailRepositoryImpl(
         // Cleaning up DB first, as we are not using paging and the API behaviour is not clearly defined
         storyDao.deleteContents(storyDto.id)
 
-        ContentEntity.fromDto(storyId = storyDto.id, contentDtoList = storyDto.contents)
-            ?.let { contents ->
-                storyDao.insertContents(contents = contents)
-            }
+        val contents =
+            ContentEntity.fromDto(storyId = storyDto.id, contentDtoList = storyDto.contents)
+        storyDao.insertContents(contents = contents)
     }
 }
