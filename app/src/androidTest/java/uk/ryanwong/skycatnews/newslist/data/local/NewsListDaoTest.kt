@@ -65,21 +65,6 @@ internal class NewsListDaoTest {
     }
 
     @Test
-    fun emptyTable_InsertNullTitle_ReturnNullTitle() = runTest {
-        // Given
-        val listId = 1
-        val listTitle = null
-        newsListDao.getNewsListTitle(listId = listId) shouldBe null
-
-        // When
-        newsListDao.insertNewsListTitle(NewsListEntity(listId = listId, title = listTitle))
-
-        // Then
-        val returnedTitle = newsListDao.getNewsListTitle(listId = listId)
-        returnedTitle shouldBe listTitle
-    }
-
-    @Test
     fun existingListTitle_UpdateListTitle_ReturnUpdatedListTitle() = runTest {
         // Given
         val listId = 1
