@@ -9,16 +9,16 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import uk.ryanwong.skycatnews.app.di.DispatcherModule
+import uk.ryanwong.skycatnews.app.exception.RemoteSourceFailedWithNoCacheException
 import uk.ryanwong.skycatnews.except
 import uk.ryanwong.skycatnews.newslist.data.local.NewsListDao
-import uk.ryanwong.skycatnews.newslist.data.local.model.NewsItemEntity
-import uk.ryanwong.skycatnews.newslist.data.local.model.NewsListEntity
+import uk.ryanwong.skycatnews.newslist.data.local.entity.NewsItemEntity
+import uk.ryanwong.skycatnews.newslist.data.local.entity.NewsListEntity
 import uk.ryanwong.skycatnews.newslist.data.remote.NewsListService
 import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsListDto
 import uk.ryanwong.skycatnews.newslist.domain.model.NewsList
 import java.net.ConnectException
 import java.net.UnknownHostException
-import uk.ryanwong.skycatnews.app.exception.RemoteSourceFailedWithNoCacheException
 
 class NewsListRepositoryImpl(
     private val newsListService: NewsListService,

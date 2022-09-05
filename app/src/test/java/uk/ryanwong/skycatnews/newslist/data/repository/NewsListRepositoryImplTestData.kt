@@ -4,7 +4,7 @@
 
 package uk.ryanwong.skycatnews.newslist.data.repository
 
-import uk.ryanwong.skycatnews.newslist.data.local.model.NewsItemEntity
+import uk.ryanwong.skycatnews.newslist.data.local.entity.NewsItemEntity
 import uk.ryanwong.skycatnews.newslist.data.remote.model.LinksDto
 import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsItemDto
 import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsListDto

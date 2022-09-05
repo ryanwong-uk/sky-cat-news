@@ -18,8 +18,8 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import uk.ryanwong.skycatnews.app.database.LocalDatabaseImpl
-import uk.ryanwong.skycatnews.storydetail.data.local.model.ContentEntity
-import uk.ryanwong.skycatnews.storydetail.data.local.model.StoryEntity
+import uk.ryanwong.skycatnews.storydetail.data.local.entity.ContentEntity
+import uk.ryanwong.skycatnews.storydetail.data.local.entity.StoryEntity
 
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)

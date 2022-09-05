@@ -8,8 +8,8 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import uk.ryanwong.skycatnews.storydetail.data.local.model.ContentEntity
-import uk.ryanwong.skycatnews.storydetail.data.local.model.StoryEntity
+import uk.ryanwong.skycatnews.storydetail.data.local.entity.ContentEntity
+import uk.ryanwong.skycatnews.storydetail.data.local.entity.StoryEntity
 
 @Dao
 interface StoryDao {

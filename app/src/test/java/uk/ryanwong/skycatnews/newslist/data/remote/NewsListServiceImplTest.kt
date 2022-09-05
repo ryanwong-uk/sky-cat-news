@@ -18,7 +18,6 @@ import io.ktor.utils.io.ByteReadChannel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.Json
-import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsListDto
 
 @OptIn(ExperimentalCoroutinesApi::class)
 internal class NewsListServiceImplTest : FreeSpec() {

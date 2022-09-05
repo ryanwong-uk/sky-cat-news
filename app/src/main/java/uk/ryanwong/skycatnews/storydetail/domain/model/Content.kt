@@ -4,7 +4,7 @@
 
 package uk.ryanwong.skycatnews.storydetail.domain.model
 
-import uk.ryanwong.skycatnews.storydetail.data.local.model.ContentEntity
+import uk.ryanwong.skycatnews.storydetail.data.local.entity.ContentEntity
 
 data class Content(
     val accessibilityText: String?,

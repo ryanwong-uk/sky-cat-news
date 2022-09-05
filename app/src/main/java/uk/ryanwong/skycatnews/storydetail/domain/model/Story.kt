@@ -4,8 +4,8 @@
 
 package uk.ryanwong.skycatnews.storydetail.domain.model
 
-import uk.ryanwong.skycatnews.storydetail.data.local.model.ContentEntity
-import uk.ryanwong.skycatnews.storydetail.data.local.model.StoryEntity
+import uk.ryanwong.skycatnews.storydetail.data.local.entity.ContentEntity
+import uk.ryanwong.skycatnews.storydetail.data.local.entity.StoryEntity
 
 data class Story(
     val id: Int,

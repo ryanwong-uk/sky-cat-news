@@ -4,7 +4,7 @@
 
 package uk.ryanwong.skycatnews.newslist.domain.model
 
-import uk.ryanwong.skycatnews.newslist.data.local.model.NewsItemEntity
+import uk.ryanwong.skycatnews.newslist.data.local.entity.NewsItemEntity
 
 data class NewsItem(
     val newsId: Int,

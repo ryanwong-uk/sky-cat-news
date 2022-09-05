@@ -4,8 +4,8 @@
 
 package uk.ryanwong.skycatnews.newslist.data.local
 
-import uk.ryanwong.skycatnews.newslist.data.local.model.NewsItemEntity
-import uk.ryanwong.skycatnews.newslist.data.local.model.NewsListEntity
+import uk.ryanwong.skycatnews.newslist.data.local.entity.NewsItemEntity
+import uk.ryanwong.skycatnews.newslist.data.local.entity.NewsListEntity
 
 internal class MockNewsListDao : NewsListDao {
 

@@ -5,8 +5,6 @@
 package uk.ryanwong.skycatnews.storydetail.data.repository
 
 import io.ktor.client.plugins.HttpRequestTimeoutException
-import java.net.ConnectException
-import java.net.UnknownHostException
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -15,11 +13,13 @@ import uk.ryanwong.skycatnews.app.exception.RemoteSourceFailedWithNoCacheExcepti
 import uk.ryanwong.skycatnews.app.exception.StoryNotFoundException
 import uk.ryanwong.skycatnews.except
 import uk.ryanwong.skycatnews.storydetail.data.local.StoryDao
-import uk.ryanwong.skycatnews.storydetail.data.local.model.ContentEntity
-import uk.ryanwong.skycatnews.storydetail.data.local.model.StoryEntity
+import uk.ryanwong.skycatnews.storydetail.data.local.entity.ContentEntity
+import uk.ryanwong.skycatnews.storydetail.data.local.entity.StoryEntity
 import uk.ryanwong.skycatnews.storydetail.data.remote.StoryService
 import uk.ryanwong.skycatnews.storydetail.data.remote.model.StoryDto
 import uk.ryanwong.skycatnews.storydetail.domain.model.Story
+import java.net.ConnectException
+import java.net.UnknownHostException
 
 class StoryDetailRepositoryImpl(
     private val storyService: StoryService,
