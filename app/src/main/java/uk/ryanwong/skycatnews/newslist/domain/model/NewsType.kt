@@ -14,11 +14,11 @@ enum class NewsType {
         fun parse(newsType: String?): NewsType {
             return newsType?.let {
                 try {
-                    NewsType.valueOf(it)
+                    valueOf(it)
                 } catch (e: IllegalArgumentException) {
-                    NewsType.UNKNOWN
+                    UNKNOWN
                 }
-            } ?: NewsType.UNKNOWN
+            } ?: UNKNOWN
         }
     }
 }

@@ -13,11 +13,11 @@ enum class StoryContentType {
         fun parse(storyContentType: String?): StoryContentType {
             return storyContentType?.let {
                 try {
-                    StoryContentType.valueOf(it)
+                    valueOf(it)
                 } catch (e: IllegalArgumentException) {
-                    StoryContentType.UNKNOWN
+                    UNKNOWN
                 }
-            } ?: StoryContentType.UNKNOWN
+            } ?: UNKNOWN
         }
     }
 }
