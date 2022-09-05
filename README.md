@@ -18,6 +18,7 @@ This is a prototype of the app. As the backend isn't developed yet, this prototy
 
 * Android-Kotlin
 * MVVM architecture with use-cases
+* Single activity
 * Jetpack Compose UI
 
 ### Major libraries used
