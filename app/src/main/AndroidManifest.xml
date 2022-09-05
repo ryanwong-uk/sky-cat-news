@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="uk.ryanwong.skycatnews">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".SkyCatNewsApp"
         android:allowBackup="true"
@@ -15,7 +17,7 @@
         android:theme="@style/Theme.SkyCatNews"
         tools:targetApi="31">
         <activity
-            android:name=".ui.MainActivity"
+            android:name="uk.ryanwong.skycatnews.app.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.SkyCatNews">
             <intent-filter>

@@ -2,7 +2,7 @@
  * Copyright (c) 2022. Ryan Wong (hello@ryanwong.co.uk)
  */
 
-package uk.ryanwong.skycatnews.ui
+package uk.ryanwong.skycatnews.app
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -15,7 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import dagger.hilt.android.AndroidEntryPoint
-import uk.ryanwong.skycatnews.ui.theme.SkyCatNewsTheme
+import uk.ryanwong.skycatnews.app.ui.theme.SkyCatNewsTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
