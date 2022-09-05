@@ -2,7 +2,7 @@
  * Copyright (c) 2022. Ryan Wong (hello@ryanwong.co.uk)
  */
 
-package uk.ryanwong.skycatnews.Storydetail.data.repository
+package uk.ryanwong.skycatnews.storydetail.data.repository
 
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
@@ -13,9 +13,7 @@ import kotlinx.coroutines.test.runTest
 import uk.ryanwong.skycatnews.storydetail.data.local.MockStoryDao
 import uk.ryanwong.skycatnews.storydetail.data.local.entity.StoryEntity
 import uk.ryanwong.skycatnews.storydetail.data.remote.MockStoryService
-import uk.ryanwong.skycatnews.storydetail.data.repository.StoryDetailRepository
-import uk.ryanwong.skycatnews.storydetail.data.repository.StoryDetailRepositoryImpl
-import uk.ryanwong.skycatnews.storydetail.data.repository.StoryDetailRepositoryImplTestData
+import uk.ryanwong.skycatnews.storydetail.domain.model.Story
 
 @OptIn(ExperimentalCoroutinesApi::class)
 internal class StoryDetailRepositoryImplTest : FreeSpec() {
@@ -93,6 +91,41 @@ internal class StoryDetailRepositoryImplTest : FreeSpec() {
                     }
                 }
             }
+
+            "Remote data source returned OK but with empty content list" - {
+                "Should return Result.Success<Story>" {
+                    setupRepository()
+                    scope.runTest {
+                        // Given
+
+                        // Only to trigger a success response,
+                        // actual data to be tested is from mockStoryDao.mockGetStoryResponse
+                        val storyDto = StoryDetailRepositoryImplTestData.mockStoryDto
+                        mockStoryService.mockGetStoreResponse = Result.success(storyDto)
+
+                        val storyId = StoryDetailRepositoryImplTestData.mockStoryDto.id
+                        mockStoryDao.mockGetStoryResponse =
+                            StoryDetailRepositoryImplTestData.getMockStoryEntity(storyId = storyId)
+                        mockStoryDao.mockGetContentsResponse = listOf()
+
+                        // When
+                        val story = storyDetailRepository.getStory(storyId = storyId)
+
+                        // Then
+                        story shouldBe Result.success(
+                            Story(
+                                id = 1,
+                                contents = emptyList(),
+                                date = "2020-11-19T00:00:00Z",
+                                headline = "some-headline",
+                                heroImageAccessibilityText = "some-hero-image-accessibility-text",
+                                heroImageUrl = "https://some.hero.image/url"
+                            )
+                        )
+                    }
+                }
+            }
+
         }
     }
 }
