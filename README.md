@@ -10,7 +10,7 @@ This is a prototype of the app. As the backend isn't developed yet, this prototy
 
 ## TL;DR - Status 
 
-* 68 Unit tests for repositories, models, Ktor API services are done.
+* 72 Unit tests for repositories, models, Ktor API services are done.
 * 16 Unit tests for RoomDB DAOs are done.
 
 
