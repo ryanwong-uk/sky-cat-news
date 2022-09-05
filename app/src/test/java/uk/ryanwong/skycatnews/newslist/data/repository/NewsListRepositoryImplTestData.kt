@@ -15,31 +15,35 @@ import uk.ryanwong.skycatnews.newslist.domain.model.NewsList
 import uk.ryanwong.skycatnews.newslist.domain.model.NewsType
 
 internal object NewsListRepositoryImplTestData {
-    val mockNewsItemDto = NewsItemDto(
-        creationDate = "2020-11-18T00:00:00Z",
-        headline = "some-headline",
-        id = 1,
-        modifiedDate = "2020-11-19T00:00:00Z",
-        teaserImage = TeaserImageDto(
-            links = LinksDto(
-                url = UrlDto(
-                    href = "https://some.url/href",
-                    templated = true,
-                    type = "image/jpeg"
-                )
+    val mockNewsItemDto by lazy {
+        NewsItemDto(
+            creationDate = "2020-11-18T00:00:00Z",
+            headline = "some-headline",
+            id = 1,
+            modifiedDate = "2020-11-19T00:00:00Z",
+            teaserImage = TeaserImageDto(
+                links = LinksDto(
+                    url = UrlDto(
+                        href = "https://some.url/href",
+                        templated = true,
+                        type = "image/jpeg"
+                    )
+                ),
+                accessibilityText = "some-accessibility-text"
             ),
-            accessibilityText = "some-accessibility-text"
-        ),
-        teaserText = "some-teaser-text",
-        type = "story",
-        url = null,
-        weblinkUrl = null
-    )
+            teaserText = "some-teaser-text",
+            type = "story",
+            url = null,
+            weblinkUrl = null
+        )
+    }
 
-    val mockNewsListDto = NewsListDto(
-        title = "some-title",
-        news = listOf(mockNewsItemDto)
-    )
+    val mockNewsListDto by lazy {
+        NewsListDto(
+            title = "some-title",
+            news = listOf(mockNewsItemDto)
+        )
+    }
 
     fun getMockNewsItemEntity(listId: Int) = NewsItemEntity(
         listId = listId,
@@ -57,18 +61,20 @@ internal object NewsListRepositoryImplTestData {
         teaserImageAccessibilityText = "some-accessibility-text"
     )
 
-    val mockNewsList = NewsList(
-        title = "some-title",
-        newsItems = listOf(
-            NewsItem(
-                newsId = 1,
-                headline = "some-headline",
-                teaserText = "some-teaser-text",
-                modifiedDate = "2020-11-19T00:00:00Z",
-                teaserImageUrl = "https://some.url/href",
-                type = NewsType.STORY,
-                url = null
+    val mockNewsList by lazy {
+        NewsList(
+            title = "some-title",
+            newsItems = listOf(
+                NewsItem(
+                    newsId = 1,
+                    headline = "some-headline",
+                    teaserText = "some-teaser-text",
+                    modifiedDate = "2020-11-19T00:00:00Z",
+                    teaserImageUrl = "https://some.url/href",
+                    type = NewsType.STORY,
+                    url = null
+                )
             )
         )
-    )
+    }
 }

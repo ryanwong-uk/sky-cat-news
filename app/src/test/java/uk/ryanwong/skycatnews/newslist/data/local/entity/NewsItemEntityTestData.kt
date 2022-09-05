@@ -11,114 +11,126 @@ import uk.ryanwong.skycatnews.newslist.data.remote.model.UrlDto
 
 internal object NewsItemEntityTestData {
 
-    val mockNewsItemDto = NewsItemDto(
-        id = 1,
-        creationDate = "2020-11-18T00:00:00Z",
-        headline = "some-headline",
-        modifiedDate = "2020-11-19T00:00:00Z",
-        teaserImage = TeaserImageDto(
-            links = LinksDto(
-                url = UrlDto(
-                    href = "https://some.links.url/href",
-                    templated = true,
-                    type = "image/jpeg"
-                )
+    val mockNewsItemDto by lazy {
+        NewsItemDto(
+            id = 1,
+            creationDate = "2020-11-18T00:00:00Z",
+            headline = "some-headline",
+            modifiedDate = "2020-11-19T00:00:00Z",
+            teaserImage = TeaserImageDto(
+                links = LinksDto(
+                    url = UrlDto(
+                        href = "https://some.links.url/href",
+                        templated = true,
+                        type = "image/jpeg"
+                    )
+                ),
+                accessibilityText = "some-accessibility-text"
             ),
-            accessibilityText = "some-accessibility-text"
-        ),
-        teaserText = "some-teaser-text",
-        type = "story",
-        url = "https://some.url/",
-        weblinkUrl = "https://some.weblink.url/"
-    )
+            teaserText = "some-teaser-text",
+            type = "story",
+            url = "https://some.url/",
+            weblinkUrl = "https://some.weblink.url/"
+        )
+    }
 
-    val mockNewsItemEntity = NewsItemEntity(
-        listId = 1,
-        newsId = 1,
-        type = "story",
-        headline = "some-headline",
-        creationDate = "2020-11-18T00:00:00Z",
-        modifiedDate = "2020-11-19T00:00:00Z",
-        url = "https://some.url/",
-        weblinkUrl = "https://some.weblink.url/",
-        teaserText = "some-teaser-text",
-        teaserImageHref = "https://some.links.url/href",
-        teaserImageTemplated = true,
-        teaserImageType = "image/jpeg",
-        teaserImageAccessibilityText = "some-accessibility-text"
-    )
+    val mockNewsItemEntity by lazy {
+        NewsItemEntity(
+            listId = 1,
+            newsId = 1,
+            type = "story",
+            headline = "some-headline",
+            creationDate = "2020-11-18T00:00:00Z",
+            modifiedDate = "2020-11-19T00:00:00Z",
+            url = "https://some.url/",
+            weblinkUrl = "https://some.weblink.url/",
+            teaserText = "some-teaser-text",
+            teaserImageHref = "https://some.links.url/href",
+            teaserImageTemplated = true,
+            teaserImageType = "image/jpeg",
+            teaserImageAccessibilityText = "some-accessibility-text"
+        )
+    }
 
-    val mockNewsItemDto2 = NewsItemDto(
-        id = 2,
-        creationDate = "2020-11-18T00:00:00Z",
-        headline = "some-headline",
-        modifiedDate = "2020-11-19T00:00:00Z",
-        teaserImage = TeaserImageDto(
-            links = LinksDto(
-                url = UrlDto(
-                    href = "https://some.links.url/href",
-                    templated = true,
-                    type = "image/jpeg"
-                )
+    val mockNewsItemDto2 by lazy {
+        NewsItemDto(
+            id = 2,
+            creationDate = "2020-11-18T00:00:00Z",
+            headline = "some-headline",
+            modifiedDate = "2020-11-19T00:00:00Z",
+            teaserImage = TeaserImageDto(
+                links = LinksDto(
+                    url = UrlDto(
+                        href = "https://some.links.url/href",
+                        templated = true,
+                        type = "image/jpeg"
+                    )
+                ),
+                accessibilityText = "some-accessibility-text"
             ),
-            accessibilityText = "some-accessibility-text"
-        ),
-        teaserText = "some-teaser-text-2",
-        type = "story",
-        url = "https://some.url/",
-        weblinkUrl = "https://some.weblink.url/"
-    )
+            teaserText = "some-teaser-text-2",
+            type = "story",
+            url = "https://some.url/",
+            weblinkUrl = "https://some.weblink.url/"
+        )
+    }
 
-    val mockNewsItemEntity2 = NewsItemEntity(
-        listId = 1,
-        newsId = 2,
-        type = "story",
-        headline = "some-headline",
-        creationDate = "2020-11-18T00:00:00Z",
-        modifiedDate = "2020-11-19T00:00:00Z",
-        url = "https://some.url/",
-        weblinkUrl = "https://some.weblink.url/",
-        teaserText = "some-teaser-text-2",
-        teaserImageHref = "https://some.links.url/href",
-        teaserImageTemplated = true,
-        teaserImageType = "image/jpeg",
-        teaserImageAccessibilityText = "some-accessibility-text"
-    )
+    val mockNewsItemEntity2 by lazy {
+        NewsItemEntity(
+            listId = 1,
+            newsId = 2,
+            type = "story",
+            headline = "some-headline",
+            creationDate = "2020-11-18T00:00:00Z",
+            modifiedDate = "2020-11-19T00:00:00Z",
+            url = "https://some.url/",
+            weblinkUrl = "https://some.weblink.url/",
+            teaserText = "some-teaser-text-2",
+            teaserImageHref = "https://some.links.url/href",
+            teaserImageTemplated = true,
+            teaserImageType = "image/jpeg",
+            teaserImageAccessibilityText = "some-accessibility-text"
+        )
+    }
 
-    val mockNewsItemDto3 = NewsItemDto(
-        id = 3,
-        creationDate = "2020-11-18T00:00:00Z",
-        headline = "some-headline",
-        modifiedDate = "2020-11-19T00:00:00Z",
-        teaserImage = TeaserImageDto(
-            links = LinksDto(
-                url = UrlDto(
-                    href = "https://some.links.url/href",
-                    templated = true,
-                    type = "image/jpeg"
-                )
+    val mockNewsItemDto3 by lazy {
+        NewsItemDto(
+            id = 3,
+            creationDate = "2020-11-18T00:00:00Z",
+            headline = "some-headline",
+            modifiedDate = "2020-11-19T00:00:00Z",
+            teaserImage = TeaserImageDto(
+                links = LinksDto(
+                    url = UrlDto(
+                        href = "https://some.links.url/href",
+                        templated = true,
+                        type = "image/jpeg"
+                    )
+                ),
+                accessibilityText = "some-accessibility-text"
             ),
-            accessibilityText = "some-accessibility-text"
-        ),
-        teaserText = "some-teaser-text-3",
-        type = "story",
-        url = "https://some.url/",
-        weblinkUrl = "https://some.weblink.url/"
-    )
+            teaserText = "some-teaser-text-3",
+            type = "story",
+            url = "https://some.url/",
+            weblinkUrl = "https://some.weblink.url/"
+        )
+    }
 
-    val mockNewsItemEntity3 = NewsItemEntity(
-        listId = 1,
-        newsId = 3,
-        type = "story",
-        headline = "some-headline",
-        creationDate = "2020-11-18T00:00:00Z",
-        modifiedDate = "2020-11-19T00:00:00Z",
-        url = "https://some.url/",
-        weblinkUrl = "https://some.weblink.url/",
-        teaserText = "some-teaser-text-3",
-        teaserImageHref = "https://some.links.url/href",
-        teaserImageTemplated = true,
-        teaserImageType = "image/jpeg",
-        teaserImageAccessibilityText = "some-accessibility-text"
-    )
+    val mockNewsItemEntity3 by lazy {
+        NewsItemEntity(
+            listId = 1,
+            newsId = 3,
+            type = "story",
+            headline = "some-headline",
+            creationDate = "2020-11-18T00:00:00Z",
+            modifiedDate = "2020-11-19T00:00:00Z",
+            url = "https://some.url/",
+            weblinkUrl = "https://some.weblink.url/",
+            teaserText = "some-teaser-text-3",
+            teaserImageHref = "https://some.links.url/href",
+            teaserImageTemplated = true,
+            teaserImageType = "image/jpeg",
+            teaserImageAccessibilityText = "some-accessibility-text"
+        )
+    }
 }

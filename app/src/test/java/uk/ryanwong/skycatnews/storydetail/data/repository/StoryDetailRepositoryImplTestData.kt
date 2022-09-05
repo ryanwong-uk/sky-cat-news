@@ -14,24 +14,26 @@ import uk.ryanwong.skycatnews.storydetail.domain.model.Story
 import uk.ryanwong.skycatnews.storydetail.domain.model.StoryContentType
 
 internal object StoryDetailRepositoryImplTestData {
-    val mockStoryDto = StoryDto(
-        contents = listOf(
-            ContentDto(
+    val mockStoryDto by lazy {
+        StoryDto(
+            contents = listOf(
+                ContentDto(
+                    accessibilityText = "some-accessibility-text",
+                    text = "some-text-1",
+                    type = "paragraph",
+                    url = "https://some.url/"
+                )
+            ),
+            creationDate = "2020-11-18T00:00:00Z",
+            headline = "some-head-line",
+            heroImage = HeroImageDto(
                 accessibilityText = "some-accessibility-text",
-                text = "some-text-1",
-                type = "paragraph",
-                url = "https://some.url/"
-            )
-        ),
-        creationDate = "2020-11-18T00:00:00Z",
-        headline = "some-head-line",
-        heroImage = HeroImageDto(
-            accessibilityText = "some-accessibility-text",
-            imageUrl = "https://some.hero.image/url"
-        ),
-        id = 1,
-        modifiedDate = "2020-11-19T00:00:00Z"
-    )
+                imageUrl = "https://some.hero.image/url"
+            ),
+            id = 1,
+            modifiedDate = "2020-11-19T00:00:00Z"
+        )
+    }
 
     fun getMockContentEntity(storyId: Int) = ContentEntity(
         sequenceId = 0, // RoomDB auto-increment but default is 0
@@ -51,19 +53,21 @@ internal object StoryDetailRepositoryImplTestData {
         modifiedDate = "2020-11-19T00:00:00Z"
     )
 
-    val mockStoryId1 = Story(
-        id = 1,
-        contents = listOf(
-            Content(
-                accessibilityText = "some-accessibility-text",
-                text = "some-text-1",
-                type = StoryContentType.PARAGRAPH,
-                url = "https://some.url/"
-            )
-        ),
-        date = "2020-11-19T00:00:00Z",
-        headline = "some-headline",
-        heroImageAccessibilityText = "some-hero-image-accessibility-text",
-        heroImageUrl = "https://some.hero.image/url"
-    )
+    val mockStoryId1 by lazy {
+        Story(
+            id = 1,
+            contents = listOf(
+                Content(
+                    accessibilityText = "some-accessibility-text",
+                    text = "some-text-1",
+                    type = StoryContentType.PARAGRAPH,
+                    url = "https://some.url/"
+                )
+            ),
+            date = "2020-11-19T00:00:00Z",
+            headline = "some-headline",
+            heroImageAccessibilityText = "some-hero-image-accessibility-text",
+            heroImageUrl = "https://some.hero.image/url"
+        )
+    }
 }
