@@ -66,7 +66,7 @@ internal object NewsListRepositoryImplTestData {
                 teaserText = "some-teaser-text",
                 modifiedDate = "2020-11-19T00:00:00Z",
                 teaserImageUrl = "https://some.url/href",
-                type = NewsType.UNKNOWN,
+                type = NewsType.STORY,
                 url = null
             )
         )

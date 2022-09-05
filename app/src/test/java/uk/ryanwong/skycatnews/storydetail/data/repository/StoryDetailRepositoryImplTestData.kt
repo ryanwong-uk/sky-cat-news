@@ -57,7 +57,7 @@ internal object StoryDetailRepositoryImplTestData {
             Content(
                 accessibilityText = "some-accessibility-text",
                 text = "some-text-1",
-                type = StoryContentType.UNKNOWN,
+                type = StoryContentType.PARAGRAPH,
                 url = "https://some.url/"
             )
         ),
