@@ -164,6 +164,9 @@ dependencies {
     implementation "androidx.room:room-ktx:$room_version"
     testImplementation "androidx.room:room-testing:$room_version"
 
+    // Accompanist
+    implementation "com.google.accompanist:accompanist-webview:0.26.2-beta"
+
     // debugImplementation because LeakCanary should only run in debug builds.
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.9.1'
 }

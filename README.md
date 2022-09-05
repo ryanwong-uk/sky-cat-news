@@ -3,16 +3,18 @@
 [![Build Status](https://app.bitrise.io/app/a0e8541b47b30002/status.svg?token=Q40Sl8puw7pk7BT7AbF_8w&branch=master)](https://app.bitrise.io/app/a0e8541b47b30002) [![codecov](https://codecov.io/gh/ryanwong-uk/sky-cat-news/branch/main/graph/badge.svg?token=UG926FRXVG)](https://codecov.io/gh/ryanwong-uk/sky-cat-news)
 
 ## Scenario
-Sky has recently decided to move into the local cat news industry. To enable this, we need to build a prototype app to demonstrate to stakeholders. The basic premise of the app is to allow users to look at stories of cute cats nearby. 
 
-This is a prototype of the app. As the backend isn't developed yet, this prototype currently mock out the feed locally, with an option in place to switch to the real feed later.
+Sky has recently decided to move into the local cat news industry. To enable this, we need to build
+a prototype app to demonstrate to stakeholders. The basic premise of the app is to allow users to
+look at stories of cute cats nearby.
 
+This is a prototype of the app. As the backend isn't developed yet, this prototype currently mock
+out the feed locally, with an option in place to switch to the real feed later.
 
-## TL;DR - Status 
+## TL;DR - Status
 
 * 73 Unit tests for repositories, models, Ktor API services are done.
 * 16 Unit tests for RoomDB DAOs are done.
-
 
 ## High level architecture
 
@@ -27,6 +29,8 @@ This is a prototype of the app. As the backend isn't developed yet, this prototy
 * [`Kotlin Coroutines`](https://github.com/Kotlin/kotlinx.coroutines)
 * [`Kotlin Flow`](https://kotlinlang.org/docs/flow.html)
 * [`Jetpack Room`](https://developer.android.com/jetpack/androidx/releases/room) - Database
+* [`Accompanist - WebView wrapper for Jetpack Compose`](https://github.com/google/accompanist/tree/main/web)
+    - WebView (for Weblink)
 * [`Ktor`](https://ktor.io/) - HTTP Client
 * [`Kotlin Serialization`](https://kotlinlang.org/docs/serialization.html) - For JSON parsing
 * [`Timber`](https://github.com/JakeWharton/timber) - Logging
@@ -37,7 +41,8 @@ This is a prototype of the app. As the backend isn't developed yet, this prototy
 * [`Bitrise`](https://app.bitrise.io/) - CI
 * [`Kover`](https://github.com/Kotlin/kotlinx-kover) - code coverage
 * [`codecov`](https://codecov.io/) - code coverage
-* [`Ktlint Gradle`](https://github.com/jlleitschuh/ktlint-gradle) - ktlint plugin to check and apply code formatting
+* [`Ktlint Gradle`](https://github.com/jlleitschuh/ktlint-gradle) - ktlint plugin to check and apply
+  code formatting
 
 ## Requirements
 
@@ -46,7 +51,8 @@ This is a prototype of the app. As the backend isn't developed yet, this prototy
 
 ## Setting up the keystore
 
-### Local 
+### Local
+
 * Android keystore is not being stored in this repository. You need your own keystore to generate
   the apk / App Bundle
 
@@ -60,8 +66,9 @@ This is a prototype of the app. As the backend isn't developed yet, this prototy
      pass=<alias password>
      storePass=<keystore password>
   ```
-  
+
 ### CI environment
+
 * This project has been configured to build automatically on Bitrise.
 
 * The following environment variables have been set to provide the keystore:
