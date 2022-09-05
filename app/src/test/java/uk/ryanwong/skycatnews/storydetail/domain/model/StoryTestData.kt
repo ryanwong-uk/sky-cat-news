@@ -7,7 +7,7 @@ package uk.ryanwong.skycatnews.storydetail.domain.model
 import uk.ryanwong.skycatnews.storydetail.data.local.entity.ContentEntity
 import uk.ryanwong.skycatnews.storydetail.data.local.entity.StoryEntity
 
-object StoryTestData {
+internal object StoryTestData {
 
     val mockStoryEntity = StoryEntity(
         storyId = 1,

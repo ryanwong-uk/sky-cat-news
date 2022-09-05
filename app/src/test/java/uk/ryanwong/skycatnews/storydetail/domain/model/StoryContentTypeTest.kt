@@ -7,7 +7,7 @@ package uk.ryanwong.skycatnews.storydetail.domain.model
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 
-class StoryContentTypeTest : FreeSpec() {
+internal class StoryContentTypeTest : FreeSpec() {
 
     init {
         "Should correctly parse the string image as StoryContentType.IMAGE" {

@@ -9,7 +9,7 @@ import io.kotest.matchers.collections.shouldContainExactlyInAnyOrder
 import io.kotest.matchers.shouldBe
 import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsItemDto
 
-class NewsItemEntityTest : FreeSpec() {
+internal class NewsItemEntityTest : FreeSpec() {
 
     init {
         "fromDto" - {

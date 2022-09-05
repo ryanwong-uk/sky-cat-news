@@ -9,7 +9,7 @@ import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsItemDto
 import uk.ryanwong.skycatnews.newslist.data.remote.model.TeaserImageDto
 import uk.ryanwong.skycatnews.newslist.data.remote.model.UrlDto
 
-object NewsItemEntityTestData {
+internal object NewsItemEntityTestData {
 
     val mockNewsItemDto = NewsItemDto(
         id = 1,

@@ -8,7 +8,7 @@ import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 import uk.ryanwong.skycatnews.storydetail.data.local.entity.ContentEntity
 
-class StoryTest : FreeSpec() {
+internal class StoryTest : FreeSpec() {
 
     init {
         "fromEntity" - {

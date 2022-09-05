@@ -8,7 +8,7 @@ import uk.ryanwong.skycatnews.storydetail.data.remote.model.ContentDto
 import uk.ryanwong.skycatnews.storydetail.data.remote.model.HeroImageDto
 import uk.ryanwong.skycatnews.storydetail.data.remote.model.StoryDto
 
-object StoryServiceTestData {
+internal object StoryServiceTestData {
 
     const val mockJsonResponse = """{
    "id":"1",
