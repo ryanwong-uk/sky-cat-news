@@ -1,4 +1,4 @@
-package uk.ryanwong.skycatnews
+package uk.ryanwong.skycatnews.app
 
 /***
  * Workaround to rethrow CancellationException
