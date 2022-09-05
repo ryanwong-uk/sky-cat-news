@@ -14,7 +14,7 @@ enum class NewsType {
         fun parse(newsType: String?): NewsType {
             return newsType?.let {
                 try {
-                    valueOf(it)
+                    valueOf(it.uppercase())
                 } catch (e: IllegalArgumentException) {
                     UNKNOWN
                 }
