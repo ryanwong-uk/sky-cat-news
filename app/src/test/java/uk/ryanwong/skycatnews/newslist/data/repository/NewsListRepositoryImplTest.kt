@@ -86,8 +86,7 @@ internal class NewsListRepositoryImplTest : FreeSpec() {
                         val newsList = newsListRepository.getNewsList()
 
                         // Then
-                        newsList.isSuccess shouldBe true
-                        newsList.getOrNull() shouldBe NewsListRepositoryImplTestData.mockNewsList
+                        newsList shouldBe Result.success(NewsListRepositoryImplTestData.mockNewsList)
                     }
                 }
             }
@@ -110,10 +109,11 @@ internal class NewsListRepositoryImplTest : FreeSpec() {
                         val newsList = newsListRepository.getNewsList()
 
                         // Then
-                        newsList.isSuccess shouldBe true
-                        newsList.getOrNull() shouldBe NewsList(
-                            title = "",
-                            newsItems = emptyList()
+                        newsList shouldBe Result.success(
+                            NewsList(
+                                title = "",
+                                newsItems = emptyList()
+                            )
                         )
                     }
                 }
@@ -152,8 +152,7 @@ internal class NewsListRepositoryImplTest : FreeSpec() {
                             val newsList = newsListRepository.getNewsList()
 
                             // Then
-                            newsList.isSuccess shouldBe true
-                            newsList.getOrNull() shouldBe NewsListRepositoryImplTestData.mockNewsList
+                            newsList shouldBe Result.success(NewsListRepositoryImplTestData.mockNewsList)
                         }
                     }
 
@@ -172,8 +171,7 @@ internal class NewsListRepositoryImplTest : FreeSpec() {
                             val newsList = newsListRepository.getNewsList()
 
                             // Then
-                            newsList.isSuccess shouldBe true
-                            newsList.getOrNull() shouldBe NewsListRepositoryImplTestData.mockNewsList
+                            newsList shouldBe Result.success(NewsListRepositoryImplTestData.mockNewsList)
                         }
                     }
 
@@ -197,8 +195,7 @@ internal class NewsListRepositoryImplTest : FreeSpec() {
                             val newsList = newsListRepository.getNewsList()
 
                             // Then
-                            newsList.isSuccess shouldBe true
-                            newsList.getOrNull() shouldBe NewsListRepositoryImplTestData.mockNewsList
+                            newsList shouldBe Result.success(NewsListRepositoryImplTestData.mockNewsList)
                         }
                     }
                 }

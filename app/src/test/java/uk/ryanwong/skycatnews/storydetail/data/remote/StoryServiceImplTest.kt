@@ -63,8 +63,7 @@ internal class StoryServiceImplTest : FreeSpec() {
                     val storyDto = storyService.getStory(storyId = 1)
 
                     // Then
-                    storyDto.isSuccess shouldBe true
-                    storyDto.getOrNull() shouldBe StoryServiceTestData.mockStoryDto
+                    storyDto shouldBe Result.success(StoryServiceTestData.mockStoryDto)
                 }
             }
 
@@ -81,8 +80,7 @@ internal class StoryServiceImplTest : FreeSpec() {
                     val storyDto = storyService.getStory(storyId = 1)
 
                     // Then
-                    storyDto.isSuccess shouldBe true
-                    storyDto.getOrNull() shouldBe null
+                    storyDto shouldBe Result.success(null)
                 }
             }
 

@@ -64,8 +64,7 @@ internal class NewsListServiceImplTest : FreeSpec() {
                     val newsListDto = newsListService.getAllItems()
 
                     // Then
-                    newsListDto.isSuccess shouldBe true
-                    newsListDto.getOrNull() shouldBe NewsListServiceTestData.mockNewsListDto
+                    newsListDto shouldBe Result.success(NewsListServiceTestData.mockNewsListDto)
                 }
             }
 
@@ -82,8 +81,7 @@ internal class NewsListServiceImplTest : FreeSpec() {
                     val newsListDto = newsListService.getAllItems()
 
                     // Then
-                    newsListDto.isSuccess shouldBe true
-                    newsListDto.getOrNull() shouldBe null
+                    newsListDto shouldBe Result.success(null)
                 }
             }
 
