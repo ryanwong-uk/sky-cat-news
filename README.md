@@ -1,6 +1,6 @@
 # Sky Cat News
 
-[![Build Status](https://app.bitrise.io/app/0667f15b93a99b17/status.svg?token=2nCEgRSOnFG82N7YWNSPBQ&branch=master)](https://app.bitrise.io/app/0667f15b93a99b17) [![codecov](https://codecov.io/gh/ryanwong-uk/GMap2ICal/branch/master/graph/badge.svg?token=4NZUBRYHT0)](https://codecov.io/gh/ryanwong-uk/GMap2ICal)
+[![Build Status](https://app.bitrise.io/app/a0e8541b47b30002/status.svg?token=Q40Sl8puw7pk7BT7AbF_8w&branch=master)](https://app.bitrise.io/app/a0e8541b47b30002) [![codecov](https://codecov.io/gh/ryanwong-uk/GMap2ICal/branch/master/graph/badge.svg?token=4NZUBRYHT0)](https://codecov.io/gh/ryanwong-uk/GMap2ICal)
 
 ## Scenario
 Sky has recently decided to move into the local cat news industry. To enable this, we need to build a prototype app to demonstrate to stakeholders. The basic premise of the app is to allow users to look at stories of cute cats nearby. 
@@ -10,7 +10,8 @@ This is a prototype of the app. As the backend isn't developed yet, this prototy
 
 ## TL;DR - Status 
 
-* Unit tests for repositories, RoomDB DAOs, Ktor API services are done.
+* 51 Unit tests for repositories, models, Ktor API services are done.
+* 16 Unit tests for RoomDB DAOs are done.
 
 
 ## High level architecture
@@ -97,13 +98,13 @@ This project can be built by following the usual gradle build process.
 ### Build and sign a bundle for distribution
 
    ```
-   ./gradlew clean && ./gradlew bundleRelease
+   ./gradlew clean bundleRelease
    ```
 
 ### Build and sign an apk for distribution
 
    ```
-   ./gradlew clean && ./gradlew assembleRelease
+   ./gradlew clean assembleRelease
    ```
 
 * The generated apk(s) will be stored under `app/build/outputs/apk/`
