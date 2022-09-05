@@ -12,6 +12,7 @@ import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import uk.ryanwong.skycatnews.app.exception.RemoteSourceFailedWithNoCacheException
+import uk.ryanwong.skycatnews.app.exception.StoryNotFoundException
 import uk.ryanwong.skycatnews.storydetail.data.local.MockStoryDao
 import uk.ryanwong.skycatnews.storydetail.data.local.entity.StoryEntity
 import uk.ryanwong.skycatnews.storydetail.data.remote.MockStoryService
@@ -96,7 +97,32 @@ internal class StoryDetailRepositoryImplTest : FreeSpec() {
                 }
             }
 
-            "Remote data source returned OK but with empty content list" - {
+            "Remote data source returned success but with empty story" - {
+                "Should return Failure.StoryNotFoundException" {
+                    setupRepository()
+                    scope.runTest {
+                        // Given
+
+                        // Only to trigger a success response,
+                        // actual data to be tested is from mockStoryDao.mockGetStoryResponse
+                        val storyDto = StoryDetailRepositoryImplTestData.mockStoryDto
+                        mockStoryService.mockGetStoryResponse = Result.success(storyDto)
+
+                        val storyId = StoryDetailRepositoryImplTestData.mockStoryDto.id
+                        mockStoryDao.mockGetStoryResponse = null
+                        mockStoryDao.mockGetContentsResponse = listOf()
+
+                        // When
+                        val story = storyDetailRepository.getStory(storyId = storyId)
+
+                        // Then
+                        story.isFailure shouldBe true
+                        story.exceptionOrNull() shouldBe StoryNotFoundException()
+                    }
+                }
+            }
+
+            "Remote data source returned success but with empty content list" - {
                 "Should return Result.Success<Story>" {
                     setupRepository()
                     scope.runTest {
