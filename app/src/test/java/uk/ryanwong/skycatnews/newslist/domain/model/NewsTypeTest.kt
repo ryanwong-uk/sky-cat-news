@@ -97,6 +97,5 @@ internal class NewsTypeTest : FreeSpec() {
             // Then
             newsType shouldBe NewsType.UNKNOWN
         }
-        
     }
 }

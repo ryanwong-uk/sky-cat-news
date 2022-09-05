@@ -32,7 +32,8 @@ internal object NewsItemEntityTestData {
         weblinkUrl = "https://some.weblink.url/"
     )
 
-    val mockNewsItemEntity = NewsItemEntity(listId = 1,
+    val mockNewsItemEntity = NewsItemEntity(
+        listId = 1,
         newsId = 1,
         type = "story",
         headline = "some-headline",
@@ -44,7 +45,8 @@ internal object NewsItemEntityTestData {
         teaserImageHref = "https://some.links.url/href",
         teaserImageTemplated = true,
         teaserImageType = "image/jpeg",
-        teaserImageAccessibilityText = "some-accessibility-text")
+        teaserImageAccessibilityText = "some-accessibility-text"
+    )
 
     val mockNewsItemDto2 = NewsItemDto(
         id = 2,
@@ -67,7 +69,8 @@ internal object NewsItemEntityTestData {
         weblinkUrl = "https://some.weblink.url/"
     )
 
-    val mockNewsItemEntity2 = NewsItemEntity(listId = 1,
+    val mockNewsItemEntity2 = NewsItemEntity(
+        listId = 1,
         newsId = 2,
         type = "story",
         headline = "some-headline",
@@ -79,7 +82,8 @@ internal object NewsItemEntityTestData {
         teaserImageHref = "https://some.links.url/href",
         teaserImageTemplated = true,
         teaserImageType = "image/jpeg",
-        teaserImageAccessibilityText = "some-accessibility-text")
+        teaserImageAccessibilityText = "some-accessibility-text"
+    )
 
     val mockNewsItemDto3 = NewsItemDto(
         id = 3,
@@ -102,7 +106,8 @@ internal object NewsItemEntityTestData {
         weblinkUrl = "https://some.weblink.url/"
     )
 
-    val mockNewsItemEntity3 = NewsItemEntity(listId = 1,
+    val mockNewsItemEntity3 = NewsItemEntity(
+        listId = 1,
         newsId = 3,
         type = "story",
         headline = "some-headline",
@@ -114,5 +119,6 @@ internal object NewsItemEntityTestData {
         teaserImageHref = "https://some.links.url/href",
         teaserImageTemplated = true,
         teaserImageType = "image/jpeg",
-        teaserImageAccessibilityText = "some-accessibility-text")
+        teaserImageAccessibilityText = "some-accessibility-text"
+    )
 }

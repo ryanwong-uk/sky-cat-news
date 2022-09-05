@@ -99,18 +99,22 @@ internal class NewsItemEntityTest : FreeSpec() {
 
             "Should correctly convert a newsItemDtoList with multiple items" {
                 // Given
-                val newsItemDtoList = listOf(NewsItemEntityTestData.mockNewsItemDto,
+                val newsItemDtoList = listOf(
+                    NewsItemEntityTestData.mockNewsItemDto,
                     NewsItemEntityTestData.mockNewsItemDto2,
-                    NewsItemEntityTestData.mockNewsItemDto3)
+                    NewsItemEntityTestData.mockNewsItemDto3
+                )
 
                 // When
                 val newsItemEntity =
                     NewsItemEntity.fromDto(listId = 1, newsItemDtoList = newsItemDtoList)
 
                 // Then
-                newsItemEntity shouldContainExactlyInAnyOrder listOf(NewsItemEntityTestData.mockNewsItemEntity,
+                newsItemEntity shouldContainExactlyInAnyOrder listOf(
+                    NewsItemEntityTestData.mockNewsItemEntity,
                     NewsItemEntityTestData.mockNewsItemEntity2,
-                    NewsItemEntityTestData.mockNewsItemEntity3)
+                    NewsItemEntityTestData.mockNewsItemEntity3
+                )
             }
         }
     }

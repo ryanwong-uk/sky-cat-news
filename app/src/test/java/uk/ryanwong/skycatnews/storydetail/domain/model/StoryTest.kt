@@ -25,7 +25,6 @@ internal class StoryTest : FreeSpec() {
 
                 // Then
                 story shouldBe null
-
             }
 
             "Should return Story if storyEntity is not null and contentEntities is empty" {
@@ -46,7 +45,8 @@ internal class StoryTest : FreeSpec() {
                     date = "2022-5-21T00:00:00Z",
                     headline = "some-headline",
                     heroImageAccessibilityText = "some-accessibility-text",
-                    heroImageUrl = "https://some.hero.image/url")
+                    heroImageUrl = "https://some.hero.image/url"
+                )
             }
 
             "Should fill headline with empty string if it comes as null" {
@@ -69,7 +69,8 @@ internal class StoryTest : FreeSpec() {
                     date = "2022-5-21T00:00:00Z",
                     headline = "",
                     heroImageAccessibilityText = "some-accessibility-text",
-                    heroImageUrl = "https://some.hero.image/url")
+                    heroImageUrl = "https://some.hero.image/url"
+                )
             }
 
             "Should return Story if storyEntity and contentEntities are not null" {
@@ -86,16 +87,20 @@ internal class StoryTest : FreeSpec() {
                 // Then
                 story shouldBe Story(
                     id = 1,
-                    contents = listOf(Content(accessibilityText = "some-accessibility-text",
-                        text = "some-text-1",
-                        type = StoryContentType.PARAGRAPH,
-                        url = "https://some.url/")),
+                    contents = listOf(
+                        Content(
+                            accessibilityText = "some-accessibility-text",
+                            text = "some-text-1",
+                            type = StoryContentType.PARAGRAPH,
+                            url = "https://some.url/"
+                        )
+                    ),
                     date = "2022-5-21T00:00:00Z",
                     headline = "some-headline",
                     heroImageAccessibilityText = "some-accessibility-text",
-                    heroImageUrl = "https://some.hero.image/url")
+                    heroImageUrl = "https://some.hero.image/url"
+                )
             }
-
         }
     }
 }
