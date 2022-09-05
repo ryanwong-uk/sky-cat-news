@@ -18,6 +18,8 @@ object DataModule {
     @Provides
     @ViewModelScoped
     fun provideNewsListService(): NewsListService {
+        // TODO: When we are ready to connect to a real backend, change below to NewsListServiceImpl
+        // The DEFAULT_BASE_URL is defined in the app-level build.gradle
         return FakeNewsListService()
     }
 }
