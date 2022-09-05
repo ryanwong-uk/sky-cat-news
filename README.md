@@ -69,7 +69,7 @@ This is a prototype of the app. As the backend isn't developed yet, this prototy
      BITRISEIO_ANDROID_KEYSTORE_PASSWORD = <your keystore password>
      BITRISEIO_ANDROID_KEYSTORE_ALIAS = <your keystore alias>
      BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD = <your keystore private key password>
-```
+  ```
 
 * The keystore file should be securely uploaded and then placed to `$HOME/keystores/release.jks`
 
