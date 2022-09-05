@@ -13,7 +13,7 @@ enum class StoryContentType {
         fun parse(storyContentType: String?): StoryContentType {
             return storyContentType?.let {
                 try {
-                    valueOf(it)
+                    valueOf(it.uppercase())
                 } catch (e: IllegalArgumentException) {
                     UNKNOWN
                 }
