@@ -6,14 +6,18 @@ package uk.ryanwong.skycatnews.storydetail.data.repository
 
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
+import io.ktor.client.plugins.HttpRequestTimeoutException
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
+import uk.ryanwong.skycatnews.app.exception.RemoteSourceFailedWithNoCacheException
 import uk.ryanwong.skycatnews.storydetail.data.local.MockStoryDao
 import uk.ryanwong.skycatnews.storydetail.data.local.entity.StoryEntity
 import uk.ryanwong.skycatnews.storydetail.data.remote.MockStoryService
 import uk.ryanwong.skycatnews.storydetail.domain.model.Story
+import java.net.ConnectException
+import java.net.UnknownHostException
 
 @OptIn(ExperimentalCoroutinesApi::class)
 internal class StoryDetailRepositoryImplTest : FreeSpec() {
@@ -44,7 +48,7 @@ internal class StoryDetailRepositoryImplTest : FreeSpec() {
                     scope.runTest {
                         // Given
                         val storyDto = StoryDetailRepositoryImplTestData.mockStoryDto
-                        mockStoryService.mockGetStoreResponse = Result.success(storyDto)
+                        mockStoryService.mockGetStoryResponse = Result.success(storyDto)
                         val storyId = StoryDetailRepositoryImplTestData.mockStoryDto.id
 
                         // When
@@ -74,7 +78,7 @@ internal class StoryDetailRepositoryImplTest : FreeSpec() {
                         // Only to trigger a success response,
                         // actual data to be tested is from mockStoryDao.mockGetStoryResponse
                         val storyDto = StoryDetailRepositoryImplTestData.mockStoryDto
-                        mockStoryService.mockGetStoreResponse = Result.success(storyDto)
+                        mockStoryService.mockGetStoryResponse = Result.success(storyDto)
 
                         val storyId = StoryDetailRepositoryImplTestData.mockStoryDto.id
                         mockStoryDao.mockGetStoryResponse =
@@ -101,7 +105,7 @@ internal class StoryDetailRepositoryImplTest : FreeSpec() {
                         // Only to trigger a success response,
                         // actual data to be tested is from mockStoryDao.mockGetStoryResponse
                         val storyDto = StoryDetailRepositoryImplTestData.mockStoryDto
-                        mockStoryService.mockGetStoreResponse = Result.success(storyDto)
+                        mockStoryService.mockGetStoryResponse = Result.success(storyDto)
 
                         val storyId = StoryDetailRepositoryImplTestData.mockStoryDto.id
                         mockStoryDao.mockGetStoryResponse =
@@ -126,6 +130,158 @@ internal class StoryDetailRepositoryImplTest : FreeSpec() {
                 }
             }
 
+            "Remote data source returned failure" - {
+                "Should rethrow all other unexpected exceptions" {
+                    setupRepository()
+                    scope.runTest {
+                        // Given
+                        mockStoryService.mockGetStoryResponse =
+                            Result.failure(exception = ClassNotFoundException())
+                        val storyId = 1
+
+                        // When
+                        val story = storyDetailRepository.getStory(storyId = storyId)
+
+                        // Then
+                        story.isFailure shouldBe true
+                        story.exceptionOrNull() shouldBe ClassNotFoundException()
+                    }
+                }
+
+                "Repository contains cached data" - {
+                    "Should return Result.Success with cached NewsList for UnknownHostException" {
+                        setupRepository()
+                        scope.runTest {
+                            // Given
+                            val storyId = 1
+                            mockStoryService.mockGetStoryResponse =
+                                Result.failure(exception = UnknownHostException())
+                            mockStoryDao.mockGetStoryResponse =
+                                StoryDetailRepositoryImplTestData.getMockStoryEntity(storyId = storyId)
+                            mockStoryDao.mockGetContentsResponse = listOf(
+                                StoryDetailRepositoryImplTestData.getMockContentEntity(storyId = storyId)
+                            )
+
+                            // When
+                            val story = storyDetailRepository.getStory(storyId = storyId)
+
+                            // Then
+                            story shouldBe Result.success(StoryDetailRepositoryImplTestData.mockStoryId1)
+                        }
+                    }
+
+                    "Should return Result.Success with cached NewsList for ConnectException" {
+                        setupRepository()
+                        scope.runTest {
+                            // Given
+                            val storyId = 1
+                            mockStoryService.mockGetStoryResponse =
+                                Result.failure(exception = ConnectException())
+                            mockStoryDao.mockGetStoryResponse =
+                                StoryDetailRepositoryImplTestData.getMockStoryEntity(storyId = storyId)
+                            mockStoryDao.mockGetContentsResponse = listOf(
+                                StoryDetailRepositoryImplTestData.getMockContentEntity(storyId = storyId)
+                            )
+
+                            // When
+                            val story = storyDetailRepository.getStory(storyId = storyId)
+
+                            // Then
+                            story shouldBe Result.success(StoryDetailRepositoryImplTestData.mockStoryId1)
+                        }
+                    }
+
+                    "Should return Result.Success with cached NewsList for HttpRequestTimeoutException" {
+                        setupRepository()
+                        scope.runTest {
+                            // Given
+                            val storyId = 1
+                            mockStoryService.mockGetStoryResponse =
+                                Result.failure(
+                                    exception = HttpRequestTimeoutException(
+                                        "some-url",
+                                        1200L
+                                    )
+                                )
+                            mockStoryDao.mockGetStoryResponse =
+                                StoryDetailRepositoryImplTestData.getMockStoryEntity(storyId = storyId)
+                            mockStoryDao.mockGetContentsResponse = listOf(
+                                StoryDetailRepositoryImplTestData.getMockContentEntity(storyId = storyId)
+                            )
+
+                            // When
+                            val story = storyDetailRepository.getStory(storyId = storyId)
+
+                            // Then
+                            story shouldBe Result.success(StoryDetailRepositoryImplTestData.mockStoryId1)
+                        }
+                    }
+                }
+
+                "Repository contains no cached data" - {
+                    "Should return Result.failure with RemoteSourceFailedWithNoCacheException for UnknownHostException" {
+                        setupRepository()
+                        scope.runTest {
+                            // Given
+                            val storyId = 1
+                            mockStoryService.mockGetStoryResponse =
+                                Result.failure(exception = UnknownHostException())
+                            mockStoryDao.mockGetStoryResponse = null
+                            mockStoryDao.mockGetContentsResponse = emptyList()
+
+                            // When
+                            val story = storyDetailRepository.getStory(storyId = storyId)
+
+                            // Then
+                            story.isFailure shouldBe true
+                            story.exceptionOrNull() shouldBe RemoteSourceFailedWithNoCacheException()
+                        }
+                    }
+
+                    "Should return Result.failure with RemoteSourceFailedWithNoCacheException for ConnectException" {
+                        setupRepository()
+                        scope.runTest {
+                            // Given
+                            val storyId = 1
+                            mockStoryService.mockGetStoryResponse =
+                                Result.failure(exception = ConnectException())
+                            mockStoryDao.mockGetStoryResponse = null
+                            mockStoryDao.mockGetContentsResponse = emptyList()
+
+                            // When
+                            val story = storyDetailRepository.getStory(storyId = storyId)
+
+                            // Then
+                            story.isFailure shouldBe true
+                            story.exceptionOrNull() shouldBe RemoteSourceFailedWithNoCacheException()
+                        }
+                    }
+
+                    "Should return Result.failure with RemoteSourceFailedWithNoCacheException for HttpRequestTimeoutException" {
+                        setupRepository()
+                        scope.runTest {
+                            // Given
+                            val storyId = 1
+                            mockStoryService.mockGetStoryResponse =
+                                Result.failure(
+                                    exception = HttpRequestTimeoutException(
+                                        "some-url",
+                                        1200L
+                                    )
+                                )
+                            mockStoryDao.mockGetStoryResponse = null
+                            mockStoryDao.mockGetContentsResponse = emptyList()
+
+                            // When
+                            val story = storyDetailRepository.getStory(storyId = storyId)
+
+                            // Then
+                            story.isFailure shouldBe true
+                            story.exceptionOrNull() shouldBe RemoteSourceFailedWithNoCacheException()
+                        }
+                    }
+                }
+            }
         }
     }
 }
