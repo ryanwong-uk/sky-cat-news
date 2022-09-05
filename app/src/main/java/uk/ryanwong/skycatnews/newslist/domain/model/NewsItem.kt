@@ -24,7 +24,7 @@ data class NewsItem(
                         newsId = newsId,
                         headline = headline ?: "",
                         teaserText = teaserText ?: "",
-                        modifiedDate = modifiedDate ?: "",
+                        modifiedDate = modifiedDate,
                         teaserImageUrl = teaserImageHref ?: "",
                         type = NewsType.parse(type ?: ""),
                         url = url
