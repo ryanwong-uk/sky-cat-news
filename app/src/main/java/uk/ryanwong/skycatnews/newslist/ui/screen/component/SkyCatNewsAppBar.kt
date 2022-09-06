@@ -2,7 +2,7 @@
  * Copyright (c) 2022. Ryan Wong (hello@ryanwong.co.uk)
  */
 
-package uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.newslist.ui.screen.component
+package uk.ryanwong.skycatnews.newslist.ui.screen.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -15,10 +15,10 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import uk.ryanwong.skycatnews.R
 import uk.ryanwong.skycatnews.app.ui.theme.SkyCatNewsTheme
 import uk.ryanwong.skycatnews.app.ui.theme.SkyGreyBackground
@@ -28,6 +28,8 @@ fun SkyCatNewsAppBar(
     customTitle: String? = null,
     modifier: Modifier = Modifier,
 ) {
+    val padding8 = dimensionResource(id = R.dimen.padding_8)
+
     TopAppBar(
         title = {
             Row(
@@ -44,7 +46,7 @@ fun SkyCatNewsAppBar(
                     painter = painterResource(id = R.drawable.header_skycatnews),
                     contentDescription = stringResource(R.string.app_name),
                     alignment = Alignment.Center,
-                    modifier = Modifier.padding(vertical = 8.dp),
+                    modifier = Modifier.padding(vertical = padding8),
                 )
             }
         },
