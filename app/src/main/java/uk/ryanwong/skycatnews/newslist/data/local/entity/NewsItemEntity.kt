@@ -6,6 +6,7 @@ package uk.ryanwong.skycatnews.newslist.data.local.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import timber.log.Timber
 import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsItemDto
 
 @Entity(
@@ -40,7 +41,7 @@ data class NewsItemEntity(
 ) {
     companion object {
         fun fromDto(listId: Int, newsItemDtoList: List<NewsItemDto>?): List<NewsItemEntity>? {
-            return newsItemDtoList?.map { newsItem ->
+            return newsItemDtoList?.mapNotNull { newsItem ->
                 with(newsItem) {
 
                     /***
@@ -48,7 +49,8 @@ data class NewsItemEntity(
                      * the format of story and weblink, we drop them for now.
                      */
                     if (id == null || creationDate == null || modifiedDate == null) {
-                        return null
+                        Timber.d("NewsItemEntity.fromDto(): invalid NewsItem dropped")
+                        return@with null
                     }
 
                     NewsItemEntity(

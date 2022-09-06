@@ -4,6 +4,7 @@
 
 package uk.ryanwong.skycatnews.newslist.domain.model
 
+import timber.log.Timber
 import uk.ryanwong.skycatnews.newslist.data.local.entity.NewsItemEntity
 
 sealed class NewsItem {
@@ -61,7 +62,10 @@ sealed class NewsItem {
                         }
                     }
                     // For unknown type and ADVERT, we drop them for now as we don't know how to show them.
-                    else -> null
+                    else -> {
+                        Timber.d("NewsItem.fromEntity(): unknown NewsItem with type $newsItemType dropped")
+                        null
+                    }
                 }
             }
         }

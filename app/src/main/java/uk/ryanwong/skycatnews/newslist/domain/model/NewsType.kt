@@ -4,6 +4,8 @@
 
 package uk.ryanwong.skycatnews.newslist.domain.model
 
+import timber.log.Timber
+
 enum class NewsType {
     UNKNOWN,
     STORY,
@@ -16,6 +18,7 @@ enum class NewsType {
                 try {
                     valueOf(it.uppercase())
                 } catch (e: IllegalArgumentException) {
+                    Timber.d("NewsType.parse(): unknown NewsType $it")
                     UNKNOWN
                 }
             } ?: UNKNOWN

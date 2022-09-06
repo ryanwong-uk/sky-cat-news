@@ -4,6 +4,8 @@
 
 package uk.ryanwong.skycatnews.storydetail.domain.model
 
+import timber.log.Timber
+
 enum class StoryContentType {
     UNKNOWN,
     IMAGE,
@@ -15,6 +17,7 @@ enum class StoryContentType {
                 try {
                     valueOf(it.uppercase())
                 } catch (e: IllegalArgumentException) {
+                    Timber.d("StoryContentType.parse(): unknown type: $it")
                     UNKNOWN
                 }
             } ?: UNKNOWN
