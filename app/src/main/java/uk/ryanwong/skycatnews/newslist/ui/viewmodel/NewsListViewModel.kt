@@ -9,27 +9,47 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import uk.ryanwong.skycatnews.app.di.DispatcherModule
+import uk.ryanwong.skycatnews.newslist.data.repository.NewsListRepository
+import uk.ryanwong.skycatnews.newslist.domain.model.NewsItem
 import javax.inject.Inject
 
 @HiltViewModel
 class NewsListViewModel @Inject constructor(
+    private val newsListRepository: NewsListRepository,
     @DispatcherModule.MainDispatcher private val dispatcher: CoroutineDispatcher,
 ) : ViewModel() {
 
     private val _isRefreshing = MutableStateFlow(false)
     val isRefreshing = _isRefreshing.asStateFlow()
 
+    private val _newsListTitle = MutableStateFlow("")
+    val newsListTitle = _newsListTitle.asStateFlow()
+
+    private val _newsList = MutableStateFlow(listOf<NewsItem>())
+    val newsList = _newsList.asStateFlow()
+
+    init {
+        refreshNewsList()
+    }
+
     fun refreshNewsList() {
         _isRefreshing.value = true
         viewModelScope.launch(dispatcher) {
             withContext(Dispatchers.IO) {
-                delay(2000)
+                newsListRepository.getNewsList().onSuccess { newsListResult ->
+                    Timber.d("!!! success size = ${newsListResult.newsItems.size}")
+                    _newsList.value = newsListResult.newsItems
+                    _newsListTitle.value = newsListResult.title
+                }.onFailure {
+                    // TODO: print error
+                    Timber.d("!!! error")
+                }
                 _isRefreshing.value = false
             }
         }
