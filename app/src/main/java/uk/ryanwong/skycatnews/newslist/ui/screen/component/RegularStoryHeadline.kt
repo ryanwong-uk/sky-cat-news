@@ -108,7 +108,8 @@ fun RegularHeadline(
                     .size(Size.ORIGINAL)
                     .crossfade(true)
                     .build(),
-                placeholder = painterResource(R.drawable.ic_launcher_background),
+                error = painterResource(R.drawable.placeholder),
+                placeholder = painterResource(R.drawable.placeholder),
                 contentDescription = imageAccessibilityText,
                 contentScale = ContentScale.FillWidth,
                 modifier = Modifier

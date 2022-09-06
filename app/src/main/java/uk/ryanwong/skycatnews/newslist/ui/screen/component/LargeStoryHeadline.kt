@@ -97,7 +97,8 @@ fun LargeHeadline(
                     .data(imageUrl)
                     .crossfade(true)
                     .build(),
-                placeholder = painterResource(R.drawable.ic_launcher_background),
+                error = painterResource(R.drawable.placeholder),
+                placeholder = painterResource(R.drawable.placeholder),
                 contentDescription = imageAccessibilityText,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
