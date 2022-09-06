@@ -23,9 +23,9 @@ class FakeNewsListService : NewsListService {
                         teaserImage = TeaserImageDto(
                             links = LinksDto(
                                 url = UrlDto(
-                                    href = "",
+                                    href = "https://ryanwong.co.uk/sample-resources/skycatnews/cat1_hero.webp",
                                     templated = true,
-                                    type = "image/jpeg"
+                                    type = "image/webp"
                                 )
                             ),
                             accessibilityText = "Image content description"
@@ -43,9 +43,9 @@ class FakeNewsListService : NewsListService {
                         teaserImage = TeaserImageDto(
                             links = LinksDto(
                                 url = UrlDto(
-                                    href = "",
+                                    href = "https://ryanwong.co.uk/sample-resources/skycatnews/cat2_hero.webp",
                                     templated = true,
-                                    type = "image/jpeg"
+                                    type = "image/webp"
                                 )
                             ),
                             accessibilityText = "Image content description"
@@ -74,9 +74,9 @@ class FakeNewsListService : NewsListService {
                         teaserImage = TeaserImageDto(
                             links = LinksDto(
                                 url = UrlDto(
-                                    href = "",
+                                    href = "https://ryanwong.co.uk/sample-resources/skycatnews/cat3_hero.webp",
                                     templated = true,
-                                    type = "image/jpeg"
+                                    type = "image/webp"
                                 )
                             ),
                             accessibilityText = "Image content description"
@@ -84,7 +84,7 @@ class FakeNewsListService : NewsListService {
                         teaserText = null,
                         type = "weblink",
                         url = null,
-                        weblinkUrl = "weblink url"
+                        weblinkUrl = "https://news.sky.com/story/john-shuttleworth-comedy-gig-inside-cave-halted-halfway-after-fan-gets-trapped-in-tree-above-gorge-12617846"
                     ),
                     NewsItemDto(
                         creationDate = "2020-11-18T00:00:00Z",
@@ -94,9 +94,9 @@ class FakeNewsListService : NewsListService {
                         teaserImage = TeaserImageDto(
                             links = LinksDto(
                                 url = UrlDto(
-                                    href = "",
+                                    href = "https://ryanwong.co.uk/sample-resources/skycatnews/cat4_hero.webp",
                                     templated = true,
-                                    type = "image/jpeg"
+                                    type = "image/webp"
                                 )
                             ),
                             accessibilityText = "Image content description"
@@ -114,9 +114,9 @@ class FakeNewsListService : NewsListService {
                         teaserImage = TeaserImageDto(
                             links = LinksDto(
                                 url = UrlDto(
-                                    href = "",
+                                    href = "https://ryanwong.co.uk/sample-resources/skycatnews/cat5_hero.webp",
                                     templated = true,
-                                    type = "image/jpeg"
+                                    type = "image/webp"
                                 )
                             ),
                             accessibilityText = "Image content description"
@@ -124,7 +124,7 @@ class FakeNewsListService : NewsListService {
                         teaserText = null,
                         type = "weblink",
                         url = null,
-                        weblinkUrl = ""
+                        weblinkUrl = "https://news.sky.com/story/tory-leadership-rishi-sunak-and-liz-truss-promise-to-increase-scrutiny-of-scottish-govt-as-they-head-to-perth-12674081"
                     )
                 ),
                 title = "Sky Cat News"
