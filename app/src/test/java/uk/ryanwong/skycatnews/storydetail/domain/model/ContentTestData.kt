@@ -42,28 +42,15 @@ internal object ContentTestData {
     }
 
     val mockContentList1 by lazy {
-        Content(
-            accessibilityText = "some-accessibility-text-1",
+        Content.Paragraph(
             text = "some-text-1",
-            type = StoryContentType.PARAGRAPH,
-            url = "https://some.url/1"
         )
     }
 
     val mockContentList2 by lazy {
-        Content(
+        Content.Image(
             accessibilityText = "some-accessibility-text-2",
-            text = "some-text-2",
-            type = StoryContentType.IMAGE,
             url = "https://some.url/2"
-        )
-    }
-    val mockContentList3 by lazy {
-        Content(
-            accessibilityText = "some-accessibility-text-3",
-            text = "some-text-3",
-            type = StoryContentType.UNKNOWN,
-            url = "https://some.url/3"
         )
     }
 }

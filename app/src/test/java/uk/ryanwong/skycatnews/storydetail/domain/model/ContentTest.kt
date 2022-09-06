@@ -25,7 +25,7 @@ internal class ContentTest : FreeSpec() {
                 content shouldBe listOf()
             }
 
-            "Should correctly convert a list with multiple contentEntities" {
+            "Should drop unknown entries when having multiple contentEntities" {
                 // Given
                 val contentEntities = listOf(
                     ContentTestData.mockContentEntity1,
@@ -39,8 +39,7 @@ internal class ContentTest : FreeSpec() {
                 // Then
                 content shouldContainInOrder listOf(
                     ContentTestData.mockContentList1,
-                    ContentTestData.mockContentList2,
-                    ContentTestData.mockContentList3
+                    ContentTestData.mockContentList2
                 )
             }
 
@@ -56,14 +55,7 @@ internal class ContentTest : FreeSpec() {
                 val content = Content.fromEntity(contentEntities = contentEntities)
 
                 // Then
-                content shouldBe listOf(
-                    Content(
-                        accessibilityText = "some-accessibility-text-1",
-                        text = "",
-                        type = StoryContentType.PARAGRAPH,
-                        url = "https://some.url/1"
-                    )
-                )
+                content shouldBe listOf(Content.Paragraph(text = ""))
             }
 
             "Should keep url as null if it comes as null" {
@@ -78,14 +70,7 @@ internal class ContentTest : FreeSpec() {
                 val content = Content.fromEntity(contentEntities = contentEntities)
 
                 // Then
-                content shouldBe listOf(
-                    Content(
-                        accessibilityText = "some-accessibility-text-1",
-                        text = "some-text-1",
-                        type = StoryContentType.PARAGRAPH,
-                        url = null
-                    )
-                )
+                content shouldBe listOf(Content.Paragraph(text = "some-text-1"))
             }
 
             "Should keep accessibilityText as null if it comes as null" {
@@ -100,14 +85,7 @@ internal class ContentTest : FreeSpec() {
                 val content = Content.fromEntity(contentEntities = contentEntities)
 
                 // Then
-                content shouldBe listOf(
-                    Content(
-                        accessibilityText = null,
-                        text = "some-text-1",
-                        type = StoryContentType.PARAGRAPH,
-                        url = "https://some.url/1"
-                    )
-                )
+                content shouldBe listOf(Content.Paragraph(text = "some-text-1"))
             }
         }
     }

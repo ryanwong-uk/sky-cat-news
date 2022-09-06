@@ -88,11 +88,8 @@ internal class StoryTest : FreeSpec() {
                 story shouldBe Story(
                     id = 1,
                     contents = listOf(
-                        Content(
-                            accessibilityText = "some-accessibility-text",
+                        Content.Paragraph(
                             text = "some-text-1",
-                            type = StoryContentType.PARAGRAPH,
-                            url = "https://some.url/"
                         )
                     ),
                     date = "2022-5-21T00:00:00Z",

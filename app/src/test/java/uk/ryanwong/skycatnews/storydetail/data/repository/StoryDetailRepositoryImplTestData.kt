@@ -11,7 +11,6 @@ import uk.ryanwong.skycatnews.storydetail.data.remote.model.HeroImageDto
 import uk.ryanwong.skycatnews.storydetail.data.remote.model.StoryDto
 import uk.ryanwong.skycatnews.storydetail.domain.model.Content
 import uk.ryanwong.skycatnews.storydetail.domain.model.Story
-import uk.ryanwong.skycatnews.storydetail.domain.model.StoryContentType
 
 internal object StoryDetailRepositoryImplTestData {
     val mockStoryDto by lazy {
@@ -57,11 +56,8 @@ internal object StoryDetailRepositoryImplTestData {
         Story(
             id = 1,
             contents = listOf(
-                Content(
-                    accessibilityText = "some-accessibility-text",
+                Content.Paragraph(
                     text = "some-text-1",
-                    type = StoryContentType.PARAGRAPH,
-                    url = "https://some.url/"
                 )
             ),
             date = "2020-11-19T00:00:00Z",
