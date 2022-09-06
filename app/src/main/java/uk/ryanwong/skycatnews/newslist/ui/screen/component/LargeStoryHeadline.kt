@@ -4,12 +4,9 @@
 
 package uk.ryanwong.skycatnews.newslist.ui.screen.component
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.Card
@@ -17,8 +14,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
@@ -26,7 +23,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import uk.ryanwong.skycatnews.R
 import uk.ryanwong.skycatnews.app.ui.theme.SkyCatNewsTheme
 import uk.ryanwong.skycatnews.newslist.domain.model.NewsItem
@@ -38,6 +36,7 @@ fun LargeStoryHeadline(
     modifier: Modifier = Modifier,
 ) {
     LargeHeadline(
+        imageUrl = story.teaserImageUrl,
         imageAccessibilityText = story.teaserImageAccessibilityText,
         headline = story.headline,
         teaserText = story.teaserText,
@@ -54,6 +53,7 @@ fun LargeWebLinkHeadline(
     modifier: Modifier = Modifier,
 ) {
     LargeHeadline(
+        imageUrl = webLink.teaserImageUrl,
         imageAccessibilityText = webLink.teaserImageAccessibilityText,
         headline = webLink.headline,
         teaserText = null,
@@ -65,6 +65,7 @@ fun LargeWebLinkHeadline(
 
 @Composable
 fun LargeHeadline(
+    imageUrl: String?,
     imageAccessibilityText: String?,
     headline: String,
     teaserText: String?,
@@ -90,15 +91,18 @@ fun LargeHeadline(
                     onClick = onItemClicked
                 )
         ) {
-            // TODO: Coil
-            Image(
-                painterResource(id = R.drawable.ic_launcher_background),
-                contentScale = ContentScale.Crop,
+            AsyncImage(
+                model = ImageRequest
+                    .Builder(LocalContext.current)
+                    .data(imageUrl)
+                    .crossfade(true)
+                    .build(),
+                placeholder = painterResource(R.drawable.ic_launcher_background),
                 contentDescription = imageAccessibilityText,
+                contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(320.dp)
-                    .background(color = Color.LightGray)
+                    .wrapContentHeight()
             )
 
             Text(

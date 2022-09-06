@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 import uk.ryanwong.skycatnews.app.di.DispatcherModule
 import uk.ryanwong.skycatnews.newslist.data.repository.NewsListRepository
 import uk.ryanwong.skycatnews.newslist.domain.model.NewsItem
@@ -43,12 +42,11 @@ class NewsListViewModel @Inject constructor(
         viewModelScope.launch(dispatcher) {
             withContext(Dispatchers.IO) {
                 newsListRepository.getNewsList().onSuccess { newsListResult ->
-                    Timber.d("!!! success size = ${newsListResult.newsItems.size}")
                     _newsList.value = newsListResult.newsItems
                     _newsListTitle.value = newsListResult.title
-                }.onFailure {
+                }.onFailure { ex ->
                     // TODO: print error
-                    Timber.d("!!! error")
+                    ex.printStackTrace()
                 }
                 _isRefreshing.value = false
             }

@@ -4,12 +4,12 @@
 
 package uk.ryanwong.skycatnews.newslist.ui.screen.component
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -21,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
@@ -28,6 +29,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import coil.size.Size
 import uk.ryanwong.skycatnews.R
 import uk.ryanwong.skycatnews.app.ui.theme.SkyCatNewsTheme
 import uk.ryanwong.skycatnews.newslist.domain.model.NewsItem
@@ -39,6 +43,7 @@ fun RegularStoryHeadline(
     modifier: Modifier = Modifier,
 ) {
     RegularHeadline(
+        imageUrl = story.teaserImageUrl,
         imageAccessibilityText = story.teaserImageAccessibilityText,
         headline = story.headline,
         teaserText = story.teaserText,
@@ -55,10 +60,11 @@ fun RegularWebLinkHeadline(
     modifier: Modifier = Modifier,
 ) {
     RegularHeadline(
-        imageAccessibilityText = webLink.teaserImageAccessibilityText,
         headline = webLink.headline,
         teaserText = null,
         date = webLink.modifiedDate,
+        imageUrl = webLink.teaserImageUrl,
+        imageAccessibilityText = webLink.teaserImageAccessibilityText,
         onItemClicked = onItemClicked,
         modifier = modifier
     )
@@ -66,6 +72,7 @@ fun RegularWebLinkHeadline(
 
 @Composable
 fun RegularHeadline(
+    imageUrl: String?,
     imageAccessibilityText: String?,
     headline: String,
     teaserText: String?,
@@ -74,6 +81,7 @@ fun RegularHeadline(
     modifier: Modifier = Modifier,
 ) {
     val padding4 = dimensionResource(id = R.dimen.padding_4)
+    val padding8 = dimensionResource(id = R.dimen.padding_8)
     val padding16 = dimensionResource(id = R.dimen.padding_16)
 
     Card(
@@ -82,6 +90,7 @@ fun RegularHeadline(
             .padding(bottom = padding16)
             .fillMaxWidth()
             .wrapContentHeight()
+            .defaultMinSize(minHeight = dimensionResource(id = R.dimen.minimum_list_item_height))
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -92,13 +101,18 @@ fun RegularHeadline(
                     onClick = onItemClicked
                 )
         ) {
-            Image(
-                painterResource(id = R.drawable.ic_launcher_background),
+            AsyncImage(
+                model = ImageRequest
+                    .Builder(LocalContext.current)
+                    .data(imageUrl)
+                    .size(Size.ORIGINAL)
+                    .crossfade(true)
+                    .build(),
+                placeholder = painterResource(R.drawable.ic_launcher_background),
                 contentDescription = imageAccessibilityText,
-                contentScale = ContentScale.Crop,
+                contentScale = ContentScale.FillWidth,
                 modifier = Modifier
                     .weight(0.3f)
-                    .height(intrinsicSize = IntrinsicSize.Max)
                     .padding(all = padding4)
             )
 
@@ -138,7 +152,7 @@ fun RegularHeadline(
                     textAlign = TextAlign.Right,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = padding16, vertical = padding4)
+                        .padding(horizontal = padding16, vertical = padding8)
                 )
             }
         }

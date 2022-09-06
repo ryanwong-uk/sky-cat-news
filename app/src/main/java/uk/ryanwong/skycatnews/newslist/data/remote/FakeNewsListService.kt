@@ -23,9 +23,9 @@ class FakeNewsListService : NewsListService {
                         teaserImage = TeaserImageDto(
                             links = LinksDto(
                                 url = UrlDto(
-                                    href = "https://ryanwong.co.uk/sample-resources/skycatnews/cat1_hero.webp",
+                                    href = "https://ryanwong.co.uk/sample-resources/skycatnews/cat1_hero.jpg",
                                     templated = true,
-                                    type = "image/webp"
+                                    type = "image/jpeg"
                                 )
                             ),
                             accessibilityText = "Image content description"
@@ -43,9 +43,9 @@ class FakeNewsListService : NewsListService {
                         teaserImage = TeaserImageDto(
                             links = LinksDto(
                                 url = UrlDto(
-                                    href = "https://ryanwong.co.uk/sample-resources/skycatnews/cat2_hero.webp",
+                                    href = "https://ryanwong.co.uk/sample-resources/skycatnews/cat2_hero.jpg",
                                     templated = true,
-                                    type = "image/webp"
+                                    type = "image/jpeg"
                                 )
                             ),
                             accessibilityText = "Image content description"
@@ -74,9 +74,9 @@ class FakeNewsListService : NewsListService {
                         teaserImage = TeaserImageDto(
                             links = LinksDto(
                                 url = UrlDto(
-                                    href = "https://ryanwong.co.uk/sample-resources/skycatnews/cat3_hero.webp",
+                                    href = "https://ryanwong.co.uk/sample-resources/skycatnews/cat3_hero.jpg",
                                     templated = true,
-                                    type = "image/webp"
+                                    type = "image/jpeg"
                                 )
                             ),
                             accessibilityText = "Image content description"
@@ -94,9 +94,9 @@ class FakeNewsListService : NewsListService {
                         teaserImage = TeaserImageDto(
                             links = LinksDto(
                                 url = UrlDto(
-                                    href = "https://ryanwong.co.uk/sample-resources/skycatnews/cat4_hero.webp",
+                                    href = "https://ryanwong.co.uk/sample-resources/skycatnews/cat4_hero.jpg",
                                     templated = true,
-                                    type = "image/webp"
+                                    type = "image/jpeg"
                                 )
                             ),
                             accessibilityText = "Image content description"
@@ -114,9 +114,9 @@ class FakeNewsListService : NewsListService {
                         teaserImage = TeaserImageDto(
                             links = LinksDto(
                                 url = UrlDto(
-                                    href = "https://ryanwong.co.uk/sample-resources/skycatnews/cat5_hero.webp",
+                                    href = "https://ryanwong.co.uk/sample-resources/skycatnews/cat5_hero.jpg",
                                     templated = true,
-                                    type = "image/webp"
+                                    type = "image/jpeg"
                                 )
                             ),
                             accessibilityText = "Image content description"
