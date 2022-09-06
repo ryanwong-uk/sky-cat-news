@@ -16,9 +16,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import dagger.hilt.android.AndroidEntryPoint
 import uk.ryanwong.skycatnews.app.ui.theme.SkyCatNewsTheme
+import uk.ryanwong.skycatnews.newslist.ui.screen.NewsListScreen
 import uk.ryanwong.skycatnews.newslist.ui.screen.WebLinkScreen
-import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.newslist.ui.screen.NewsListScreen
-import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.storydetail.ui.screen.StoryDetailScreen
+import uk.ryanwong.skycatnews.storydetail.ui.screen.StoryDetailScreen
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
