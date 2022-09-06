@@ -30,7 +30,6 @@ out the feed locally, with an option in place to switch to the real feed later. 
 * [`Kotlin Flow`](https://kotlinlang.org/docs/flow.html)
 * [`Jetpack Room`](https://developer.android.com/jetpack/androidx/releases/room) - Database
 * [`Accompanist - WebView wrapper for Jetpack Compose`](https://github.com/google/accompanist/tree/main/web)
-    - WebView (for Weblink)
 * [`Ktor`](https://ktor.io/) - HTTP Client
 * [`Kotlin Serialization`](https://kotlinlang.org/docs/serialization.html) - For JSON parsing
 * [`Timber`](https://github.com/JakeWharton/timber) - Logging
