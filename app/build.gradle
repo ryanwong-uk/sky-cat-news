@@ -149,6 +149,10 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.9.1'
 
+    // Coil
+    implementation 'io.coil-kt:coil:2.2.0'
+    implementation 'io.coil-kt:coil-compose:2.2.0'
+
     // Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
@@ -198,7 +202,7 @@ tasks.koverMergedHtmlReport {
             'uk.ryanwong.skycatnews.*.*Dao_Impl*',
             'uk.ryanwong.skycatnews.ComposableSingletons*',
             'uk.ryanwong.skycatnews.BuildConfig*',
-            'uk.ryanwong.skycatnews.*.Fake*.*'
+            'uk.ryanwong.skycatnews.*.Fake*'
     ]
 }
 
@@ -217,6 +221,6 @@ tasks.koverMergedXmlReport {
             'uk.ryanwong.skycatnews.*.*Dao_Impl*',
             'uk.ryanwong.skycatnews.ComposableSingletons*',
             'uk.ryanwong.skycatnews.BuildConfig*',
-            'uk.ryanwong.skycatnews.*.Fake*.*'
+            'uk.ryanwong.skycatnews.*.Fake*'
     ]
 }

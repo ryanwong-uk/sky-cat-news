@@ -4,12 +4,9 @@
 
 ## Scenario
 
-Sky has recently decided to move into the local cat news industry. To enable this, we need to build
-a prototype app to demonstrate to stakeholders. The basic premise of the app is to allow users to
-look at stories of cute cats nearby.
+Sky has recently decided to move into the local cat news industry. To enable this, we need to build a prototype app to demonstrate to stakeholders. The basic premise of the app is to allow users to look at stories of cute cats nearby.
 
-This is a prototype of the app. As the backend isn't developed yet, this prototype currently mock
-out the feed locally, with an option in place to switch to the real feed later. Please refer to the "Building the App" section below for details.
+This is a prototype of the app. As the backend isn't developed yet, this prototype currently mock out the feed locally, with an option in place to switch to the real feed later. Please refer to the "Building the App" section below for details.
 
 ## TL;DR - Status
 
@@ -19,7 +16,7 @@ out the feed locally, with an option in place to switch to the real feed later. 
 ## High level architecture
 
 * Android-Kotlin
-* MVVM architecture with use-cases
+* MVVM architecture (without use-cases as this app is being too simple)
 * Single activity
 * Jetpack Compose UI
 
@@ -31,6 +28,7 @@ out the feed locally, with an option in place to switch to the real feed later. 
 * [`Jetpack Room`](https://developer.android.com/jetpack/androidx/releases/room) - Database
 * [`Accompanist - WebView wrapper for Jetpack Compose`](https://github.com/google/accompanist/tree/main/web)
 * [`Acoompanist - Swipe Refresh layout for Jetpack Compose`](https://github.com/google/accompanist/tree/main/swiperefresh)
+* [`Coil`](https://coil-kt.github.io/coil/) - Image loading
 * [`Ktor`](https://ktor.io/) - HTTP Client
 * [`Kotlin Serialization`](https://kotlinlang.org/docs/serialization.html) - For JSON parsing
 * [`Timber`](https://github.com/JakeWharton/timber) - Logging
@@ -41,8 +39,7 @@ out the feed locally, with an option in place to switch to the real feed later. 
 * [`Bitrise`](https://app.bitrise.io/) - CI
 * [`Kover`](https://github.com/Kotlin/kotlinx-kover) - code coverage
 * [`codecov`](https://codecov.io/) - code coverage
-* [`Ktlint Gradle`](https://github.com/jlleitschuh/ktlint-gradle) - ktlint plugin to check and apply
-  code formatting
+* [`Ktlint Gradle`](https://github.com/jlleitschuh/ktlint-gradle) - ktlint plugin to check and apply code formatting
 
 ## Requirements
 
@@ -53,8 +50,7 @@ out the feed locally, with an option in place to switch to the real feed later. 
 
 ### Local
 
-* Android keystore is not being stored in this repository. You need your own keystore to generate
-  the apk / App Bundle
+* Android keystore is not being stored in this repository. You need your own keystore to generate the apk / App Bundle
 
 * If your project folder is at `/app/skycatnews/`, the keystore file and `keystore.properties`
   should be placed at `/app/`
@@ -86,7 +82,8 @@ out the feed locally, with an option in place to switch to the real feed later. 
 
 This project can be built using the options provided under the Android Studio `Build` menu, or using the gradle commands. Some common gradle command line tasks are:
 
-./gradlew `<task>`: 
+./gradlew `<task>`:
+
 * `check` - Runs all checks (unit tests; generate ktlint and code coverage report)
 * `connectedCheck` - Runs all device checks on currently connected devices.
 * `installFakeDebug` - Installs the DebugFakeDebug build.
@@ -117,4 +114,5 @@ This project can be built using the options provided under the Android Studio `B
 #### /story/<id>
 
 * The entries within `contents` implicitly assume the ordering is preserved. It might be safer if we could add something like `sequenceId` so the App can always present them in a proper order.
-* Again, how we name the urls for links and images could be improved. The keys like `url`, `imageUrl`, `href` carries different meanings everywhere, which again can be error-prone. 
+* Again, how we name the urls for links and images could be improved. The keys like `url`
+  , `imageUrl`, `href` carries different meanings everywhere, which again can be error-prone. 
