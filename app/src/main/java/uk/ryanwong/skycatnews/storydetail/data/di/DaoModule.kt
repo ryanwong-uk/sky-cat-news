@@ -15,8 +15,7 @@ import uk.ryanwong.skycatnews.storydetail.data.local.StoryDao
 @InstallIn(SingletonComponent::class)
 object DaoModule {
     @Provides
-    fun provideStoryDao(database: LocalDatabase):
-        StoryDao {
+    fun provideStoryDao(database: LocalDatabase): StoryDao {
         return database.storyDao()
     }
 }

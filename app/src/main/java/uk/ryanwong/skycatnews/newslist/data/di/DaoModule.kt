@@ -15,8 +15,7 @@ import uk.ryanwong.skycatnews.newslist.data.local.NewsListDao
 @InstallIn(SingletonComponent::class)
 object DaoModule {
     @Provides
-    fun provideNewsListDao(database: LocalDatabase):
-        NewsListDao {
+    fun provideNewsListDao(database: LocalDatabase): NewsListDao {
         return database.newsListDao()
     }
 }

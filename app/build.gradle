@@ -45,8 +45,6 @@ android {
         // Bundle output filename
         setProperty("archivesBaseName", "skycatnews-" + versionName + "-" + new Date().format('yyyyMMdd-HHmmss'))
 
-        buildConfigField "String", "DEFAULT_BASE_URL", '"http://192.168.1.1"'
-
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
@@ -84,6 +82,19 @@ android {
             }
         }
     }
+
+    flavorDimensions "datasource"
+    productFlavors {
+        fake {
+            dimension 'datasource'
+            buildConfigField "String", "DEFAULT_BASE_URL", '""'
+        }
+        prod {
+            dimension 'datasource'
+            buildConfigField "String", "DEFAULT_BASE_URL", '"http://192.168.1.1"'
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

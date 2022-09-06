@@ -9,7 +9,7 @@ a prototype app to demonstrate to stakeholders. The basic premise of the app is 
 look at stories of cute cats nearby.
 
 This is a prototype of the app. As the backend isn't developed yet, this prototype currently mock
-out the feed locally, with an option in place to switch to the real feed later.
+out the feed locally, with an option in place to switch to the real feed later. Please refer to the "Building the App" section below for details.
 
 ## TL;DR - Status
 
@@ -84,36 +84,20 @@ out the feed locally, with an option in place to switch to the real feed later.
 
 ## Building the App
 
-This project can be built by following the usual gradle build process.
+This project can be built using the options provided under the Android Studio `Build` menu, or using the gradle commands. Some common gradle command line tasks are:
 
-### Run unit tests and generate coverage report
+./gradlew `<task>`: 
+* `check` - Runs all checks (unit tests; generate ktlint and code coverage report)
+* `connectedCheck` - Runs all device checks on currently connected devices.
+* `installFakeDebug` - Installs the DebugFakeDebug build.
+* `installProdDebug` - Installs the DebugProdDebug build.
+* `installFakeRelease` - Installs the ReleaseFakeRelease build.
+* `installProdRelease` - Installs the ReleaseProdRelease build.
+* `bundleRelease` - Assembles bundles for all Release variants.
+* `assembleRelease` - Assembles apks for all Release variants.
 
-   ```
-   ./gradlew check
-   ```
-
-### Build and install on the connected device
-
-   ```
-   ./gradlew installDebug
-   // or
-   // ./gradlew installRelease
-   ```
-
-* Options are: `Debug`, `Release`
-* Debug builds will have an App package name suffix `.debug`
-
-### Build and sign a bundle for distribution
-
-   ```
-   ./gradlew clean bundleRelease
-   ```
-
-### Build and sign an apk for distribution
-
-   ```
-   ./gradlew clean assembleRelease
-   ```
+`Fake` means the hardcoded local data source.
+`Prod` means the remote backend data source.
 
 * The generated apk(s) will be stored under `app/build/outputs/apk/`
 * Other usages can be listed using `./gradelew tasks`
