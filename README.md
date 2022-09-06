@@ -109,7 +109,7 @@ This project can be built using the options provided under the Android Studio `B
 #### /news-list
 
 * It is unclear for the purpose of supplying `title` - are we supposed to show that on the UI, so we support different titles managed by the backend?
-* `teaserImage` appears to be over complicated. Probably `_links` (the underscore is a bit usual) and `url` can be safely removed.
+* `teaserImage` appears to be over complicated. Probably `_links` (the underscore here is a bit unusual) and `url` can be safely removed?
 * The key `url` exhibits different behaviour for `teaserImage` and `advert` which can be error-prone.
 * `weblink` does not have the `teaserText` kay pair which is required by the proposed wireframe.
 * If the API is for the mobile application, it would work more perfectly if we could simplify and flatten the nested structure.
