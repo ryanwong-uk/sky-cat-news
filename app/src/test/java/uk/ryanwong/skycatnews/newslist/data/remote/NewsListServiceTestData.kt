@@ -133,7 +133,7 @@ internal object NewsListServiceTestData {
                     ),
                     teaserText = "Story teaser text",
                     type = "story",
-                    url = null,
+                    advertUrl = null,
                     weblinkUrl = null
                 ),
                 NewsItemDto(
@@ -153,7 +153,7 @@ internal object NewsListServiceTestData {
                     ),
                     teaserText = "Story teaser text",
                     type = "story",
-                    url = null,
+                    advertUrl = null,
                     weblinkUrl = null
                 ),
                 NewsItemDto(
@@ -164,7 +164,7 @@ internal object NewsListServiceTestData {
                     teaserImage = null,
                     teaserText = null,
                     type = "advert",
-                    url = "advert/url",
+                    advertUrl = "advert/url",
                     weblinkUrl = null
                 ),
                 NewsItemDto(
@@ -184,7 +184,7 @@ internal object NewsListServiceTestData {
                     ),
                     teaserText = null,
                     type = "weblink",
-                    url = null,
+                    advertUrl = null,
                     weblinkUrl = "weblink url"
                 ),
                 NewsItemDto(
@@ -204,7 +204,7 @@ internal object NewsListServiceTestData {
                     ),
                     teaserText = "Story teaser text",
                     type = "story",
-                    url = null,
+                    advertUrl = null,
                     weblinkUrl = null
                 ),
                 NewsItemDto(
@@ -224,7 +224,7 @@ internal object NewsListServiceTestData {
                     ),
                     teaserText = null,
                     type = "weblink",
-                    url = null,
+                    advertUrl = null,
                     weblinkUrl = ""
                 )
             ),

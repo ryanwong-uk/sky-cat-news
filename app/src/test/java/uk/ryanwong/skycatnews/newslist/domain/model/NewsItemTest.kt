@@ -107,7 +107,7 @@ internal class NewsItemTest : FreeSpec() {
 
             "Should keep url as null if it comes as null" {
                 // Given
-                val newsItemEntities = listOf(NewsItemTestData.mockNewsItemEntity1.copy(url = null))
+                val newsItemEntities = listOf(NewsItemTestData.mockNewsItemEntity1.copy(advertUrl = null))
 
                 // When
                 val newsItem = NewsItem.fromEntity(newsItemEntities = newsItemEntities)

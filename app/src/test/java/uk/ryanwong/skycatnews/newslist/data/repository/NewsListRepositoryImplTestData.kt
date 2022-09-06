@@ -32,7 +32,7 @@ internal object NewsListRepositoryImplTestData {
             ),
             teaserText = "some-teaser-text",
             type = "story",
-            url = null,
+            advertUrl = null,
             weblinkUrl = null
         )
     }
@@ -51,7 +51,7 @@ internal object NewsListRepositoryImplTestData {
         headline = "some-headline",
         creationDate = "2020-11-18T00:00:00Z",
         modifiedDate = "2020-11-19T00:00:00Z",
-        url = null,
+        advertUrl = null,
         weblinkUrl = null,
         teaserText = "some-teaser-text",
         teaserImageHref = "https://some.url/href",

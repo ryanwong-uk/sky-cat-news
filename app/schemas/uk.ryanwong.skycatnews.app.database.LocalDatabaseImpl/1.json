@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "29cb033c8593d9ec89e82f37211cd780",
+    "identityHash": "bc86b132bb239cffc7240f5cc257246f",
     "entities": [
       {
         "tableName": "news_items",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`list_id` INTEGER NOT NULL, `news_id` INTEGER NOT NULL, `type` TEXT, `headline` TEXT, `creation_date` TEXT NOT NULL, `modified_date` TEXT NOT NULL, `url` TEXT, `weblink_url` TEXT, `teaser_text` TEXT, `teaser_image_href` TEXT, `teaser_image_templated` INTEGER, `teaser_image_type` TEXT, `teaser_image_accessibility_text` TEXT, PRIMARY KEY(`list_id`, `news_id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`list_id` INTEGER NOT NULL, `news_id` INTEGER NOT NULL, `type` TEXT, `headline` TEXT, `creation_date` TEXT NOT NULL, `modified_date` TEXT NOT NULL, `advert_url` TEXT, `weblink_url` TEXT, `teaser_text` TEXT, `teaser_image_href` TEXT, `teaser_image_templated` INTEGER, `teaser_image_type` TEXT, `teaser_image_accessibility_text` TEXT, PRIMARY KEY(`list_id`, `news_id`))",
         "fields": [
           {
             "fieldPath": "listId",
@@ -45,8 +45,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "url",
-            "columnName": "url",
+            "fieldPath": "advertUrl",
+            "columnName": "advert_url",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -227,7 +227,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '29cb033c8593d9ec89e82f37211cd780')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'bc86b132bb239cffc7240f5cc257246f')"
     ]
   }
 }

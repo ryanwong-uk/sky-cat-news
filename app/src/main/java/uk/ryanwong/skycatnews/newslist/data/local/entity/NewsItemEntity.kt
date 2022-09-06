@@ -24,7 +24,8 @@ data class NewsItemEntity(
     val creationDate: String,
     @ColumnInfo(name = "modified_date")
     val modifiedDate: String,
-    val url: String?,
+    @ColumnInfo(name = "advert_url")
+    val advertUrl: String?,
     @ColumnInfo(name = "weblink_url")
     val weblinkUrl: String?,
 
@@ -60,7 +61,7 @@ data class NewsItemEntity(
                         headline = headline,
                         creationDate = creationDate,
                         modifiedDate = modifiedDate,
-                        url = url,
+                        advertUrl = advertUrl,
                         weblinkUrl = weblinkUrl,
                         teaserText = teaserText,
                         teaserImageHref = teaserImage?.links?.url?.href,

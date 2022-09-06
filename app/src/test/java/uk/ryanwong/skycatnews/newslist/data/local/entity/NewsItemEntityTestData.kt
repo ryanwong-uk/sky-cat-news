@@ -29,7 +29,7 @@ internal object NewsItemEntityTestData {
             ),
             teaserText = "some-teaser-text",
             type = "story",
-            url = "https://some.url/",
+            advertUrl = "https://some.url/",
             weblinkUrl = "https://some.weblink.url/"
         )
     }
@@ -42,7 +42,7 @@ internal object NewsItemEntityTestData {
             headline = "some-headline",
             creationDate = "2020-11-18T00:00:00Z",
             modifiedDate = "2020-11-19T00:00:00Z",
-            url = "https://some.url/",
+            advertUrl = "https://some.url/",
             weblinkUrl = "https://some.weblink.url/",
             teaserText = "some-teaser-text",
             teaserImageHref = "https://some.links.url/href",
@@ -70,7 +70,7 @@ internal object NewsItemEntityTestData {
             ),
             teaserText = "some-teaser-text-2",
             type = "story",
-            url = "https://some.url/",
+            advertUrl = "https://some.url/",
             weblinkUrl = "https://some.weblink.url/"
         )
     }
@@ -83,7 +83,7 @@ internal object NewsItemEntityTestData {
             headline = "some-headline",
             creationDate = "2020-11-18T00:00:00Z",
             modifiedDate = "2020-11-19T00:00:00Z",
-            url = "https://some.url/",
+            advertUrl = "https://some.url/",
             weblinkUrl = "https://some.weblink.url/",
             teaserText = "some-teaser-text-2",
             teaserImageHref = "https://some.links.url/href",
@@ -111,7 +111,7 @@ internal object NewsItemEntityTestData {
             ),
             teaserText = "some-teaser-text-3",
             type = "story",
-            url = "https://some.url/",
+            advertUrl = "https://some.url/",
             weblinkUrl = "https://some.weblink.url/"
         )
     }
@@ -124,7 +124,7 @@ internal object NewsItemEntityTestData {
             headline = "some-headline",
             creationDate = "2020-11-18T00:00:00Z",
             modifiedDate = "2020-11-19T00:00:00Z",
-            url = "https://some.url/",
+            advertUrl = "https://some.url/",
             weblinkUrl = "https://some.weblink.url/",
             teaserText = "some-teaser-text-3",
             teaserImageHref = "https://some.links.url/href",

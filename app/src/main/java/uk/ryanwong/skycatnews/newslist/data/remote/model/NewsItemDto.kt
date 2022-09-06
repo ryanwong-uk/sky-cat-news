@@ -4,6 +4,7 @@
 
 package uk.ryanwong.skycatnews.newslist.data.remote.model
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -13,7 +14,8 @@ data class NewsItemDto(
     val teaserImage: TeaserImageDto? = null,
     val teaserText: String? = null,
     val type: String? = null,
-    val url: String? = null,
+    @SerialName(value = "url")
+    val advertUrl: String? = null,
     val weblinkUrl: String? = null,
     val creationDate: String? = null,
     val modifiedDate: String? = null,

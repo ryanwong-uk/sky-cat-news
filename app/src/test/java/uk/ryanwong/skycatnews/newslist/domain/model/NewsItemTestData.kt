@@ -16,7 +16,7 @@ internal object NewsItemTestData {
             headline = "some-headline",
             creationDate = "2022-5-21T00:00:00Z",
             modifiedDate = "2022-5-21T00:00:00Z",
-            url = "https://some.url/",
+            advertUrl = "https://some.url/",
             weblinkUrl = "https://some.weblink.url/",
             teaserText = "some-teaser-text",
             teaserImageHref = "https://some.teaser.image/href",
@@ -34,7 +34,7 @@ internal object NewsItemTestData {
             headline = "some-headline-2",
             creationDate = "2022-5-21T00:00:01Z",
             modifiedDate = "2022-5-21T00:00:01Z",
-            url = "https://some.url/2",
+            advertUrl = "https://some.url/2",
             weblinkUrl = "https://some.weblink.url/2",
             teaserText = "some-teaser-text-2",
             teaserImageHref = "https://some.teaser.image/href/2",
@@ -52,7 +52,7 @@ internal object NewsItemTestData {
             headline = "some-headline-3",
             creationDate = "2022-5-21T00:00:02Z",
             modifiedDate = "2022-5-21T00:00:02Z",
-            url = "https://some.url/3",
+            advertUrl = "https://some.url/3",
             weblinkUrl = "https://some.weblink.url/3",
             teaserText = "some-teaser-text-3",
             teaserImageHref = "https://some.teaser.image/href/3",
@@ -80,7 +80,7 @@ internal object NewsItemTestData {
             modifiedDate = "2022-5-21T00:00:01Z",
             teaserImageUrl = "https://some.teaser.image/href/2",
             teaserImageAccessibilityText = "some-teaser-image-accessibility-text-2",
-            url = "https://some.url/2"
+            url = "https://some.weblink.url/2"
         )
     }
 }

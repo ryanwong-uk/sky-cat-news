@@ -32,7 +32,7 @@ class FakeNewsListService : NewsListService {
                         ),
                         teaserText = "Story teaser text",
                         type = "story",
-                        url = null,
+                        advertUrl = null,
                         weblinkUrl = null
                     ),
                     NewsItemDto(
@@ -52,7 +52,7 @@ class FakeNewsListService : NewsListService {
                         ),
                         teaserText = "Story teaser text",
                         type = "story",
-                        url = null,
+                        advertUrl = null,
                         weblinkUrl = null
                     ),
                     NewsItemDto(
@@ -63,7 +63,7 @@ class FakeNewsListService : NewsListService {
                         teaserImage = null,
                         teaserText = null,
                         type = "advert",
-                        url = "advert/url",
+                        advertUrl = "advert/url",
                         weblinkUrl = null
                     ),
                     NewsItemDto(
@@ -83,7 +83,7 @@ class FakeNewsListService : NewsListService {
                         ),
                         teaserText = null,
                         type = "weblink",
-                        url = null,
+                        advertUrl = null,
                         weblinkUrl = "https://news.sky.com/story/john-shuttleworth-comedy-gig-inside-cave-halted-halfway-after-fan-gets-trapped-in-tree-above-gorge-12617846"
                     ),
                     NewsItemDto(
@@ -103,7 +103,7 @@ class FakeNewsListService : NewsListService {
                         ),
                         teaserText = "Story teaser text",
                         type = "story",
-                        url = null,
+                        advertUrl = null,
                         weblinkUrl = null
                     ),
                     NewsItemDto(
@@ -123,7 +123,7 @@ class FakeNewsListService : NewsListService {
                         ),
                         teaserText = null,
                         type = "weblink",
-                        url = null,
+                        advertUrl = null,
                         weblinkUrl = "https://news.sky.com/story/tory-leadership-rishi-sunak-and-liz-truss-promise-to-increase-scrutiny-of-scottish-govt-as-they-head-to-perth-12674081"
                     )
                 ),
