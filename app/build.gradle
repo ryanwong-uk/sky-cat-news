@@ -91,7 +91,7 @@ android {
         }
         prod {
             dimension 'datasource'
-            buildConfigField "String", "DEFAULT_BASE_URL", '"http://192.168.1.1"'
+            buildConfigField "String", "DEFAULT_BASE_URL", '"https://ryanwong.co.uk/restapis"'
         }
     }
 
