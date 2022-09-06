@@ -39,6 +39,23 @@ fun NewsListScreen(
     val isRefreshing by newsListViewModel.isRefreshing.collectAsStateWithLifecycle()
     val newsList by newsListViewModel.newsList.collectAsStateWithLifecycle()
 
+    NewsListScreenLayout(
+        newsList = newsList,
+        isRefreshing = isRefreshing,
+        onRefresh = { newsListViewModel.refreshNewsList() },
+        onStoryItemClicked = onStoryItemClicked,
+        onWebLinkItemClicked = onWebLinkItemClicked,
+    )
+}
+
+@Composable
+fun NewsListScreenLayout(
+    newsList: List<NewsItem>,
+    isRefreshing: Boolean,
+    onRefresh: () -> Unit,
+    onStoryItemClicked: (id: Int) -> Unit,
+    onWebLinkItemClicked: (id: Int) -> Unit,
+) {
     val padding16 = dimensionResource(id = R.dimen.padding_16)
 
     Column(
@@ -48,7 +65,7 @@ fun NewsListScreen(
 
         SwipeRefresh(
             state = rememberSwipeRefreshState(isRefreshing = isRefreshing),
-            onRefresh = { newsListViewModel.refreshNewsList() }
+            onRefresh = onRefresh,
         ) {
             LazyColumn(
                 contentPadding = PaddingValues(vertical = padding16),
@@ -96,11 +113,18 @@ fun NewsListScreen(
     }
 }
 
-@Preview
+@Preview(
+    name = "News List Screen",
+    showSystemUi = true,
+    showBackground = true,
+)
 @Composable
 private fun NewsListScreenPreview() {
     SkyCatNewsTheme {
-        NewsListScreen(
+        NewsListScreenLayout(
+            newsList = listOf(),
+            isRefreshing = false,
+            onRefresh = { },
             onStoryItemClicked = {},
             onWebLinkItemClicked = {},
         )
