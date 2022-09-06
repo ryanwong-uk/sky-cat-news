@@ -49,15 +49,15 @@ sealed class NewsItem {
                     }
 
                     NewsType.WEBLINK -> {
-                        // TODO: URL should be essential for weblink entries. Change this if not.
-                        newsItemEntity.url?.let {
+                        // TODO: weblinkUrl should be essential for weblink entries. Change this if not.
+                        newsItemEntity.weblinkUrl?.let { weblink ->
                             WebLink(
                                 newsId = newsItemEntity.newsId,
                                 headline = newsItemEntity.headline ?: "",
                                 modifiedDate = newsItemEntity.modifiedDate,
                                 teaserImageUrl = newsItemEntity.teaserImageHref ?: "",
                                 teaserImageAccessibilityText = newsItemEntity.teaserImageAccessibilityText,
-                                url = newsItemEntity.url
+                                url = weblink
                             )
                         }
                     }
