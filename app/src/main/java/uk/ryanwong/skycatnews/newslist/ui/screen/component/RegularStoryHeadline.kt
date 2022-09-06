@@ -26,7 +26,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import uk.ryanwong.skycatnews.R
@@ -77,11 +76,12 @@ fun RegularHeadline(
     val padding4 = dimensionResource(id = R.dimen.padding_4)
     val padding16 = dimensionResource(id = R.dimen.padding_16)
 
-    Card(modifier = modifier
-        .padding(horizontal = padding16)
-        .padding(bottom = padding16)
-        .fillMaxWidth()
-        .wrapContentHeight()
+    Card(
+        modifier = modifier
+            .padding(horizontal = padding16)
+            .padding(bottom = padding16)
+            .fillMaxWidth()
+            .wrapContentHeight()
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,

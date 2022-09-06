@@ -5,18 +5,21 @@
 package uk.ryanwong.skycatnews.newslist.ui.screen
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import uk.ryanwong.skycatnews.R
 import uk.ryanwong.skycatnews.app.ui.theme.SkyCatNewsTheme
 import uk.ryanwong.skycatnews.newslist.domain.model.NewsItem
 import uk.ryanwong.skycatnews.newslist.ui.screen.component.LargeStoryHeadline
@@ -36,6 +39,8 @@ fun NewsListScreen(
     val isRefreshing by newsListViewModel.isRefreshing.collectAsStateWithLifecycle()
     val newsList by newsListViewModel.newsList.collectAsStateWithLifecycle()
 
+    val padding16 = dimensionResource(id = R.dimen.padding_16)
+
     Column(
         modifier = Modifier.fillMaxSize(),
     ) {
@@ -46,6 +51,7 @@ fun NewsListScreen(
             onRefresh = { newsListViewModel.refreshNewsList() }
         ) {
             LazyColumn(
+                contentPadding = PaddingValues(vertical = padding16),
                 modifier = Modifier.fillMaxSize()
             ) {
                 if (newsList.isNotEmpty()) {

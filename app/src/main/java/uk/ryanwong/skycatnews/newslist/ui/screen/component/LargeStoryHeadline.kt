@@ -11,13 +11,20 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import uk.ryanwong.skycatnews.R
@@ -68,48 +75,62 @@ fun LargeHeadline(
     val padding4 = dimensionResource(id = R.dimen.padding_4)
     val padding16 = dimensionResource(id = R.dimen.padding_16)
 
-    Column(
+    Card(
         modifier = modifier
-            .fillMaxWidth()
-            .clickable(
-                enabled = true,
-                onClick = onItemClicked
-            )
+            .padding(horizontal = padding16)
             .padding(bottom = padding16)
+            .fillMaxWidth()
+            .wrapContentHeight()
     ) {
-        // TODO: Coil
-        Image(
-            painterResource(id = R.drawable.ic_launcher_background),
-            contentDescription = imageAccessibilityText,
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(320.dp)
-                .background(color = Color.LightGray)
-        )
-
-        Text(
-            text = headline,
-            maxLines = 1,
-            style = MaterialTheme.typography.h6,
-            modifier = Modifier
-                .padding(horizontal = padding16, vertical = padding4)
-        )
-        teaserText?.let {
-            Text(
-                text = teaserText,
-                maxLines = 3,
-                style = MaterialTheme.typography.body1,
+                .clickable(
+                    enabled = true,
+                    onClick = onItemClicked
+                )
+        ) {
+            // TODO: Coil
+            Image(
+                painterResource(id = R.drawable.ic_launcher_background),
+                contentScale = ContentScale.Crop,
+                contentDescription = imageAccessibilityText,
                 modifier = Modifier
-                    .padding(horizontal = padding16)
+                    .fillMaxWidth()
+                    .height(320.dp)
+                    .background(color = Color.LightGray)
+            )
+
+            Text(
+                text = headline,
+                maxLines = 1,
+                style = MaterialTheme.typography.h6,
+                fontWeight = FontWeight.Bold,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier
+                    .padding(horizontal = padding16, vertical = padding4)
+            )
+            teaserText?.let {
+                Text(
+                    text = teaserText,
+                    maxLines = 3,
+                    style = MaterialTheme.typography.body1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier
+                        .padding(horizontal = padding16)
+                )
+            }
+            Text(
+                text = date,
+                maxLines = 1,
+                style = MaterialTheme.typography.caption,
+                fontStyle = FontStyle.Italic,
+                textAlign = TextAlign.Right,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = padding16, vertical = padding4)
             )
         }
-        Text(
-            text = date,
-            maxLines = 1,
-            style = MaterialTheme.typography.caption,
-            modifier = Modifier
-                .padding(horizontal = padding16, vertical = padding4)
-        )
     }
 }
 
