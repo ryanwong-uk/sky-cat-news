@@ -101,3 +101,20 @@ This project can be built using the options provided under the Android Studio `B
 
 * The generated apk(s) will be stored under `app/build/outputs/apk/`
 * Other usages can be listed using `./gradelew tasks`
+
+## Comments
+
+### The proposed API contract
+
+#### /news-list
+
+* It is unclear for the purpose of supplying `title` - are we supposed to show that on the UI, so we support different titles managed by the backend?
+* `teaserImage` appears to be over complicated. Probably `_links` (the underscore is a bit usual) and `url` can be safely removed.
+* The key `url` exhibits different behaviour for `teaserImage` and `advert` which can be error-prone.
+* `weblink` does not have the `teaserText` kay pair which is required by the proposed wireframe.
+* If the API is for the mobile application, it would work more perfectly if we could simplify and flatten the nested structure.
+
+#### /story/<id>
+
+* The entries within `contents` implicitly assume the ordering is preserved. It might be safer if we could add something like `sequenceId` so the App can always present them in a proper order.
+* Again, how we name the urls for links and images could be improved. The keys like `url`, `imageUrl`, `href` carries different meanings everywhere, which again can be error-prone. 
