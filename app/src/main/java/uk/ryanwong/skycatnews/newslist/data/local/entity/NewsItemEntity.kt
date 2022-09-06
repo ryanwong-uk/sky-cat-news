@@ -40,7 +40,7 @@ data class NewsItemEntity(
     val teaserImageAccessibilityText: String?,
 ) {
     companion object {
-        fun fromDto(listId: Int, newsItemDtoList: List<NewsItemDto>?): List<NewsItemEntity>? {
+        fun fromDto(listId: Int, newsItemDtoList: List<NewsItemDto>?): List<NewsItemEntity> {
             return newsItemDtoList?.mapNotNull { newsItem ->
                 with(newsItem) {
 
@@ -69,7 +69,7 @@ data class NewsItemEntity(
                         teaserImageAccessibilityText = teaserImage?.accessibilityText,
                     )
                 }
-            }
+            } ?: emptyList()
         }
     }
 }

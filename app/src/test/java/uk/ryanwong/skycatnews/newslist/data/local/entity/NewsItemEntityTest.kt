@@ -26,7 +26,7 @@ internal class NewsItemEntityTest : FreeSpec() {
                     NewsItemEntity.fromDto(listId = 1, newsItemDtoList = newsItemDtoList)
 
                 // Then
-                newsItemEntity shouldBe null
+                newsItemEntity shouldBe emptyList()
             }
 
             "Should skip processing NewsItemDto in the list if creationDate is null" {
@@ -42,7 +42,7 @@ internal class NewsItemEntityTest : FreeSpec() {
                     NewsItemEntity.fromDto(listId = 1, newsItemDtoList = newsItemDtoList)
 
                 // Then
-                newsItemEntity shouldBe null
+                newsItemEntity shouldBe emptyList()
             }
 
             "Should skip processing NewsItemDto in the list if modifiedDate is null" {
@@ -58,10 +58,27 @@ internal class NewsItemEntityTest : FreeSpec() {
                     NewsItemEntity.fromDto(listId = 1, newsItemDtoList = newsItemDtoList)
 
                 // Then
-                newsItemEntity shouldBe null
+                newsItemEntity shouldBe emptyList()
             }
 
-            "Should return null if newsItemDtoList is null" {
+            "Should only ignore skipped item while retaining valid items" {
+                // Given
+                val newsItemDtoList = listOf(
+                    NewsItemEntityTestData.mockNewsItemDto.copy(
+                        modifiedDate = null
+                    ),
+                    NewsItemEntityTestData.mockNewsItemDto2
+                )
+
+                // When
+                val newsItemEntity =
+                    NewsItemEntity.fromDto(listId = 1, newsItemDtoList = newsItemDtoList)
+
+                // Then
+                newsItemEntity shouldBe listOf(NewsItemEntityTestData.mockNewsItemEntity2)
+            }
+
+            "Should return empty list if newsItemDtoList is null" {
                 // Given
                 val newsItemDtoList = null
 
@@ -70,7 +87,7 @@ internal class NewsItemEntityTest : FreeSpec() {
                     NewsItemEntity.fromDto(listId = 1, newsItemDtoList = newsItemDtoList)
 
                 // Then
-                newsItemEntity shouldBe null
+                newsItemEntity shouldBe emptyList()
             }
 
             "Should return empty list if newsItemDtoList is empty" {

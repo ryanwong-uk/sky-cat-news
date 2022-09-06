@@ -13,7 +13,7 @@ out the feed locally, with an option in place to switch to the real feed later. 
 
 ## TL;DR - Status
 
-* 73 Unit tests for repositories, models, Ktor API services are done.
+* 74 Unit tests for repositories, models, Ktor API services are done.
 * 16 Unit tests for RoomDB DAOs are done.
 
 ## High level architecture
