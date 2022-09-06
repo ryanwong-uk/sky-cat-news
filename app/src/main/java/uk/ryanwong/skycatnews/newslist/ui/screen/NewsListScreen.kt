@@ -49,10 +49,8 @@ fun NewsListScreen(
                 modifier = Modifier.fillMaxSize()
             ) {
                 if (newsList.isNotEmpty()) {
-                    val mutableNewsList = newsList.toMutableList()
-
                     item {
-                        val firstItem = mutableNewsList.removeFirst()
+                        val firstItem = newsList.first()
                         when (firstItem) {
                             is NewsItem.Story -> {
                                 LargeStoryHeadline(
@@ -69,7 +67,8 @@ fun NewsListScreen(
                         }
                     }
 
-                    itemsIndexed(mutableNewsList) { _, newsItem ->
+                    val regularItemsList = newsList.subList(1, newsList.size)
+                    itemsIndexed(regularItemsList) { _, newsItem ->
                         when (newsItem) {
                             is NewsItem.Story -> {
                                 RegularStoryHeadline(
