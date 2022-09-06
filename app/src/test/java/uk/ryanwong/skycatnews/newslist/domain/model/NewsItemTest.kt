@@ -24,7 +24,7 @@ internal class NewsItemTest : FreeSpec() {
                 newsItem shouldBe emptyList()
             }
 
-            "Should correctly convert a list with multiple newsItemEntities" {
+            "Should convert and keep only known types from multiple newsItemEntities" {
                 // Given
                 val newsItemEntities = listOf(
                     NewsItemTestData.mockNewsItemEntity1,
@@ -37,71 +37,70 @@ internal class NewsItemTest : FreeSpec() {
 
                 // then
                 newsItem shouldContainInOrder listOf(
-                    NewsItemTestData.mockNewsItem1,
-                    NewsItemTestData.mockNewsItem2,
-                    NewsItemTestData.mockNewsItem3
+                    NewsItemTestData.mockNewsItemStory,
+                    NewsItemTestData.mockNewsItemWebLink
                 )
             }
 
             "Should fill headline with empty string if it comes as null" {
                 // Given
-                val newsItemEntities = listOf(NewsItemTestData.mockNewsItemEntity1.copy(headline = null))
+                val newsItemEntities =
+                    listOf(NewsItemTestData.mockNewsItemEntity1.copy(headline = null))
 
                 // When
                 val newsItem = NewsItem.fromEntity(newsItemEntities = newsItemEntities)
 
                 // then
                 newsItem shouldBe listOf(
-                    NewsItem(
+                    NewsItem.Story(
                         newsId = 1,
                         headline = "",
                         teaserText = "some-teaser-text",
                         modifiedDate = "2022-5-21T00:00:00Z",
                         teaserImageUrl = "https://some.teaser.image/href",
-                        type = NewsType.STORY,
-                        url = "https://some.url/"
+                        teaserImageAccessibilityText = "some-teaser-image-accessibility-text",
                     )
                 )
             }
 
             "Should fill teaserText with empty string if it comes as null" {
                 // Given
-                val newsItemEntities = listOf(NewsItemTestData.mockNewsItemEntity1.copy(teaserText = null))
+                val newsItemEntities =
+                    listOf(NewsItemTestData.mockNewsItemEntity1.copy(teaserText = null))
 
                 // When
                 val newsItem = NewsItem.fromEntity(newsItemEntities = newsItemEntities)
 
                 // then
                 newsItem shouldBe listOf(
-                    NewsItem(
+                    NewsItem.Story(
                         newsId = 1,
                         headline = "some-headline",
                         teaserText = "",
                         modifiedDate = "2022-5-21T00:00:00Z",
                         teaserImageUrl = "https://some.teaser.image/href",
-                        type = NewsType.STORY,
-                        url = "https://some.url/"
+                        teaserImageAccessibilityText = "some-teaser-image-accessibility-text",
                     )
                 )
             }
 
             "Should fill teaserImageUrl with empty string if teaserImageHref comes as null" {
                 // Given
-                val newsItemEntities = listOf(NewsItemTestData.mockNewsItemEntity1.copy(teaserImageHref = null))
+                val newsItemEntities =
+                    listOf(NewsItemTestData.mockNewsItemEntity1.copy(teaserImageHref = null))
 
                 // When
                 val newsItem = NewsItem.fromEntity(newsItemEntities = newsItemEntities)
 
                 // then
                 newsItem shouldBe listOf(
-                    NewsItem(
+                    NewsItem.Story(
                         newsId = 1,
                         headline = "some-headline",
                         teaserText = "some-teaser-text",
                         modifiedDate = "2022-5-21T00:00:00Z",
                         teaserImageUrl = "",
-                        type = NewsType.STORY,
-                        url = "https://some.url/"
+                        teaserImageAccessibilityText = "some-teaser-image-accessibility-text",
                     )
                 )
             }
@@ -115,14 +114,13 @@ internal class NewsItemTest : FreeSpec() {
 
                 // then
                 newsItem shouldBe listOf(
-                    NewsItem(
+                    NewsItem.Story(
                         newsId = 1,
                         headline = "some-headline",
                         teaserText = "some-teaser-text",
                         modifiedDate = "2022-5-21T00:00:00Z",
                         teaserImageUrl = "https://some.teaser.image/href",
-                        type = NewsType.STORY,
-                        url = null
+                        teaserImageAccessibilityText = "some-teaser-image-accessibility-text",
                     )
                 )
             }

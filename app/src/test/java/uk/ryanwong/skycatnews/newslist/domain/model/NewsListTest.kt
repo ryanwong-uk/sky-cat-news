@@ -27,7 +27,7 @@ internal class NewsListTest : FreeSpec() {
                 // Given
                 val newsList = NewsList(
                     title = "some-title",
-                    newsItems = listOf(NewsListTestData.mockNewsItem1)
+                    newsItems = listOf(NewsListTestData.mockNewsItemStory)
                 )
 
                 // When
@@ -57,7 +57,7 @@ internal class NewsListTest : FreeSpec() {
             "Should return NewsList correctly if newsItemEntities contains one item" {
                 // Given
                 val title = "some-title"
-                val newsItemEntities = listOf(NewsListTestData.mockNewsItemEntity1)
+                val newsItemEntities = listOf(NewsListTestData.mockNewsItemEntityStory)
 
                 // When
                 val newsList = NewsList.fromEntity(
@@ -68,17 +68,17 @@ internal class NewsListTest : FreeSpec() {
                 // Then
                 newsList shouldBe NewsList(
                     title = "some-title",
-                    newsItems = listOf(NewsListTestData.mockNewsItem1)
+                    newsItems = listOf(NewsListTestData.mockNewsItemStory)
                 )
             }
 
-            "Should return NewsList correctly if newsItemEntities contains multiple items" {
+            "Should convert and keep only known types from multiple newsItemEntities" {
                 // Given
                 val title = "some-title"
                 val newsItemEntities = listOf(
-                    NewsListTestData.mockNewsItemEntity1,
-                    NewsListTestData.mockNewsItemEntity2,
-                    NewsListTestData.mockNewsItemEntity3
+                    NewsListTestData.mockNewsItemEntityStory,
+                    NewsListTestData.mockNewsItemEntityWebLink,
+                    NewsListTestData.mockNewsItemEntityUnknown
                 )
 
                 // When
@@ -91,9 +91,8 @@ internal class NewsListTest : FreeSpec() {
                 newsList shouldBe NewsList(
                     title = "some-title",
                     newsItems = listOf(
-                        NewsListTestData.mockNewsItem1,
-                        NewsListTestData.mockNewsItem2,
-                        NewsListTestData.mockNewsItem3
+                        NewsListTestData.mockNewsItemStory,
+                        NewsListTestData.mockNewsItemWebLink
                     )
                 )
             }

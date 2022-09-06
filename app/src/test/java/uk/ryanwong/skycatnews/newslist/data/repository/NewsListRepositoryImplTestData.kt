@@ -12,7 +12,6 @@ import uk.ryanwong.skycatnews.newslist.data.remote.model.TeaserImageDto
 import uk.ryanwong.skycatnews.newslist.data.remote.model.UrlDto
 import uk.ryanwong.skycatnews.newslist.domain.model.NewsItem
 import uk.ryanwong.skycatnews.newslist.domain.model.NewsList
-import uk.ryanwong.skycatnews.newslist.domain.model.NewsType
 
 internal object NewsListRepositoryImplTestData {
     val mockNewsItemDto by lazy {
@@ -65,14 +64,13 @@ internal object NewsListRepositoryImplTestData {
         NewsList(
             title = "some-title",
             newsItems = listOf(
-                NewsItem(
+                NewsItem.Story(
                     newsId = 1,
                     headline = "some-headline",
                     teaserText = "some-teaser-text",
                     modifiedDate = "2020-11-19T00:00:00Z",
                     teaserImageUrl = "https://some.url/href",
-                    type = NewsType.STORY,
-                    url = null
+                    teaserImageAccessibilityText = "some-accessibility-text",
                 )
             )
         )

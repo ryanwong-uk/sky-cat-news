@@ -8,7 +8,7 @@ import uk.ryanwong.skycatnews.newslist.data.local.entity.NewsItemEntity
 
 internal object NewsListTestData {
 
-    val mockNewsItemEntity1 by lazy {
+    val mockNewsItemEntityStory by lazy {
         NewsItemEntity(
             listId = 1,
             newsId = 1,
@@ -26,7 +26,7 @@ internal object NewsListTestData {
         )
     }
 
-    val mockNewsItemEntity2 by lazy {
+    val mockNewsItemEntityWebLink by lazy {
         NewsItemEntity(
             listId = 1,
             newsId = 2,
@@ -44,7 +44,7 @@ internal object NewsListTestData {
         )
     }
 
-    val mockNewsItemEntity3 by lazy {
+    val mockNewsItemEntityUnknown by lazy {
         NewsItemEntity(
             listId = 1,
             newsId = 3,
@@ -62,39 +62,25 @@ internal object NewsListTestData {
         )
     }
 
-    val mockNewsItem1 by lazy {
-        NewsItem(
+    val mockNewsItemStory by lazy {
+        NewsItem.Story(
             newsId = 1,
             headline = "some-headline",
             teaserText = "some-teaser-text",
             modifiedDate = "2022-5-21T00:00:00Z",
             teaserImageUrl = "https://some.teaser.image/href",
-            type = NewsType.STORY,
-            url = "https://some.url/"
+            teaserImageAccessibilityText = "some-teaser-image-accessibility-text",
         )
     }
 
-    val mockNewsItem2 by lazy {
-        NewsItem(
+    val mockNewsItemWebLink by lazy {
+        NewsItem.WebLink(
             newsId = 2,
             headline = "some-headline-2",
-            teaserText = "some-teaser-text-2",
             modifiedDate = "2022-5-21T00:00:01Z",
             teaserImageUrl = "https://some.teaser.image/href/2",
-            type = NewsType.WEBLINK,
+            teaserImageAccessibilityText = "some-teaser-image-accessibility-text-2",
             url = "https://some.url/2"
-        )
-    }
-
-    val mockNewsItem3 by lazy {
-        NewsItem(
-            newsId = 3,
-            headline = "some-headline-3",
-            teaserText = "some-teaser-text-3",
-            modifiedDate = "2022-5-21T00:00:02Z",
-            teaserImageUrl = "https://some.teaser.image/href/3",
-            type = NewsType.UNKNOWN,
-            url = "https://some.url/3"
         )
     }
 }
