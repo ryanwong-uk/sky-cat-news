@@ -4,25 +4,26 @@
 
 package uk.ryanwong.skycatnews.newslist.ui.screen
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Text
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import uk.ryanwong.skycatnews.app.ui.theme.SkyCatNewsTheme
+import uk.ryanwong.skycatnews.newslist.domain.model.NewsItem
+import uk.ryanwong.skycatnews.newslist.ui.screen.component.LargeStoryHeadline
+import uk.ryanwong.skycatnews.newslist.ui.screen.component.LargeWebLinkHeadline
+import uk.ryanwong.skycatnews.newslist.ui.screen.component.RegularStoryHeadline
+import uk.ryanwong.skycatnews.newslist.ui.screen.component.RegularWebLinkHeadline
+import uk.ryanwong.skycatnews.newslist.ui.screen.component.SkyCatNewsAppBar
 import uk.ryanwong.skycatnews.newslist.ui.viewmodel.NewsListViewModel
 
 @OptIn(ExperimentalLifecycleComposeApi::class)
@@ -33,14 +34,12 @@ fun NewsListScreen(
     onWebLinkItemClicked: (id: Int) -> Unit,
 ) {
     val isRefreshing by newsListViewModel.isRefreshing.collectAsStateWithLifecycle()
+    val newsList by newsListViewModel.newsList.collectAsStateWithLifecycle()
 
     Column(
         modifier = Modifier.fillMaxSize(),
     ) {
-        Text(
-            "text = header",
-            modifier = Modifier.height(48.dp)
-        )
+        SkyCatNewsAppBar()
 
         SwipeRefresh(
             state = rememberSwipeRefreshState(isRefreshing = isRefreshing),
@@ -49,28 +48,43 @@ fun NewsListScreen(
             LazyColumn(
                 modifier = Modifier.fillMaxSize()
             ) {
-                item {
-                    Column(
-                        modifier = Modifier
-                            .height(120.dp)
-                            .fillMaxWidth()
-                            .background(color = Color.LightGray)
-                    ) {
-                        Text(
-                            text = "Greg is great",
-                            modifier = Modifier
-                                .height(48.dp)
-                                .fillMaxWidth()
-                        )
+                if (newsList.isNotEmpty()) {
+                    val mutableNewsList = newsList.toMutableList()
+
+                    item {
+                        val firstItem = mutableNewsList.removeFirst()
+                        when (firstItem) {
+                            is NewsItem.Story -> {
+                                LargeStoryHeadline(
+                                    story = firstItem,
+                                    onItemClicked = { onStoryItemClicked(firstItem.newsId) },
+                                )
+                            }
+                            is NewsItem.WebLink -> {
+                                LargeWebLinkHeadline(
+                                    webLink = firstItem,
+                                    onItemClicked = { onWebLinkItemClicked(firstItem.newsId) },
+                                )
+                            }
+                        }
                     }
-                }
-                items(30) { index ->
-                    Text(
-                        text = "Greg is great $index",
-                        modifier = Modifier
-                            .height(48.dp)
-                            .fillMaxWidth()
-                    )
+
+                    itemsIndexed(mutableNewsList) { _, newsItem ->
+                        when (newsItem) {
+                            is NewsItem.Story -> {
+                                RegularStoryHeadline(
+                                    story = newsItem,
+                                    onItemClicked = { onStoryItemClicked(newsItem.newsId) },
+                                )
+                            }
+                            is NewsItem.WebLink -> {
+                                RegularWebLinkHeadline(
+                                    webLink = newsItem,
+                                    onItemClicked = { onWebLinkItemClicked(newsItem.newsId) },
+                                )
+                            }
+                        }
+                    }
                 }
             }
         }
