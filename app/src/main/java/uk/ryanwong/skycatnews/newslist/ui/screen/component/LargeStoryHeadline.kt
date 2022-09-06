@@ -72,7 +72,7 @@ fun LargeHeadline(
     onItemClicked: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val padding4 = dimensionResource(id = R.dimen.padding_4)
+    val padding8 = dimensionResource(id = R.dimen.padding_8)
     val padding16 = dimensionResource(id = R.dimen.padding_16)
 
     Card(
@@ -108,7 +108,8 @@ fun LargeHeadline(
                 fontWeight = FontWeight.Bold,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier
-                    .padding(horizontal = padding16, vertical = padding4)
+                    .fillMaxWidth()
+                    .padding(horizontal = padding16, vertical = padding8)
             )
             teaserText?.let {
                 Text(
@@ -117,6 +118,7 @@ fun LargeHeadline(
                     style = MaterialTheme.typography.body1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier
+                        .fillMaxWidth()
                         .padding(horizontal = padding16)
                 )
             }
@@ -128,7 +130,7 @@ fun LargeHeadline(
                 textAlign = TextAlign.Right,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = padding16, vertical = padding4)
+                    .padding(horizontal = padding16, vertical = padding8)
             )
         }
     }

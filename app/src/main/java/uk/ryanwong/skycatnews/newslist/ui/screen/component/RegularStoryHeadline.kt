@@ -106,6 +106,7 @@ fun RegularHeadline(
                 verticalArrangement = Arrangement.Center,
                 modifier = modifier
                     .weight(0.7f)
+                    .height(intrinsicSize = IntrinsicSize.Max)
             ) {
                 Text(
                     text = headline,
@@ -125,6 +126,7 @@ fun RegularHeadline(
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier
                             .fillMaxWidth()
+                            .weight(weight = 1.0f)
                             .padding(horizontal = padding16)
                     )
                 }
