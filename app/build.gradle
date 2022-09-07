@@ -203,7 +203,8 @@ tasks.koverMergedHtmlReport {
             'uk.ryanwong.skycatnews.ComposableSingletons*',
             'uk.ryanwong.skycatnews.BuildConfig*',
             'uk.ryanwong.skycatnews.*.Fake*',
-            'uk.ryanwong.skycatnews.*.previewparameter'
+            'uk.ryanwong.skycatnews.*.previewparameter*',
+            'uk.ryanwong.skycatnews.app.ComposableSingletons*'
     ]
 }
 
@@ -223,6 +224,7 @@ tasks.koverMergedXmlReport {
             'uk.ryanwong.skycatnews.ComposableSingletons*',
             'uk.ryanwong.skycatnews.BuildConfig*',
             'uk.ryanwong.skycatnews.*.Fake*',
-            'uk.ryanwong.skycatnews.*.previewparameter'
+            'uk.ryanwong.skycatnews.*.previewparameter*',
+            'uk.ryanwong.skycatnews.app.ComposableSingletons*'
     ]
 }
