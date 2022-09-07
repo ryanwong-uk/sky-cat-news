@@ -37,6 +37,7 @@ private fun SkyCatNewsApp() {
     NavHost(navController = navController, startDestination = "newslist") {
         composable(route = "newslist") {
             NewsListScreen(
+                navController = navController,
                 onStoryItemClicked = { listId -> navController.navigate("newslist/story/$listId") },
                 onWebLinkItemClicked = { listId -> navController.navigate("newslist/weblink/$listId") },
             )
@@ -49,7 +50,7 @@ private fun SkyCatNewsApp() {
                 }
             )
         ) {
-            StoryDetailScreen()
+            StoryDetailScreen(navController = navController)
         }
 
         composable(
@@ -60,7 +61,7 @@ private fun SkyCatNewsApp() {
                 }
             )
         ) {
-            WebLinkScreen()
+            WebLinkScreen(navController = navController)
         }
     }
 }

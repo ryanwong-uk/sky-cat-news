@@ -9,12 +9,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.web.WebView
 import com.google.accompanist.web.rememberWebViewState
 import uk.ryanwong.skycatnews.newslist.ui.screen.component.SkyCatNewsAppBar
 
 @Composable
 fun WebLinkScreen(
+    navController: NavController,
     modifier: Modifier = Modifier,
 ) {
     val webViewState = rememberWebViewState(url = "https://www.sky.co.uk/")
@@ -22,7 +25,7 @@ fun WebLinkScreen(
     Column(
         modifier = modifier.fillMaxSize(),
     ) {
-        SkyCatNewsAppBar()
+        SkyCatNewsAppBar(navController = navController)
 
         WebView(
             state = webViewState,
@@ -35,5 +38,7 @@ fun WebLinkScreen(
 @Preview
 @Composable
 private fun WeblinkScreenPreview() {
-    WebLinkScreen()
+    WebLinkScreen(
+        navController = rememberNavController(),
+    )
 }

@@ -8,31 +8,61 @@ import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.height
+import androidx.compose.material.ContentAlpha
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import uk.ryanwong.skycatnews.R
 import uk.ryanwong.skycatnews.app.ui.theme.SkyCatNewsTheme
 
 @Composable
 fun SkyCatNewsAppBar(
+    navController: NavController,
     customTitle: String? = null,
     modifier: Modifier = Modifier,
 ) {
-    val padding8 = dimensionResource(id = R.dimen.padding_8)
+    val canNavigateUp = navController.previousBackStackEntry != null
 
     TopAppBar(
-        title = {
+        backgroundColor = MaterialTheme.colors.surface,
+        modifier = modifier
+    ) {
+
+        Box(Modifier.height(dimensionResource(id = R.dimen.app_bar_height))) {
+            // Navigation Icon
+            if (canNavigateUp) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    CompositionLocalProvider(
+                        LocalContentAlpha provides ContentAlpha.high,
+                    ) {
+                        IconButton(onClick = {
+                            navController.navigateUp()
+                        }) {
+                            Icon(Icons.Rounded.ArrowBack, "")
+                        }
+                    }
+                }
+            }
+
             Row(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
@@ -48,13 +78,10 @@ fun SkyCatNewsAppBar(
                     painter = painterResource(id = R.drawable.header_skycatnews),
                     contentDescription = stringResource(R.string.app_name),
                     alignment = Alignment.Center,
-                    modifier = Modifier.padding(vertical = padding8),
                 )
             }
-        },
-        backgroundColor = MaterialTheme.colors.surface,
-        modifier = modifier
-    )
+        }
+    }
 }
 
 @Preview(
@@ -67,7 +94,8 @@ fun SkyCatNewsAppBar(
 private fun AppBarPreviewDefaultImageLight() {
     SkyCatNewsTheme {
         SkyCatNewsAppBar(
-            customTitle = null
+            customTitle = null,
+            navController = rememberNavController()
         )
     }
 }
@@ -82,7 +110,8 @@ private fun AppBarPreviewDefaultImageLight() {
 private fun AppBarPreviewCustomTitleLight() {
     SkyCatNewsTheme {
         SkyCatNewsAppBar(
-            customTitle = "Some Other News"
+            customTitle = "Some Other News",
+            navController = rememberNavController()
         )
     }
 }
@@ -97,7 +126,8 @@ private fun AppBarPreviewCustomTitleLight() {
 private fun AppBarPreviewDefaultImageDark() {
     SkyCatNewsTheme {
         SkyCatNewsAppBar(
-            customTitle = null
+            customTitle = null,
+            navController = rememberNavController()
         )
     }
 }
@@ -112,7 +142,8 @@ private fun AppBarPreviewDefaultImageDark() {
 private fun AppBarPreviewCustomTitleDark() {
     SkyCatNewsTheme {
         SkyCatNewsAppBar(
-            customTitle = "Some Other News"
+            customTitle = "Some Other News",
+            navController = rememberNavController()
         )
     }
 }

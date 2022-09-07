@@ -34,6 +34,8 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.google.accompanist.swiperefresh.SwipeRefresh
@@ -53,18 +55,23 @@ import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.storydetail.ui.previewparam
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun StoryDetailScreen(
+    navController: NavController,
     storyDetailViewModel: StoryDetailViewModel = hiltViewModel(),
 ) {
     val isRefreshing by storyDetailViewModel.isRefreshing.collectAsStateWithLifecycle()
     val story by storyDetailViewModel.story.collectAsStateWithLifecycle()
 
-    StoryDetailScreenLayout(story = story, isRefreshing = isRefreshing)
+    StoryDetailScreenLayout(
+        story = story, isRefreshing = isRefreshing,
+        navController = navController
+    )
 }
 
 @Composable
 private fun StoryDetailScreenLayout(
     isRefreshing: Boolean,
     story: Story?,
+    navController: NavController,
     modifier: Modifier = Modifier,
 ) {
     val padding16 = dimensionResource(id = R.dimen.padding_16)
@@ -74,7 +81,7 @@ private fun StoryDetailScreenLayout(
             .fillMaxSize()
             .background(color = MaterialTheme.colors.background),
     ) {
-        SkyCatNewsAppBar()
+        SkyCatNewsAppBar(navController = navController)
 
         SwipeRefresh(
             state = rememberSwipeRefreshState(isRefreshing = isRefreshing),
@@ -217,7 +224,8 @@ private fun StoryDetailScreenLayoutPreviewLight(
     SkyCatNewsTheme {
         StoryDetailScreenLayout(
             isRefreshing = false,
-            story = story
+            story = story,
+            navController = rememberNavController(),
         )
     }
 }
@@ -235,7 +243,8 @@ private fun StoryDetailScreenLayoutPreviewDark(
     SkyCatNewsTheme {
         StoryDetailScreenLayout(
             isRefreshing = false,
-            story = story
+            story = story,
+            navController = rememberNavController(),
         )
     }
 }

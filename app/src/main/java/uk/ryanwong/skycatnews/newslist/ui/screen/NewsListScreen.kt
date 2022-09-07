@@ -22,6 +22,8 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import uk.ryanwong.skycatnews.R
@@ -40,6 +42,7 @@ import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.newslist.ui.screen.previewp
 @Composable
 fun NewsListScreen(
     newsListViewModel: NewsListViewModel = hiltViewModel(),
+    navController: NavController,
     onStoryItemClicked: (id: Int) -> Unit,
     onWebLinkItemClicked: (id: Int) -> Unit,
 ) {
@@ -52,6 +55,7 @@ fun NewsListScreen(
         onRefresh = { newsListViewModel.refreshNewsList() },
         onStoryItemClicked = onStoryItemClicked,
         onWebLinkItemClicked = onWebLinkItemClicked,
+        navController = navController
     )
 }
 
@@ -62,6 +66,7 @@ fun NewsListScreenLayout(
     onRefresh: () -> Unit,
     onStoryItemClicked: (id: Int) -> Unit,
     onWebLinkItemClicked: (id: Int) -> Unit,
+    navController: NavController,
 ) {
     val padding16 = dimensionResource(id = R.dimen.padding_16)
 
@@ -70,7 +75,7 @@ fun NewsListScreenLayout(
             .fillMaxSize()
             .background(color = MaterialTheme.colors.background),
     ) {
-        SkyCatNewsAppBar()
+        SkyCatNewsAppBar(navController = navController)
 
         SwipeRefresh(
             state = rememberSwipeRefreshState(isRefreshing = isRefreshing),
@@ -147,6 +152,7 @@ private fun NewsListScreenPreviewLight(
             onRefresh = { },
             onStoryItemClicked = {},
             onWebLinkItemClicked = {},
+            navController = rememberNavController(),
         )
     }
 }
@@ -169,6 +175,7 @@ private fun NewsListScreenPreviewDark(
             onRefresh = { },
             onStoryItemClicked = {},
             onWebLinkItemClicked = {},
+            navController = rememberNavController(),
         )
     }
 }
@@ -188,6 +195,7 @@ private fun NewsListScreenNoDataPreviewLight() {
             onRefresh = { },
             onStoryItemClicked = {},
             onWebLinkItemClicked = {},
+            navController = rememberNavController(),
         )
     }
 }
@@ -207,6 +215,7 @@ private fun NewsListScreenNoDataPreviewDark() {
             onRefresh = { },
             onStoryItemClicked = {},
             onWebLinkItemClicked = {},
+            navController = rememberNavController(),
         )
     }
 }
