@@ -36,8 +36,8 @@ class NewsListViewModel @Inject constructor(
         _uiState.update { currentUiState ->
             currentUiState.copy(isLoading = true)
         }
-        viewModelScope.launch(dispatcher) {
 
+        viewModelScope.launch(dispatcher) {
             newsListRepository.getNewsList().onSuccess { newsListResult ->
                 _uiState.update { currentUiState ->
                     currentUiState.copy(

@@ -17,9 +17,13 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.SnackbarHost
+import androidx.compose.material.SnackbarHostState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -28,6 +32,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -58,27 +63,48 @@ fun StoryDetailScreen(
     navController: NavController,
     storyDetailViewModel: StoryDetailViewModel = hiltViewModel(),
 ) {
-    val isRefreshing by storyDetailViewModel.isRefreshing.collectAsStateWithLifecycle()
-    val story by storyDetailViewModel.story.collectAsStateWithLifecycle()
+    val uiState by storyDetailViewModel.uiState.collectAsStateWithLifecycle()
+    val snackbarHostState = remember { SnackbarHostState() }
 
-    StoryDetailScreenLayout(
-        story = story,
-        isRefreshing = isRefreshing,
-        onRefresh = { storyDetailViewModel.refreshStory() },
-        navController = navController
-    )
+    Box(modifier = Modifier.fillMaxSize()) {
+        StoryDetailScreenLayout(
+            story = uiState.story,
+            isLoading = uiState.isLoading,
+            onRefresh = { storyDetailViewModel.refreshStory() },
+            navController = navController
+        )
+
+        SnackbarHost(
+            hostState = snackbarHostState,
+            modifier = Modifier.align(Alignment.BottomCenter)
+        )
+    }
+
+    if (uiState.errorMessages.isNotEmpty()) {
+        val errorMessage = remember(uiState) { uiState.errorMessages[0] }
+        val errorMessageText = stringResource(errorMessage.messageId)
+        val actionLabel = stringResource(R.string.ok)
+
+        LaunchedEffect(errorMessage.id) {
+            snackbarHostState.showSnackbar(
+                message = errorMessageText,
+                actionLabel = actionLabel
+            )
+            storyDetailViewModel.errorShown(errorId = errorMessage.id)
+        }
+    }
 }
 
 @Composable
 private fun StoryDetailScreenLayout(
-    isRefreshing: Boolean,
+    isLoading: Boolean,
     story: Story?,
     onRefresh: () -> Unit,
     navController: NavController,
     modifier: Modifier = Modifier,
 ) {
     val padding16 = dimensionResource(id = R.dimen.padding_16)
-    val shouldAllowSwipeRefresh = (story == null && !isRefreshing)
+    val shouldAllowSwipeRefresh = (story == null && !isLoading)
 
     Column(
         modifier = modifier
@@ -88,7 +114,7 @@ private fun StoryDetailScreenLayout(
         SkyCatNewsAppBar(navController = navController)
 
         SwipeRefresh(
-            state = rememberSwipeRefreshState(isRefreshing = isRefreshing),
+            state = rememberSwipeRefreshState(isRefreshing = isLoading),
             onRefresh = onRefresh,
             swipeEnabled = shouldAllowSwipeRefresh,
         ) {
@@ -99,7 +125,7 @@ private fun StoryDetailScreenLayout(
             ) {
 
                 if (story == null) {
-                    if (!isRefreshing) {
+                    if (!isLoading) {
                         item {
                             NoDataScreen(modifier = Modifier.fillParentMaxHeight())
                         }
@@ -228,7 +254,7 @@ private fun StoryDetailScreenLayoutPreviewLight(
 ) {
     SkyCatNewsTheme {
         StoryDetailScreenLayout(
-            isRefreshing = false,
+            isLoading = false,
             story = story,
             onRefresh = {},
             navController = rememberNavController(),
@@ -249,7 +275,7 @@ private fun StoryDetailScreenLayoutPreviewDark(
 ) {
     SkyCatNewsTheme {
         StoryDetailScreenLayout(
-            isRefreshing = false,
+            isLoading = false,
             story = story,
             onRefresh = {},
             navController = rememberNavController(),
@@ -267,7 +293,7 @@ private fun StoryDetailScreenLayoutPreviewDark(
 private fun StoryDetailScreenLayoutNoDataPreviewLight() {
     SkyCatNewsTheme {
         StoryDetailScreenLayout(
-            isRefreshing = false,
+            isLoading = false,
             story = null,
             onRefresh = {},
             navController = rememberNavController(),
@@ -285,7 +311,7 @@ private fun StoryDetailScreenLayoutNoDataPreviewLight() {
 private fun StoryDetailScreenLayoutNoDataPreviewDark() {
     SkyCatNewsTheme {
         StoryDetailScreenLayout(
-            isRefreshing = false,
+            isLoading = false,
             story = null,
             onRefresh = {},
             navController = rememberNavController(),
