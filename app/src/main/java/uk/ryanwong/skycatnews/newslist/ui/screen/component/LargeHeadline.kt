@@ -7,6 +7,7 @@ package uk.ryanwong.skycatnews.newslist.ui.screen.component
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -80,7 +81,7 @@ fun LargeHeadline(
             .padding(horizontal = padding16)
             .padding(bottom = padding16)
             .fillMaxWidth()
-            .wrapContentHeight()
+            .aspectRatio(ratio = 1f, matchHeightConstraintsFirst = true)
     ) {
         Column(
             modifier = Modifier
