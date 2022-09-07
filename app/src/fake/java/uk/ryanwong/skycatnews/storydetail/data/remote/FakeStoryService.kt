@@ -4,6 +4,7 @@
 
 package uk.ryanwong.skycatnews.storydetail.data.remote
 
+import kotlinx.coroutines.delay
 import uk.ryanwong.skycatnews.storydetail.data.remote.model.ContentDto
 import uk.ryanwong.skycatnews.storydetail.data.remote.model.HeroImageDto
 import uk.ryanwong.skycatnews.storydetail.data.remote.model.StoryDto
@@ -19,6 +20,9 @@ class FakeStoryService : StoryService {
     )
 
     override suspend fun getStory(storyId: Int): Result<StoryDto> {
+        // simulate some network delay
+        delay(1000)
+
         return Result.success(
             StoryDto(
                 contents = listOf(

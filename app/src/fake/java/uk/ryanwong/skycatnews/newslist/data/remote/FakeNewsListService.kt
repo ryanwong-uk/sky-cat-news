@@ -4,6 +4,7 @@
 
 package uk.ryanwong.skycatnews.newslist.data.remote
 
+import kotlinx.coroutines.delay
 import uk.ryanwong.skycatnews.newslist.data.remote.model.LinksDto
 import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsItemDto
 import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsListDto
@@ -20,6 +21,9 @@ class FakeNewsListService : NewsListService {
         val randomTimestamp3 = generateRandomPastDate()
         val randomTimestamp4 = generateRandomPastDate()
         val randomTimestamp5 = generateRandomPastDate()
+
+        // simulate some network delay
+        delay(1000)
 
         return Result.success(
             NewsListDto(
@@ -134,7 +138,27 @@ class FakeNewsListService : NewsListService {
                         type = "weblink",
                         advertUrl = null,
                         weblinkUrl = "https://news.sky.com/story/tory-leadership-rishi-sunak-and-liz-truss-promise-to-increase-scrutiny-of-scottish-govt-as-they-head-to-perth-12674081"
-                    )
+                    ),
+                    NewsItemDto(
+                        creationDate = randomTimestamp4,
+                        headline = "Story headline",
+                        id = 6,
+                        modifiedDate = randomTimestamp4,
+                        teaserImage = TeaserImageDto(
+                            links = LinksDto(
+                                url = UrlDto(
+                                    href = "https://ryanwong.co.uk/sample-resources/skycatnews/cat6_hero.jpg",
+                                    templated = true,
+                                    type = "image/jpeg"
+                                )
+                            ),
+                            accessibilityText = "Image content description"
+                        ),
+                        teaserText = "Created shall divided winged above spirit. Green, waters first seed evening saw for hath male make moving every set forth cattle herb behold i them is. Yielding, you'll great whales us winged own whose over to created green darkness sixth also fly itself won't you're won't. Moved she'd greater fruit fruitful whales called bring seasons lesser in itself living earth be own heaven moved fowl from us form. Fill appear cattle she'd open. Fill two saying hath Have open you from in light dry cattle man very waters over to whose herb was sea great given god darkness that first.",
+                        type = "story",
+                        advertUrl = null,
+                        weblinkUrl = null
+                    ),
                 ),
                 title = "Sky Cat News"
             )
