@@ -13,6 +13,7 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headersOf
+import io.ktor.serialization.JsonConvertException
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.utils.io.ByteReadChannel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -68,7 +69,7 @@ internal class NewsListServiceImplTest : FreeSpec() {
                 }
             }
 
-            "Should return null if API request is successful with empty body" {
+            "Should return failure if API request is successful with empty body" {
                 runTest {
                     // Given
                     setupDataSource(
@@ -81,11 +82,12 @@ internal class NewsListServiceImplTest : FreeSpec() {
                     val newsListDto = newsListService.getAllItems()
 
                     // Then
-                    newsListDto shouldBe Result.success(null)
+                    newsListDto.isFailure shouldBe true
+                    newsListDto.exceptionOrNull() shouldBe JsonConvertException("Illegal input")
                 }
             }
 
-            "Should return null if API request returns HTTP Error" {
+            "Should return failure if API request returns HTTP Error" {
                 runTest {
                     // Given
                     setupDataSource(
