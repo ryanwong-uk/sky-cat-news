@@ -24,6 +24,8 @@ class StoryDetailViewModel @Inject constructor(
     @DispatcherModule.MainDispatcher private val dispatcher: CoroutineDispatcher,
 ) : ViewModel() {
 
+    private var storyId = 0
+
     private val _isRefreshing = MutableStateFlow(false)
     val isRefreshing = _isRefreshing.asStateFlow()
 
@@ -31,11 +33,11 @@ class StoryDetailViewModel @Inject constructor(
     val story = _story.asStateFlow()
 
     init {
-        val storyId = stateHandle.get<Int>("list_id") ?: 0
-        refreshStory(storyId)
+        storyId = stateHandle.get<Int>("list_id") ?: 0
+        refreshStory()
     }
 
-    fun refreshStory(storyId: Int) {
+    fun refreshStory() {
         _isRefreshing.value = true
         viewModelScope.launch(dispatcher) {
 

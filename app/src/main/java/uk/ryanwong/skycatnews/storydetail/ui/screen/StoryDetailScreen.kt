@@ -62,7 +62,9 @@ fun StoryDetailScreen(
     val story by storyDetailViewModel.story.collectAsStateWithLifecycle()
 
     StoryDetailScreenLayout(
-        story = story, isRefreshing = isRefreshing,
+        story = story,
+        isRefreshing = isRefreshing,
+        onRefresh = { storyDetailViewModel.refreshStory() },
         navController = navController
     )
 }
@@ -71,13 +73,15 @@ fun StoryDetailScreen(
 private fun StoryDetailScreenLayout(
     isRefreshing: Boolean,
     story: Story?,
+    onRefresh: () -> Unit,
     navController: NavController,
     modifier: Modifier = Modifier,
 ) {
     val padding16 = dimensionResource(id = R.dimen.padding_16)
+    val shouldAllowSwipeRefresh = (story == null && !isRefreshing)
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(color = MaterialTheme.colors.background),
     ) {
@@ -85,8 +89,8 @@ private fun StoryDetailScreenLayout(
 
         SwipeRefresh(
             state = rememberSwipeRefreshState(isRefreshing = isRefreshing),
-            onRefresh = {},
-            swipeEnabled = false,
+            onRefresh = onRefresh,
+            swipeEnabled = shouldAllowSwipeRefresh,
         ) {
             LazyColumn(
                 contentPadding = PaddingValues(bottom = padding16),
@@ -212,6 +216,7 @@ private fun HeroImageSection(
 }
 
 @Preview(
+    group = "story loaded",
     showSystemUi = true,
     showBackground = true,
     uiMode = UI_MODE_NIGHT_NO,
@@ -225,12 +230,14 @@ private fun StoryDetailScreenLayoutPreviewLight(
         StoryDetailScreenLayout(
             isRefreshing = false,
             story = story,
+            onRefresh = {},
             navController = rememberNavController(),
         )
     }
 }
 
 @Preview(
+    group = "story loaded",
     showSystemUi = true,
     showBackground = true,
     uiMode = UI_MODE_NIGHT_YES,
@@ -244,6 +251,43 @@ private fun StoryDetailScreenLayoutPreviewDark(
         StoryDetailScreenLayout(
             isRefreshing = false,
             story = story,
+            onRefresh = {},
+            navController = rememberNavController(),
+        )
+    }
+}
+
+@Preview(
+    group = "no data",
+    showSystemUi = true,
+    showBackground = true,
+    uiMode = UI_MODE_NIGHT_NO,
+)
+@Composable
+private fun StoryDetailScreenLayoutNoDataPreviewLight() {
+    SkyCatNewsTheme {
+        StoryDetailScreenLayout(
+            isRefreshing = false,
+            story = null,
+            onRefresh = {},
+            navController = rememberNavController(),
+        )
+    }
+}
+
+@Preview(
+    group = "no data",
+    showSystemUi = true,
+    showBackground = true,
+    uiMode = UI_MODE_NIGHT_YES,
+)
+@Composable
+private fun StoryDetailScreenLayoutNoDataPreviewDark() {
+    SkyCatNewsTheme {
+        StoryDetailScreenLayout(
+            isRefreshing = false,
+            story = null,
+            onRefresh = {},
             navController = rememberNavController(),
         )
     }
