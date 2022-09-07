@@ -42,8 +42,8 @@ import uk.ryanwong.skycatnews.newslist.ui.screen.component.LargeStoryHeadline
 import uk.ryanwong.skycatnews.newslist.ui.screen.component.LargeWebLinkHeadline
 import uk.ryanwong.skycatnews.newslist.ui.screen.component.RegularStoryHeadline
 import uk.ryanwong.skycatnews.newslist.ui.screen.component.RegularWebLinkHeadline
+import uk.ryanwong.skycatnews.newslist.ui.screen.previewparameter.NewsListProvider
 import uk.ryanwong.skycatnews.newslist.ui.viewmodel.NewsListViewModel
-import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.newslist.ui.screen.previewparameter.NewsListProvider
 
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable

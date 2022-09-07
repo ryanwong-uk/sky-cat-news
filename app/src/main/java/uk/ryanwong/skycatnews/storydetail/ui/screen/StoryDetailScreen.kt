@@ -41,16 +41,16 @@ import coil.request.ImageRequest
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import uk.ryanwong.skycatnews.R
+import uk.ryanwong.skycatnews.app.ui.component.NoDataScreen
+import uk.ryanwong.skycatnews.app.ui.component.SkyCatNewsAppBar
 import uk.ryanwong.skycatnews.app.ui.theme.BlackGradientEnd
 import uk.ryanwong.skycatnews.app.ui.theme.BlackGradientStart
 import uk.ryanwong.skycatnews.app.ui.theme.CustomTextStyle
 import uk.ryanwong.skycatnews.app.ui.theme.SkyCatNewsTheme
-import uk.ryanwong.skycatnews.app.ui.component.NoDataScreen
-import uk.ryanwong.skycatnews.app.ui.component.SkyCatNewsAppBar
 import uk.ryanwong.skycatnews.storydetail.domain.model.Content
 import uk.ryanwong.skycatnews.storydetail.domain.model.Story
+import uk.ryanwong.skycatnews.storydetail.ui.previewparameter.StoryProvider
 import uk.ryanwong.skycatnews.storydetail.ui.viewmodel.StoryDetailViewModel
-import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.storydetail.ui.previewparameter.StoryProvider
 
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable

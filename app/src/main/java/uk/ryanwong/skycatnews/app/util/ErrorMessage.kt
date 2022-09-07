@@ -2,7 +2,7 @@
  * Copyright (c) 2022. Ryan Wong (hello@ryanwong.co.uk)
  */
 
-package uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.app.util
+package uk.ryanwong.skycatnews.app.util
 
 import androidx.annotation.StringRes
 
