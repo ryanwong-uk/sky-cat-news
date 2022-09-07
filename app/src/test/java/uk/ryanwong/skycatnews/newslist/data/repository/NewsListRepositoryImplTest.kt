@@ -15,6 +15,7 @@ import uk.ryanwong.skycatnews.app.exception.RemoteSourceFailedWithNoCacheExcepti
 import uk.ryanwong.skycatnews.newslist.data.local.MockNewsListDao
 import uk.ryanwong.skycatnews.newslist.data.local.entity.NewsListEntity
 import uk.ryanwong.skycatnews.newslist.data.remote.MockNewsListService
+import uk.ryanwong.skycatnews.newslist.domain.model.NewsItem
 import uk.ryanwong.skycatnews.newslist.domain.model.NewsList
 import java.net.ConnectException
 import java.net.UnknownHostException
@@ -259,6 +260,61 @@ internal class NewsListRepositoryImplTest : FreeSpec() {
                             newsList.exceptionOrNull() shouldBe RemoteSourceFailedWithNoCacheException()
                         }
                     }
+                }
+            }
+        }
+
+        "getNewsItem" - {
+            "Should return Result.success and the correct NewsItem if exists" {
+                setupRepository()
+                scope.runTest {
+                    // Given
+                    val listId = 1
+                    val newsItemEntity =
+                        NewsListRepositoryImplTestData.getMockNewsItemEntity(listId = listId).copy(
+                            newsId = 1234
+                        )
+
+                    // Only to trigger a success response,
+                    // actual data to be tested is from mockNewsListDao.mockGetNewsListResponse
+                    val newsListDto = NewsListRepositoryImplTestData.mockNewsListDto
+                    mockNewsListService.mockGetAllItemsResponse = Result.success(newsListDto)
+                    mockNewsListDao.mockGetNewsListTitleResponse = "some-title"
+                    mockNewsListDao.mockGetNewsItemResponse = newsItemEntity
+
+                    // When
+                    val newsList = newsListRepository.getNewsItem(newsId = 1234)
+
+                    // Then
+                    newsList shouldBe Result.success(
+                        NewsItem.Story(
+                            newsId = 1234,
+                            headline = "some-headline",
+                            teaserText = "some-teaser-text",
+                            modifiedDate = "2020-11-19T00:00:00Z",
+                            teaserImageUrl = "https://some.url/href",
+                            teaserImageAccessibilityText = "some-accessibility-text",
+                        )
+                    )
+                }
+            }
+
+            "Should return Result.success(null) if NewsListDao returns null" {
+                setupRepository()
+                scope.runTest {
+                    // Given
+                    // Only to trigger a success response,
+                    // actual data to be tested is from mockNewsListDao.mockGetNewsListResponse
+                    val newsListDto = NewsListRepositoryImplTestData.mockNewsListDto
+                    mockNewsListService.mockGetAllItemsResponse = Result.success(newsListDto)
+                    mockNewsListDao.mockGetNewsListTitleResponse = "some-title"
+                    mockNewsListDao.mockGetNewsItemResponse = null
+
+                    // When
+                    val newsList = newsListRepository.getNewsItem(newsId = 2345)
+
+                    // Then
+                    newsList shouldBe Result.success(null)
                 }
             }
         }
