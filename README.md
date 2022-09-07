@@ -24,7 +24,7 @@ This is a prototype of the app. As the backend isn't developed yet, this prototy
 ## TL;DR - Status
 
 * Fully functional. More tests to complete before submission.
-* 80 Unit tests for view models, repositories, models, and Ktor API services are done.
+* 84 Unit tests for view models, repositories, models, and Ktor API services are done.
 * 18 Unit tests for RoomDB DAOs are done.
 * News list screen: on the `FakeDebug` and `FakeRelease` builds, pull-to-refresh can trigger a simulated random server response.
 * Story detail screen: on the `FakeDebug` and `FakeRelease` builds, it shows the same layout with random images.

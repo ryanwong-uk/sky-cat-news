@@ -7,7 +7,7 @@ package uk.ryanwong.skycatnews.newslist.data.repository
 import uk.ryanwong.skycatnews.newslist.domain.model.NewsItem
 import uk.ryanwong.skycatnews.newslist.domain.model.NewsList
 
-class MockNewsListRepository : NewsListRepository {
+internal class MockNewsListRepository : NewsListRepository {
 
     var mockGetNewsListResponse: Result<NewsList>? = null
     override suspend fun getNewsList(): Result<NewsList> {
