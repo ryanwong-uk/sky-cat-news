@@ -7,16 +7,23 @@ package uk.ryanwong.skycatnews.newslist.ui.screen
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.SnackbarHost
+import androidx.compose.material.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -27,14 +34,14 @@ import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import uk.ryanwong.skycatnews.R
+import uk.ryanwong.skycatnews.app.ui.component.NoDataScreen
+import uk.ryanwong.skycatnews.app.ui.component.SkyCatNewsAppBar
 import uk.ryanwong.skycatnews.app.ui.theme.SkyCatNewsTheme
 import uk.ryanwong.skycatnews.newslist.domain.model.NewsItem
 import uk.ryanwong.skycatnews.newslist.ui.screen.component.LargeStoryHeadline
 import uk.ryanwong.skycatnews.newslist.ui.screen.component.LargeWebLinkHeadline
-import uk.ryanwong.skycatnews.app.ui.component.NoDataScreen
 import uk.ryanwong.skycatnews.newslist.ui.screen.component.RegularStoryHeadline
 import uk.ryanwong.skycatnews.newslist.ui.screen.component.RegularWebLinkHeadline
-import uk.ryanwong.skycatnews.app.ui.component.SkyCatNewsAppBar
 import uk.ryanwong.skycatnews.newslist.ui.viewmodel.NewsListViewModel
 import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.newslist.ui.screen.previewparameter.NewsListProvider
 
@@ -46,23 +53,44 @@ fun NewsListScreen(
     onStoryItemClicked: (id: Int) -> Unit,
     onWebLinkItemClicked: (id: Int) -> Unit,
 ) {
-    val isRefreshing by newsListViewModel.isRefreshing.collectAsStateWithLifecycle()
-    val newsList by newsListViewModel.newsList.collectAsStateWithLifecycle()
+    val uiState by newsListViewModel.uiState.collectAsStateWithLifecycle()
+    val snackbarHostState = remember { SnackbarHostState() }
 
-    NewsListScreenLayout(
-        newsList = newsList,
-        isRefreshing = isRefreshing,
-        onRefresh = { newsListViewModel.refreshNewsList() },
-        onStoryItemClicked = onStoryItemClicked,
-        onWebLinkItemClicked = onWebLinkItemClicked,
-        navController = navController
-    )
+    Box(modifier = Modifier.fillMaxSize()) {
+        NewsListScreenLayout(
+            newsList = uiState.newsList,
+            isLoading = uiState.isLoading,
+            onRefresh = { newsListViewModel.refreshNewsList() },
+            onStoryItemClicked = onStoryItemClicked,
+            onWebLinkItemClicked = onWebLinkItemClicked,
+            navController = navController
+        )
+
+        SnackbarHost(
+            hostState = snackbarHostState,
+            modifier = Modifier.align(Alignment.BottomCenter)
+        )
+    }
+
+    if (uiState.errorMessages.isNotEmpty()) {
+        val errorMessage = remember(uiState) { uiState.errorMessages[0] }
+        val errorMessageText = stringResource(errorMessage.messageId)
+        val actionLabel = stringResource(R.string.ok)
+
+        LaunchedEffect(errorMessage.id) {
+            snackbarHostState.showSnackbar(
+                message = errorMessageText,
+                actionLabel = actionLabel
+            )
+            newsListViewModel.errorShown(errorId = errorMessage.id)
+        }
+    }
 }
 
 @Composable
 fun NewsListScreenLayout(
     newsList: List<NewsItem>,
-    isRefreshing: Boolean,
+    isLoading: Boolean,
     onRefresh: () -> Unit,
     onStoryItemClicked: (id: Int) -> Unit,
     onWebLinkItemClicked: (id: Int) -> Unit,
@@ -78,7 +106,7 @@ fun NewsListScreenLayout(
         SkyCatNewsAppBar(navController = navController)
 
         SwipeRefresh(
-            state = rememberSwipeRefreshState(isRefreshing = isRefreshing),
+            state = rememberSwipeRefreshState(isRefreshing = isLoading),
             onRefresh = onRefresh,
         ) {
             LazyColumn(
@@ -86,7 +114,7 @@ fun NewsListScreenLayout(
                 modifier = Modifier.fillMaxSize()
             ) {
                 if (newsList.isEmpty()) {
-                    if (!isRefreshing) {
+                    if (!isLoading) {
                         item {
                             NoDataScreen(modifier = Modifier.fillParentMaxHeight())
                         }
@@ -148,7 +176,7 @@ private fun NewsListScreenPreviewLight(
     SkyCatNewsTheme {
         NewsListScreenLayout(
             newsList = newsList,
-            isRefreshing = false,
+            isLoading = false,
             onRefresh = { },
             onStoryItemClicked = {},
             onWebLinkItemClicked = {},
@@ -171,7 +199,7 @@ private fun NewsListScreenPreviewDark(
     SkyCatNewsTheme {
         NewsListScreenLayout(
             newsList = newsList,
-            isRefreshing = false,
+            isLoading = false,
             onRefresh = { },
             onStoryItemClicked = {},
             onWebLinkItemClicked = {},
@@ -191,7 +219,7 @@ private fun NewsListScreenNoDataPreviewLight() {
     SkyCatNewsTheme {
         NewsListScreenLayout(
             newsList = emptyList(),
-            isRefreshing = false,
+            isLoading = false,
             onRefresh = { },
             onStoryItemClicked = {},
             onWebLinkItemClicked = {},
@@ -211,7 +239,7 @@ private fun NewsListScreenNoDataPreviewDark() {
     SkyCatNewsTheme {
         NewsListScreenLayout(
             newsList = emptyList(),
-            isRefreshing = false,
+            isLoading = false,
             onRefresh = { },
             onStoryItemClicked = {},
             onWebLinkItemClicked = {},

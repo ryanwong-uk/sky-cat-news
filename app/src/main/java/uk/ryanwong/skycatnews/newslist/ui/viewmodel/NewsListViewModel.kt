@@ -10,11 +10,14 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import timber.log.Timber
+import uk.ryanwong.skycatnews.R
 import uk.ryanwong.skycatnews.app.di.DispatcherModule
 import uk.ryanwong.skycatnews.newslist.data.repository.NewsListRepository
-import uk.ryanwong.skycatnews.newslist.domain.model.NewsItem
+import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.app.util.ErrorMessage
+import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.newslist.ui.viewmodel.NewsListUIState
+import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,29 +26,46 @@ class NewsListViewModel @Inject constructor(
     @DispatcherModule.MainDispatcher private val dispatcher: CoroutineDispatcher,
 ) : ViewModel() {
 
-    private val _isRefreshing = MutableStateFlow(false)
-    val isRefreshing = _isRefreshing.asStateFlow()
-
-    private val _newsList = MutableStateFlow(listOf<NewsItem>())
-    val newsList = _newsList.asStateFlow()
+    private val _uiState = MutableStateFlow(NewsListUIState())
+    val uiState = _uiState.asStateFlow()
 
     init {
         refreshNewsList()
     }
 
     fun refreshNewsList() {
-        _isRefreshing.value = true
+        _uiState.update { currentUiState ->
+            currentUiState.copy(isLoading = true)
+        }
         viewModelScope.launch(dispatcher) {
 
             newsListRepository.getNewsList().onSuccess { newsListResult ->
-                _newsList.value = newsListResult.newsItems
-                _isRefreshing.value = false
+                _uiState.update { currentUiState ->
+                    currentUiState.copy(
+                        newsList = newsListResult.newsItems,
+                        isLoading = false
+                    )
+                }
             }.onFailure { ex ->
-                // TODO: print error
-                Timber.e("!!!")
                 ex.printStackTrace()
-                _isRefreshing.value = false
+                _uiState.update { currentUiState ->
+                    val errorMessages = currentUiState.errorMessages + ErrorMessage(
+                        id = UUID.randomUUID().mostSignificantBits,
+                        messageId = R.string.error_loading_news_list
+                    )
+                    currentUiState.copy(
+                        isLoading = false,
+                        errorMessages = errorMessages
+                    )
+                }
             }
+        }
+    }
+
+    fun errorShown(errorId: Long) {
+        _uiState.update { currentUiState ->
+            val errorMessages = currentUiState.errorMessages.filterNot { it.id == errorId }
+            currentUiState.copy(errorMessages = errorMessages)
         }
     }
 }
