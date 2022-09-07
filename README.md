@@ -19,21 +19,21 @@
 
 Sky has recently decided to move into the local cat news industry. To enable this, we need to build a prototype app to demonstrate to stakeholders. The basic premise of the app is to allow users to look at stories of cute cats nearby.
 
-This is a prototype of the app. As the backend isn't developed yet, this prototype currently mock out the feed locally, with an option in place to switch to the real feed later. Please refer to the "Building the App" section below for details.
+This is a prototype of the app. As the backend isn't developed yet, this prototype currently mocks out the feed locally, with an option in place to switch to the real feed later. Please refer to the "Building the App" section below for details.
 
 ## TL;DR - Status
 
 * Fully functional. More tests to complete before submission.
-* 74 Unit tests for repositories, models, Ktor API services are done.
+* 74 Unit tests for repositories, models, and Ktor API services are done.
 * 16 Unit tests for RoomDB DAOs are done.
-* News list screen: on the `FakeDebug` and `FakeRelease` builds, pull-to-refresh can trigger simulated random server response.
+* News list screen: on the `FakeDebug` and `FakeRelease` builds, pull-to-refresh can trigger a simulated random server response.
 * Story detail screen: on the `FakeDebug` and `FakeRelease` builds, it shows the same layout with random images.
 * Basic dark mode supported.
 
-## High level architecture
+## High-level architecture
 
 * Android-Kotlin
-* MVVM architecture (without use-cases as this app is being too simple)
+* MVVM architecture (without use-cases as this app is too simple)
 * Single activity
 * Jetpack Compose UI
 
@@ -63,13 +63,13 @@ This is a prototype of the app. As the backend isn't developed yet, this prototy
 * Android Studio Chipmunk | 2021.2.1 Patch 2
 * Android device or simulator running Android 8.0+ (API 26)
 
-## Setting up the keystore
+## Setting up the Keystore
 
 ### Local
 
-* Android keystore is not being stored in this repository. You need your own keystore to generate the apk / App Bundle
+* Android Keystore is not being stored in this repository. You need your own Keystore to generate the apk / App Bundle
 
-* If your project folder is at `/app/skycatnews/`, the keystore file and `keystore.properties`
+* If your project folder is at `/app/skycatnews/`, the Keystore file and `keystore.properties`
   should be placed at `/app/`
 
 * The format of `keystore.properties` is:
@@ -93,11 +93,11 @@ This is a prototype of the app. As the backend isn't developed yet, this prototy
      BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD = <your keystore private key password>
   ```
 
-* The keystore file should be securely uploaded and then placed to `$HOME/keystores/release.jks`
+* The Keystore file should be securely uploaded and then placed to `$HOME/keystores/release.jks`
 
 ## Building the App
 
-This project can be built using the options provided under the Android Studio `Build` menu, or using the gradle commands. Some common gradle command line tasks are:
+This project can be built using the options provided under the Android Studio `Build` menu or using the Gradle commands. Some common Gradle command line tasks are:
 
 ./gradlew `<task>`:
 
@@ -130,9 +130,9 @@ This project can be built using the options provided under the Android Studio `B
 
 #### /story/&lt;id&gt;
 
-* The data returned by `/news-list` does not contain a dedicated `id` for story. Here I assume the `id` from `/new-list` also refers to the story Id.
-* The entries within `contents` implicitly assume the ordering is preserved. It might be safer if we could add something like `sequenceId` so the App can always present them in a proper order.
-* Again, how we name the urls for links and images could be improved. The keys like `url`
+* The data returned by `/news-list` does not contain a dedicated `id` for the story. Here I assume the `id` from `/new-list` also refers to the story Id.
+* The entries within `contents` implicitly assume the ordering is preserved. It might be safer if we could add something like `sequenceId` so the App can always present them in proper order.
+* Again, how we name the URLs for links and images could be improved. The keys like `url`
   , `imageUrl`, `href` carries different meanings everywhere, which again can be error-prone.
 
 ### UI Layout changes
