@@ -18,6 +18,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -32,6 +33,7 @@ import uk.ryanwong.skycatnews.newslist.ui.screen.component.RegularStoryHeadline
 import uk.ryanwong.skycatnews.newslist.ui.screen.component.RegularWebLinkHeadline
 import uk.ryanwong.skycatnews.newslist.ui.screen.component.SkyCatNewsAppBar
 import uk.ryanwong.skycatnews.newslist.ui.viewmodel.NewsListViewModel
+import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.newslist.ui.screen.previewparameter.NewsListProvider
 
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
@@ -126,10 +128,13 @@ fun NewsListScreenLayout(
     uiMode = UI_MODE_NIGHT_NO,
 )
 @Composable
-private fun NewsListScreenPreviewLight() {
+private fun NewsListScreenPreviewLight(
+    @PreviewParameter(NewsListProvider::class)
+    newsList: List<NewsItem>,
+) {
     SkyCatNewsTheme {
         NewsListScreenLayout(
-            newsList = listOf(),
+            newsList = newsList,
             isRefreshing = false,
             onRefresh = { },
             onStoryItemClicked = {},
@@ -145,10 +150,13 @@ private fun NewsListScreenPreviewLight() {
     uiMode = UI_MODE_NIGHT_YES,
 )
 @Composable
-private fun NewsListScreenPreviewDark() {
+private fun NewsListScreenPreviewDark(
+    @PreviewParameter(NewsListProvider::class)
+    newsList: List<NewsItem>,
+) {
     SkyCatNewsTheme {
         NewsListScreenLayout(
-            newsList = listOf(),
+            newsList = newsList,
             isRefreshing = false,
             onRefresh = { },
             onStoryItemClicked = {},
