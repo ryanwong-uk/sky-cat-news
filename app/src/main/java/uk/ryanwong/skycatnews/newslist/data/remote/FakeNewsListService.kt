@@ -4,6 +4,8 @@
 
 package uk.ryanwong.skycatnews.newslist.data.remote
 
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 import uk.ryanwong.skycatnews.newslist.data.remote.model.LinksDto
 import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsItemDto
 import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsListDto
@@ -12,14 +14,21 @@ import uk.ryanwong.skycatnews.newslist.data.remote.model.UrlDto
 
 class FakeNewsListService : NewsListService {
     override suspend fun getAllItems(): Result<NewsListDto> {
+
+        val randomTimestamp1 = generateRandomPastDate()
+        val randomTimestamp2 = generateRandomPastDate()
+        val randomTimestamp3 = generateRandomPastDate()
+        val randomTimestamp4 = generateRandomPastDate()
+        val randomTimestamp5 = generateRandomPastDate()
+
         return Result.success(
             NewsListDto(
                 news = listOf(
                     NewsItemDto(
-                        creationDate = "2020-11-18T00:00:00Z",
+                        creationDate = randomTimestamp1,
                         headline = "Story Headline",
                         id = 1,
-                        modifiedDate = "2020-11-19T00:00:00Z",
+                        modifiedDate = randomTimestamp1,
                         teaserImage = TeaserImageDto(
                             links = LinksDto(
                                 url = UrlDto(
@@ -36,10 +45,10 @@ class FakeNewsListService : NewsListService {
                         weblinkUrl = null
                     ),
                     NewsItemDto(
-                        creationDate = "2020-11-18T00:00:00Z",
+                        creationDate = randomTimestamp2,
                         headline = "Story Headline",
                         id = 2,
-                        modifiedDate = "2020-11-19T00:00:00Z",
+                        modifiedDate = randomTimestamp2,
                         teaserImage = TeaserImageDto(
                             links = LinksDto(
                                 url = UrlDto(
@@ -67,10 +76,10 @@ class FakeNewsListService : NewsListService {
                         weblinkUrl = null
                     ),
                     NewsItemDto(
-                        creationDate = "2020-11-18T00:00:00Z",
+                        creationDate = randomTimestamp3,
                         headline = "Weblink headline",
                         id = 3,
-                        modifiedDate = "2020-11-19T00:00:00Z",
+                        modifiedDate = randomTimestamp3,
                         teaserImage = TeaserImageDto(
                             links = LinksDto(
                                 url = UrlDto(
@@ -87,10 +96,10 @@ class FakeNewsListService : NewsListService {
                         weblinkUrl = "https://news.sky.com/story/john-shuttleworth-comedy-gig-inside-cave-halted-halfway-after-fan-gets-trapped-in-tree-above-gorge-12617846"
                     ),
                     NewsItemDto(
-                        creationDate = "2020-11-18T00:00:00Z",
+                        creationDate = randomTimestamp4,
                         headline = "Story headline",
                         id = 4,
-                        modifiedDate = "2020-11-19T00:00:00Z",
+                        modifiedDate = randomTimestamp4,
                         teaserImage = TeaserImageDto(
                             links = LinksDto(
                                 url = UrlDto(
@@ -107,10 +116,10 @@ class FakeNewsListService : NewsListService {
                         weblinkUrl = null
                     ),
                     NewsItemDto(
-                        creationDate = "2020-11-18T00:00:00Z",
+                        creationDate = randomTimestamp5,
                         headline = "Weblink headline",
                         id = 5,
-                        modifiedDate = "2020-11-19T00:00:00Z",
+                        modifiedDate = randomTimestamp5,
                         teaserImage = TeaserImageDto(
                             links = LinksDto(
                                 url = UrlDto(
@@ -130,5 +139,14 @@ class FakeNewsListService : NewsListService {
                 title = "Sky Cat News"
             )
         )
+    }
+
+    /***
+     * Simulate some changes for each request
+     */
+    private fun generateRandomPastDate(): String {
+        val randomOffset = (0..10080).random().toLong()
+        val zonedDateTime = ZonedDateTime.now().minusMinutes(randomOffset).withNano(0)
+        return zonedDateTime.format(DateTimeFormatter.ISO_INSTANT)
     }
 }
