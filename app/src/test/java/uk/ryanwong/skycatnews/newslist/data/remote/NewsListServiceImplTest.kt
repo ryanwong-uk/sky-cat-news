@@ -5,7 +5,9 @@
 package uk.ryanwong.skycatnews.newslist.data.remote
 
 import io.kotest.core.spec.style.FreeSpec
+import io.kotest.matchers.should
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.types.beInstanceOf
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
@@ -83,7 +85,7 @@ internal class NewsListServiceImplTest : FreeSpec() {
 
                     // Then
                     newsListDto.isFailure shouldBe true
-                    newsListDto.exceptionOrNull() shouldBe JsonConvertException("Illegal input")
+                    newsListDto.exceptionOrNull() should beInstanceOf<JsonConvertException>()
                 }
             }
 
