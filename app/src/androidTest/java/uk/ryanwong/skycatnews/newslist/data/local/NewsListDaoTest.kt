@@ -312,4 +312,65 @@ internal class NewsListDaoTest {
         val returnedNewsList = newsListDao.getNewsList(listId = listId)
         returnedNewsList shouldBe emptyList()
     }
+
+    /***
+     * News Item (in the form of NewsItemEntity?)
+     */
+    @Test
+    fun existingTable_GetOneNewsItem_ReturnOneNewsItem() = runTest {
+        // Given
+        val listId = 1
+        val originalNewsItemEntity = NewsItemEntity(
+            listId = listId,
+            newsId = 1,
+            type = "some-type",
+            headline = "some-headline",
+            creationDate = "2022-5-21T00:00:00Z",
+            modifiedDate = "2022-5-21T00:00:00Z",
+            advertUrl = "https://some.url/",
+            weblinkUrl = "https://some.weblink.url/",
+            teaserText = "some-teaser-text",
+            teaserImageHref = "https://some.teaser.image/href",
+            teaserImageTemplated = true,
+            teaserImageType = "some-teaser-image-type",
+            teaserImageAccessibilityText = "some-teaser-image-accessibility-text"
+        )
+        val newsItems = listOf(originalNewsItemEntity)
+        newsListDao.insertNewsItems(newsItems = newsItems)
+
+        // When
+        val newsItemEntity = newsListDao.getNewsItem(listId = listId, newsId = 1)
+
+        // Then
+        newsItemEntity shouldBe originalNewsItemEntity
+    }
+
+    @Test
+    fun existingTable_GetNonExistentItem_ReturnNull() = runTest {
+        // Given
+        val listId = 1
+        val originalNewsItemEntity = NewsItemEntity(
+            listId = listId,
+            newsId = 1,
+            type = "some-type",
+            headline = "some-headline",
+            creationDate = "2022-5-21T00:00:00Z",
+            modifiedDate = "2022-5-21T00:00:00Z",
+            advertUrl = "https://some.url/",
+            weblinkUrl = "https://some.weblink.url/",
+            teaserText = "some-teaser-text",
+            teaserImageHref = "https://some.teaser.image/href",
+            teaserImageTemplated = true,
+            teaserImageType = "some-teaser-image-type",
+            teaserImageAccessibilityText = "some-teaser-image-accessibility-text"
+        )
+        val newsItems = listOf(originalNewsItemEntity)
+        newsListDao.insertNewsItems(newsItems = newsItems)
+
+        // When
+        val newsItemEntity = newsListDao.getNewsItem(listId = listId, newsId = 2)
+
+        // Then
+        newsItemEntity shouldBe null
+    }
 }
