@@ -2,6 +2,18 @@
 
 [![Build Status](https://app.bitrise.io/app/a0e8541b47b30002/status.svg?token=Q40Sl8puw7pk7BT7AbF_8w&branch=main)](https://app.bitrise.io/app/a0e8541b47b30002) [![codecov](https://codecov.io/gh/ryanwong-uk/sky-cat-news/branch/main/graph/badge.svg?token=UG926FRXVG)](https://codecov.io/gh/ryanwong-uk/sky-cat-news)
 
+<p align="center">
+  <img src="screenshot_20220907_1.jpg" />
+  <img src="screenshot_20220907_2.jpg" />
+  <img src="screenshot_20220907_3.jpg" />
+</p>
+
+<p align="center">
+  <img src="screenshot_20220907_4.jpg" />
+  <img src="screenshot_20220907_5.jpg" />
+  <img src="screenshot_20220907_6.jpg" />
+</p>
+
 ## Scenario
 
 Sky has recently decided to move into the local cat news industry. To enable this, we need to build a prototype app to demonstrate to stakeholders. The basic premise of the app is to allow users to look at stories of cute cats nearby.
@@ -10,6 +22,7 @@ This is a prototype of the app. As the backend isn't developed yet, this prototy
 
 ## TL;DR - Status
 
+* Fully functional. More tests to complete before submission.
 * 74 Unit tests for repositories, models, Ktor API services are done.
 * 16 Unit tests for RoomDB DAOs are done.
 * News list screen: on the `FakeDebug` and `FakeRelease` builds, pull-to-refresh can trigger simulated random server response.
