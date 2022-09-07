@@ -19,6 +19,9 @@ interface NewsListDao {
     @Query("SELECT * FROM news_items WHERE list_id = :listId ORDER BY modified_date DESC")
     suspend fun getNewsList(listId: Int): List<NewsItemEntity>
 
+    @Query("SELECT * FROM news_items WHERE list_id = :listId AND news_id = :newsId LIMIT 1")
+    suspend fun getNewsItem(listId: Int, newsId: Int): NewsItemEntity?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNewsItems(newsItems: List<NewsItemEntity>)
 

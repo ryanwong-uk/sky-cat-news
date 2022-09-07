@@ -16,6 +16,7 @@ import uk.ryanwong.skycatnews.newslist.data.local.entity.NewsItemEntity
 import uk.ryanwong.skycatnews.newslist.data.local.entity.NewsListEntity
 import uk.ryanwong.skycatnews.newslist.data.remote.NewsListService
 import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsListDto
+import uk.ryanwong.skycatnews.newslist.domain.model.NewsItem
 import uk.ryanwong.skycatnews.newslist.domain.model.NewsList
 import java.net.ConnectException
 import java.net.UnknownHostException
@@ -61,6 +62,19 @@ class NewsListRepositoryImpl(
                     return@runCatching getNewsListFromLocalDatabase()
                 }
             }.except<CancellationException, _>()
+        }
+    }
+
+    override suspend fun getNewsItem(newsId: Int): Result<NewsItem?> {
+        return withContext(dispatcher) {
+            Result.runCatching {
+                val newsItemEntity = newsListDao.getNewsItem(listId = listId, newsId = newsId)
+
+                newsItemEntity?.let {
+                    val newsItemList = NewsItem.fromEntity(listOf(newsItemEntity))
+                    newsItemList.getOrNull(0)
+                }
+            }
         }
     }
 

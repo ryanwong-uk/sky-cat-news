@@ -19,6 +19,11 @@ internal class MockNewsListDao : NewsListDao {
         return mockGetNewsListResponse ?: throw Exception("mock response not defined")
     }
 
+    var mockGetNewsItemResponse: NewsItemEntity? = null
+    override suspend fun getNewsItem(listId: Int, newsId: Int): NewsItemEntity? {
+        return mockGetNewsItemResponse
+    }
+
     var mockInsertNewsItemsReceivedValue: List<NewsItemEntity>? = null
     override suspend fun insertNewsItems(newsItems: List<NewsItemEntity>) {
         mockInsertNewsItemsReceivedValue = newsItems
