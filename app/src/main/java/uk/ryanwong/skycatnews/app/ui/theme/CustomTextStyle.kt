@@ -39,4 +39,7 @@ object CustomTextStyle {
             fontStyle = FontStyle.Italic,
             textAlign = TextAlign.Right,
         )
+
+    val noDataErrorText
+        @Composable get() = MaterialTheme.typography.body1
 }

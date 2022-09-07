@@ -25,6 +25,11 @@ class FakeNewsListService : NewsListService {
         // simulate some network delay
         delay(1000)
 
+        // randomly return no data to trigger the no data screen
+        if ((0..100).random() % 6 == 0) {
+            return Result.success(NewsListDto(news = emptyList(), title = "Sky Cat News"))
+        }
+
         return Result.success(
             NewsListDto(
                 news = listOf(

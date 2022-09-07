@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import uk.ryanwong.skycatnews.app.di.DispatcherModule
 import uk.ryanwong.skycatnews.newslist.data.repository.NewsListRepository
 import uk.ryanwong.skycatnews.newslist.domain.model.NewsItem
@@ -27,9 +28,6 @@ class NewsListViewModel @Inject constructor(
     private val _isRefreshing = MutableStateFlow(false)
     val isRefreshing = _isRefreshing.asStateFlow()
 
-    private val _newsListTitle = MutableStateFlow("")
-    val newsListTitle = _newsListTitle.asStateFlow()
-
     private val _newsList = MutableStateFlow(listOf<NewsItem>())
     val newsList = _newsList.asStateFlow()
 
@@ -43,12 +41,13 @@ class NewsListViewModel @Inject constructor(
             withContext(Dispatchers.IO) {
                 newsListRepository.getNewsList().onSuccess { newsListResult ->
                     _newsList.value = newsListResult.newsItems
-                    _newsListTitle.value = newsListResult.title
+                    _isRefreshing.value = false
                 }.onFailure { ex ->
                     // TODO: print error
+                    Timber.e("!!!")
                     ex.printStackTrace()
+                    _isRefreshing.value = false
                 }
-                _isRefreshing.value = false
             }
         }
     }

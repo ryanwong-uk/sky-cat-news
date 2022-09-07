@@ -29,6 +29,7 @@ import uk.ryanwong.skycatnews.app.ui.theme.SkyCatNewsTheme
 import uk.ryanwong.skycatnews.newslist.domain.model.NewsItem
 import uk.ryanwong.skycatnews.newslist.ui.screen.component.LargeStoryHeadline
 import uk.ryanwong.skycatnews.newslist.ui.screen.component.LargeWebLinkHeadline
+import uk.ryanwong.skycatnews.newslist.ui.screen.component.NoDataScreen
 import uk.ryanwong.skycatnews.newslist.ui.screen.component.RegularStoryHeadline
 import uk.ryanwong.skycatnews.newslist.ui.screen.component.RegularWebLinkHeadline
 import uk.ryanwong.skycatnews.newslist.ui.screen.component.SkyCatNewsAppBar
@@ -79,7 +80,13 @@ fun NewsListScreenLayout(
                 contentPadding = PaddingValues(vertical = padding16),
                 modifier = Modifier.fillMaxSize()
             ) {
-                if (newsList.isNotEmpty()) {
+                if (newsList.isEmpty()) {
+                    if (!isRefreshing) {
+                        item {
+                            NoDataScreen(modifier = Modifier.fillParentMaxHeight())
+                        }
+                    }
+                } else {
                     item {
                         val firstItem = newsList.first()
                         when (firstItem) {
@@ -157,6 +164,44 @@ private fun NewsListScreenPreviewDark(
     SkyCatNewsTheme {
         NewsListScreenLayout(
             newsList = newsList,
+            isRefreshing = false,
+            onRefresh = { },
+            onStoryItemClicked = {},
+            onWebLinkItemClicked = {},
+        )
+    }
+}
+
+@Preview(
+    name = "News List Screen No Data",
+    group = "Light",
+    showBackground = true,
+    uiMode = UI_MODE_NIGHT_NO,
+)
+@Composable
+private fun NewsListScreenNoDataPreviewLight() {
+    SkyCatNewsTheme {
+        NewsListScreenLayout(
+            newsList = emptyList(),
+            isRefreshing = false,
+            onRefresh = { },
+            onStoryItemClicked = {},
+            onWebLinkItemClicked = {},
+        )
+    }
+}
+
+@Preview(
+    name = "News List Screen No Data",
+    group = "Dark",
+    showBackground = true,
+    uiMode = UI_MODE_NIGHT_YES,
+)
+@Composable
+private fun NewsListScreenNoDataPreviewDark() {
+    SkyCatNewsTheme {
+        NewsListScreenLayout(
+            newsList = emptyList(),
             isRefreshing = false,
             onRefresh = { },
             onStoryItemClicked = {},
