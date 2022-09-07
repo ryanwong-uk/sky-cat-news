@@ -44,7 +44,7 @@ This is a prototype of the app. As the backend isn't developed yet, this prototy
 ## Requirements
 
 * Android Studio Chipmunk | 2021.2.1 Patch 2
-* Android device or simulator running Android 6.0+ (API 23)
+* Android device or simulator running Android 8.0+ (API 26)
 
 ## Setting up the keystore
 
