@@ -5,13 +5,13 @@
 <p align="center">
   <img src="screenshot_20220907_1.jpg" width="200" />
   <img src="screenshot_20220907_2.jpg" width="200" />
-  <img src="screenshot_20220907_3.jpg" width="200" />
+  <img src="screenshot_20220907_6.jpg" width="200" />
 </p>
 
 <p align="center">
   <img src="screenshot_20220907_4.jpg" width="200" />
   <img src="screenshot_20220907_5.jpg" width="200" />
-  <img src="screenshot_20220907_6.jpg" width="200" />
+  <img src="screenshot_20220907_3.jpg" width="200" />
 </p>
 
 
