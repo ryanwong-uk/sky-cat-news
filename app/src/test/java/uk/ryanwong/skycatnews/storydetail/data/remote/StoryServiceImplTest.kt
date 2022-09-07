@@ -5,7 +5,9 @@
 package uk.ryanwong.skycatnews.storydetail.data.remote
 
 import io.kotest.core.spec.style.FreeSpec
+import io.kotest.matchers.should
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.types.beInstanceOf
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
@@ -13,6 +15,7 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headersOf
+import io.ktor.serialization.JsonConvertException
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.utils.io.ByteReadChannel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -67,7 +70,7 @@ internal class StoryServiceImplTest : FreeSpec() {
                 }
             }
 
-            "Should return an null if API request is successful with empty body" {
+            "Should return failure if API request is successful with empty body" {
                 runTest {
                     // Given
                     setupDataSource(
@@ -80,11 +83,12 @@ internal class StoryServiceImplTest : FreeSpec() {
                     val storyDto = storyService.getStory(storyId = 1)
 
                     // Then
-                    storyDto shouldBe Result.success(null)
+                    storyDto.isFailure shouldBe true
+                    storyDto.exceptionOrNull() should beInstanceOf<JsonConvertException>()
                 }
             }
 
-            "Should return null if API request returns HTTP Error" {
+            "Should return failure if API request returns HTTP Error" {
                 runTest {
                     // Given
                     setupDataSource(
