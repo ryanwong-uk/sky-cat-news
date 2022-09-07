@@ -107,6 +107,7 @@ fun LargeHeadline(
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentHeight()
+                    .weight(weight = 1f, fill = true)
             )
 
             Text(
