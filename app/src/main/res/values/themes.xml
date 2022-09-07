@@ -2,6 +2,6 @@
 <resources>
 
     <style name="Theme.SkyCatNews" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:statusBarColor">@color/purple_700</item>
+        <item name="android:statusBarColor">@color/sky_branding_dark_red</item>
     </style>
 </resources>
