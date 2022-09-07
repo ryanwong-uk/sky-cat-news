@@ -35,9 +35,9 @@ import uk.ryanwong.skycatnews.newslist.domain.model.NewsItem
 
 @Composable
 fun RegularStoryHeadline(
+    modifier: Modifier = Modifier,
     story: NewsItem.Story,
     onItemClicked: () -> Unit,
-    modifier: Modifier = Modifier,
 ) {
     RegularHeadline(
         imageUrl = story.teaserImageUrl,
@@ -52,9 +52,9 @@ fun RegularStoryHeadline(
 
 @Composable
 fun RegularWebLinkHeadline(
+    modifier: Modifier = Modifier,
     webLink: NewsItem.WebLink,
     onItemClicked: () -> Unit,
-    modifier: Modifier = Modifier,
 ) {
     RegularHeadline(
         headline = webLink.headline,
@@ -69,13 +69,13 @@ fun RegularWebLinkHeadline(
 
 @Composable
 fun RegularHeadline(
+    modifier: Modifier = Modifier,
     imageUrl: String?,
     imageAccessibilityText: String?,
     headline: String,
     teaserText: String?,
     date: String,
     onItemClicked: () -> Unit,
-    modifier: Modifier = Modifier,
 ) {
     val padding4 = dimensionResource(id = R.dimen.padding_4)
     val padding8 = dimensionResource(id = R.dimen.padding_8)

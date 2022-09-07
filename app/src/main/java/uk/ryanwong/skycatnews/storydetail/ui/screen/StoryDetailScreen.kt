@@ -97,11 +97,11 @@ fun StoryDetailScreen(
 
 @Composable
 private fun StoryDetailScreenLayout(
+    modifier: Modifier = Modifier,
     isLoading: Boolean,
     story: Story?,
     onRefresh: () -> Unit,
     navController: NavController,
-    modifier: Modifier = Modifier,
 ) {
     val padding16 = dimensionResource(id = R.dimen.padding_16)
     val shouldAllowSwipeRefresh = (story == null && !isLoading)
@@ -180,10 +180,10 @@ private fun StoryDetailScreenLayout(
 
 @Composable
 private fun HeroImageSection(
+    modifier: Modifier = Modifier,
     headline: String,
     heroImageUrl: String?,
     heroImageAccessibilityText: String?,
-    modifier: Modifier = Modifier,
 ) {
     val padding16 = dimensionResource(id = R.dimen.padding_16)
 

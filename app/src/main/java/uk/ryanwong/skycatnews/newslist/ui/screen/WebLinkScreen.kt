@@ -73,9 +73,9 @@ fun WebLinkScreen(
 
 @Composable
 fun NewsListScreenLayout(
+    modifier: Modifier = Modifier,
     url: String,
     navController: NavController,
-    modifier: Modifier = Modifier,
 ) {
     val webViewState = rememberWebViewState(url)
 

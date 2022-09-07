@@ -30,9 +30,9 @@ import uk.ryanwong.skycatnews.newslist.domain.model.NewsItem
 
 @Composable
 fun LargeStoryHeadline(
+    modifier: Modifier = Modifier,
     story: NewsItem.Story,
     onItemClicked: () -> Unit,
-    modifier: Modifier = Modifier,
 ) {
     LargeHeadline(
         imageUrl = story.teaserImageUrl,
@@ -47,9 +47,9 @@ fun LargeStoryHeadline(
 
 @Composable
 fun LargeWebLinkHeadline(
+    modifier: Modifier = Modifier,
     webLink: NewsItem.WebLink,
     onItemClicked: () -> Unit,
-    modifier: Modifier = Modifier,
 ) {
     LargeHeadline(
         imageUrl = webLink.teaserImageUrl,
@@ -64,13 +64,13 @@ fun LargeWebLinkHeadline(
 
 @Composable
 fun LargeHeadline(
+    modifier: Modifier = Modifier,
     imageUrl: String?,
     imageAccessibilityText: String?,
     headline: String,
     teaserText: String?,
     date: String,
     onItemClicked: () -> Unit,
-    modifier: Modifier = Modifier,
 ) {
     val padding8 = dimensionResource(id = R.dimen.padding_8)
     val padding16 = dimensionResource(id = R.dimen.padding_16)

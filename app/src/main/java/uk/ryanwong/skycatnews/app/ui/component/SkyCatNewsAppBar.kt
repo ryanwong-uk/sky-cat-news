@@ -36,9 +36,9 @@ import uk.ryanwong.skycatnews.app.ui.theme.SkyCatNewsTheme
 
 @Composable
 fun SkyCatNewsAppBar(
+    modifier: Modifier = Modifier,
     navController: NavController,
     customTitle: String? = null,
-    modifier: Modifier = Modifier,
 ) {
     val canNavigateUp = navController.previousBackStackEntry != null
 
