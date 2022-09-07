@@ -13,8 +13,8 @@ This is a prototype of the app. As the backend isn't developed yet, this prototy
 * 74 Unit tests for repositories, models, Ktor API services are done.
 * 16 Unit tests for RoomDB DAOs are done.
 * News list screen: on the `FakeDebug` and `FakeRelease` builds, pull-to-refresh can trigger simulated random server response.
+* Story detail screen: on the `FakeDebug` and `FakeRelease` builds, it shows the same layout with random images.
 * Basic dark mode supported.
-* 
 
 ## High level architecture
 
@@ -116,13 +116,15 @@ This project can be built using the options provided under the Android Studio `B
 
 #### /story/&lt;id&gt;
 
+* The data returned by `/news-list` does not contain a dedicated `id` for story. Here I assume the `id` from `/new-list` also refers to the story Id.
 * The entries within `contents` implicitly assume the ordering is preserved. It might be safer if we could add something like `sequenceId` so the App can always present them in a proper order.
 * Again, how we name the urls for links and images could be improved. The keys like `url`
-  , `imageUrl`, `href` carries different meanings everywhere, which again can be error-prone. 
+  , `imageUrl`, `href` carries different meanings everywhere, which again can be error-prone.
 
 ### UI Layout changes
 
 #### news-list
+
 * Changed to use an image rather than plain text for the App Bar title. Applying a branded logo instead of plain text would help present a more genuine look and feel to users.
 * Moved to show the date at the bottom of the regular headline entries. This frees up more spaces for the headline, which brings more value to the users.
 * Applied accent background colour to the top headline entry for a better visual cue.
