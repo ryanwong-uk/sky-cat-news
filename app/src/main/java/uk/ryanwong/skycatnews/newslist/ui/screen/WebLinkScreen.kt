@@ -13,7 +13,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.web.WebView
 import com.google.accompanist.web.rememberWebViewState
-import uk.ryanwong.skycatnews.newslist.ui.screen.component.SkyCatNewsAppBar
+import uk.ryanwong.skycatnews.app.ui.component.SkyCatNewsAppBar
 
 @Composable
 fun WebLinkScreen(

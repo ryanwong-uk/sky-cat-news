@@ -45,8 +45,8 @@ import uk.ryanwong.skycatnews.app.ui.theme.BlackGradientEnd
 import uk.ryanwong.skycatnews.app.ui.theme.BlackGradientStart
 import uk.ryanwong.skycatnews.app.ui.theme.CustomTextStyle
 import uk.ryanwong.skycatnews.app.ui.theme.SkyCatNewsTheme
-import uk.ryanwong.skycatnews.newslist.ui.screen.component.NoDataScreen
-import uk.ryanwong.skycatnews.newslist.ui.screen.component.SkyCatNewsAppBar
+import uk.ryanwong.skycatnews.app.ui.component.NoDataScreen
+import uk.ryanwong.skycatnews.app.ui.component.SkyCatNewsAppBar
 import uk.ryanwong.skycatnews.storydetail.domain.model.Content
 import uk.ryanwong.skycatnews.storydetail.domain.model.Story
 import uk.ryanwong.skycatnews.storydetail.ui.viewmodel.StoryDetailViewModel

@@ -31,10 +31,10 @@ import uk.ryanwong.skycatnews.app.ui.theme.SkyCatNewsTheme
 import uk.ryanwong.skycatnews.newslist.domain.model.NewsItem
 import uk.ryanwong.skycatnews.newslist.ui.screen.component.LargeStoryHeadline
 import uk.ryanwong.skycatnews.newslist.ui.screen.component.LargeWebLinkHeadline
-import uk.ryanwong.skycatnews.newslist.ui.screen.component.NoDataScreen
+import uk.ryanwong.skycatnews.app.ui.component.NoDataScreen
 import uk.ryanwong.skycatnews.newslist.ui.screen.component.RegularStoryHeadline
 import uk.ryanwong.skycatnews.newslist.ui.screen.component.RegularWebLinkHeadline
-import uk.ryanwong.skycatnews.newslist.ui.screen.component.SkyCatNewsAppBar
+import uk.ryanwong.skycatnews.app.ui.component.SkyCatNewsAppBar
 import uk.ryanwong.skycatnews.newslist.ui.viewmodel.NewsListViewModel
 import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.newslist.ui.screen.previewparameter.NewsListProvider
 
