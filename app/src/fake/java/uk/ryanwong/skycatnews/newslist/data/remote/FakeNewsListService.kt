@@ -102,7 +102,7 @@ class FakeNewsListService : NewsListService {
                         teaserText = null,
                         type = "weblink",
                         advertUrl = null,
-                        weblinkUrl = "https://news.sky.com/story/john-shuttleworth-comedy-gig-inside-cave-halted-halfway-after-fan-gets-trapped-in-tree-above-gorge-12617846"
+                        weblinkUrl = "https://news.sky.com/story/rail-strikes-industrial-action-continues-today-with-only-20-of-services-expected-to-run-12677136"
                     ),
                     NewsItemDto(
                         creationDate = randomTimestamp4,
@@ -142,7 +142,7 @@ class FakeNewsListService : NewsListService {
                         teaserText = null,
                         type = "weblink",
                         advertUrl = null,
-                        weblinkUrl = "https://news.sky.com/story/tory-leadership-rishi-sunak-and-liz-truss-promise-to-increase-scrutiny-of-scottish-govt-as-they-head-to-perth-12674081"
+                        weblinkUrl = "https://news.sky.com/story/transport-strikes-more-travel-misery-as-london-underground-and-bus-staff-begin-latest-walkout-12676263"
                     ),
                     NewsItemDto(
                         creationDate = randomTimestamp4,
