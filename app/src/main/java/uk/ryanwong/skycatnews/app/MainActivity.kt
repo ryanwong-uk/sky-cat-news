@@ -38,36 +38,30 @@ private fun SkyCatNewsApp() {
     NavHost(navController = navController, startDestination = "newslist") {
         composable(route = "newslist") {
             NewsListScreen(
-                onStoryItemClicked = { id -> navController.navigate("newslist/story/$id") },
-                onWebLinkItemClicked = { id -> navController.navigate("newslist/weblink/$id") },
+                onStoryItemClicked = { listId -> navController.navigate("newslist/story/$listId") },
+                onWebLinkItemClicked = { listId -> navController.navigate("newslist/weblink/$listId") },
             )
         }
         composable(
-            route = "newslist/story/{story_id}",
+            route = "newslist/story/{list_id}",
             arguments = listOf(
-                navArgument("story_id") {
+                navArgument("list_id") {
                     type = NavType.IntType
                 }
             )
-        ) { navBackStackEntry ->
-            val storyId = navBackStackEntry.arguments?.getInt("story_id")
-            storyId?.let {
-                StoryDetailScreen(storyId = storyId)
-            }
+        ) {
+            StoryDetailScreen()
         }
 
         composable(
-            route = "newslist/weblink/{story_id}",
+            route = "newslist/weblink/{list_id}",
             arguments = listOf(
-                navArgument("story_id") {
+                navArgument("list_id") {
                     type = NavType.IntType
                 }
             )
-        ) { navBackStackEntry ->
-            val storyId = navBackStackEntry.arguments?.getInt("story_id")
-            storyId?.let {
-                WebLinkScreen(storyId = storyId)
-            }
+        ) {
+            WebLinkScreen()
         }
     }
 }

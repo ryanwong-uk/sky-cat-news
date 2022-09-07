@@ -86,40 +86,41 @@ fun NewsListScreenLayout(
                             NoDataScreen(modifier = Modifier.fillParentMaxHeight())
                         }
                     }
-                } else {
-                    item {
-                        val firstItem = newsList.first()
-                        when (firstItem) {
-                            is NewsItem.Story -> {
-                                LargeStoryHeadline(
-                                    story = firstItem,
-                                    onItemClicked = { onStoryItemClicked(firstItem.newsId) },
-                                )
-                            }
-                            is NewsItem.WebLink -> {
-                                LargeWebLinkHeadline(
-                                    webLink = firstItem,
-                                    onItemClicked = { onWebLinkItemClicked(firstItem.newsId) },
-                                )
-                            }
+                    return@LazyColumn
+                }
+
+                item {
+                    val firstItem = newsList.first()
+                    when (firstItem) {
+                        is NewsItem.Story -> {
+                            LargeStoryHeadline(
+                                story = firstItem,
+                                onItemClicked = { onStoryItemClicked(firstItem.newsId) },
+                            )
+                        }
+                        is NewsItem.WebLink -> {
+                            LargeWebLinkHeadline(
+                                webLink = firstItem,
+                                onItemClicked = { onWebLinkItemClicked(firstItem.newsId) },
+                            )
                         }
                     }
+                }
 
-                    val regularItemsList = newsList.subList(1, newsList.size)
-                    itemsIndexed(regularItemsList) { _, newsItem ->
-                        when (newsItem) {
-                            is NewsItem.Story -> {
-                                RegularStoryHeadline(
-                                    story = newsItem,
-                                    onItemClicked = { onStoryItemClicked(newsItem.newsId) },
-                                )
-                            }
-                            is NewsItem.WebLink -> {
-                                RegularWebLinkHeadline(
-                                    webLink = newsItem,
-                                    onItemClicked = { onWebLinkItemClicked(newsItem.newsId) },
-                                )
-                            }
+                val regularItemsList = newsList.subList(1, newsList.size)
+                itemsIndexed(regularItemsList) { _, newsItem ->
+                    when (newsItem) {
+                        is NewsItem.Story -> {
+                            RegularStoryHeadline(
+                                story = newsItem,
+                                onItemClicked = { onStoryItemClicked(newsItem.newsId) },
+                            )
+                        }
+                        is NewsItem.WebLink -> {
+                            RegularWebLinkHeadline(
+                                webLink = newsItem,
+                                onItemClicked = { onWebLinkItemClicked(newsItem.newsId) },
+                            )
                         }
                     }
                 }

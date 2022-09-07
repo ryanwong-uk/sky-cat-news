@@ -8,11 +8,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import timber.log.Timber
 import uk.ryanwong.skycatnews.app.di.DispatcherModule
 import uk.ryanwong.skycatnews.newslist.data.repository.NewsListRepository
@@ -38,16 +36,15 @@ class NewsListViewModel @Inject constructor(
     fun refreshNewsList() {
         _isRefreshing.value = true
         viewModelScope.launch(dispatcher) {
-            withContext(Dispatchers.IO) {
-                newsListRepository.getNewsList().onSuccess { newsListResult ->
-                    _newsList.value = newsListResult.newsItems
-                    _isRefreshing.value = false
-                }.onFailure { ex ->
-                    // TODO: print error
-                    Timber.e("!!!")
-                    ex.printStackTrace()
-                    _isRefreshing.value = false
-                }
+
+            newsListRepository.getNewsList().onSuccess { newsListResult ->
+                _newsList.value = newsListResult.newsItems
+                _isRefreshing.value = false
+            }.onFailure { ex ->
+                // TODO: print error
+                Timber.e("!!!")
+                ex.printStackTrace()
+                _isRefreshing.value = false
             }
         }
     }

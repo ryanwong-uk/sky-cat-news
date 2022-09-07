@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
 
 object CustomTextStyle {
 
@@ -42,4 +43,14 @@ object CustomTextStyle {
 
     val noDataErrorText
         @Composable get() = MaterialTheme.typography.body1
+
+    val storyDetailHeadline
+        @Composable get() = MaterialTheme.typography.h5.copy(
+            fontWeight = FontWeight.Bold,
+        )
+
+    val storyDetailParagraph
+        @Composable get() = MaterialTheme.typography.body1.copy(
+            lineHeight = 28.sp
+        )
 }
