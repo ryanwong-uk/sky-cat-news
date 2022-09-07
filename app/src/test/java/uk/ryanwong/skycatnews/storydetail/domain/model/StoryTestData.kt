@@ -15,8 +15,8 @@ internal object StoryTestData {
             headline = "some-headline",
             heroImageUrl = "https://some.hero.image/url",
             heroImageAccessibilityText = "some-accessibility-text",
-            creationDate = "2022-5-21T00:00:00Z",
-            modifiedDate = "2022-5-21T00:00:00Z"
+            creationDate = "2022-05-21T00:00:00Z",
+            modifiedDate = "2022-05-21T00:00:00Z"
         )
     }
 

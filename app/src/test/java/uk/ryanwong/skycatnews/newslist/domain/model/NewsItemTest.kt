@@ -56,7 +56,7 @@ internal class NewsItemTest : FreeSpec() {
                         newsId = 1,
                         headline = "",
                         teaserText = "some-teaser-text",
-                        modifiedDate = "2022-5-21T00:00:00Z",
+                        modifiedDate = "2022-05-21T00:00:00Z",
                         teaserImageUrl = "https://some.teaser.image/href",
                         teaserImageAccessibilityText = "some-teaser-image-accessibility-text",
                     )
@@ -77,7 +77,7 @@ internal class NewsItemTest : FreeSpec() {
                         newsId = 1,
                         headline = "some-headline",
                         teaserText = "",
-                        modifiedDate = "2022-5-21T00:00:00Z",
+                        modifiedDate = "2022-05-21T00:00:00Z",
                         teaserImageUrl = "https://some.teaser.image/href",
                         teaserImageAccessibilityText = "some-teaser-image-accessibility-text",
                     )
@@ -98,7 +98,7 @@ internal class NewsItemTest : FreeSpec() {
                         newsId = 1,
                         headline = "some-headline",
                         teaserText = "some-teaser-text",
-                        modifiedDate = "2022-5-21T00:00:00Z",
+                        modifiedDate = "2022-05-21T00:00:00Z",
                         teaserImageUrl = "",
                         teaserImageAccessibilityText = "some-teaser-image-accessibility-text",
                     )
@@ -107,7 +107,8 @@ internal class NewsItemTest : FreeSpec() {
 
             "Should keep url as null if it comes as null" {
                 // Given
-                val newsItemEntities = listOf(NewsItemTestData.mockNewsItemEntity1.copy(advertUrl = null))
+                val newsItemEntities =
+                    listOf(NewsItemTestData.mockNewsItemEntity1.copy(advertUrl = null))
 
                 // When
                 val newsItem = NewsItem.fromEntity(newsItemEntities = newsItemEntities)
@@ -118,7 +119,7 @@ internal class NewsItemTest : FreeSpec() {
                         newsId = 1,
                         headline = "some-headline",
                         teaserText = "some-teaser-text",
-                        modifiedDate = "2022-5-21T00:00:00Z",
+                        modifiedDate = "2022-05-21T00:00:00Z",
                         teaserImageUrl = "https://some.teaser.image/href",
                         teaserImageAccessibilityText = "some-teaser-image-accessibility-text",
                     )

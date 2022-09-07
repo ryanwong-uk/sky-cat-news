@@ -42,7 +42,7 @@ internal class StoryTest : FreeSpec() {
                 story shouldBe Story(
                     id = 1,
                     contents = emptyList(),
-                    date = "2022-5-21T00:00:00Z",
+                    date = "2022-05-21T00:00:00Z",
                     headline = "some-headline",
                     heroImageAccessibilityText = "some-accessibility-text",
                     heroImageUrl = "https://some.hero.image/url"
@@ -66,7 +66,7 @@ internal class StoryTest : FreeSpec() {
                 story shouldBe Story(
                     id = 1,
                     contents = emptyList(),
-                    date = "2022-5-21T00:00:00Z",
+                    date = "2022-05-21T00:00:00Z",
                     headline = "",
                     heroImageAccessibilityText = "some-accessibility-text",
                     heroImageUrl = "https://some.hero.image/url"
@@ -92,7 +92,7 @@ internal class StoryTest : FreeSpec() {
                             text = "some-text-1",
                         )
                     ),
-                    date = "2022-5-21T00:00:00Z",
+                    date = "2022-05-21T00:00:00Z",
                     headline = "some-headline",
                     heroImageAccessibilityText = "some-accessibility-text",
                     heroImageUrl = "https://some.hero.image/url"
