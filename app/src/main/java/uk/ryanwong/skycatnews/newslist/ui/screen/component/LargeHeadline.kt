@@ -4,12 +4,14 @@
 
 package uk.ryanwong.skycatnews.newslist.ui.screen.component
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -82,6 +84,7 @@ fun LargeHeadline(
     ) {
         Column(
             modifier = Modifier
+                .background(color = MaterialTheme.colors.primary)
                 .fillMaxWidth()
                 .wrapContentHeight()
                 .clickable(
@@ -109,6 +112,7 @@ fun LargeHeadline(
                 text = headline,
                 maxLines = 1,
                 style = CustomTextStyle.largeHeadline,
+                color = MaterialTheme.colors.onPrimary,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -121,6 +125,7 @@ fun LargeHeadline(
                     text = teaserText,
                     maxLines = 3,
                     style = CustomTextStyle.largeHeadlineTeaserText,
+                    color = MaterialTheme.colors.onPrimary,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -133,6 +138,7 @@ fun LargeHeadline(
                 text = date,
                 maxLines = 1,
                 style = CustomTextStyle.largeHeadlineDate,
+                color = MaterialTheme.colors.onPrimary,
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentHeight()

@@ -4,6 +4,8 @@
 
 package uk.ryanwong.skycatnews.newslist.ui.screen.component
 
+import android.content.res.Configuration.UI_MODE_NIGHT_NO
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -21,7 +23,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import uk.ryanwong.skycatnews.R
 import uk.ryanwong.skycatnews.app.ui.theme.SkyCatNewsTheme
-import uk.ryanwong.skycatnews.app.ui.theme.SkyGreyBackground
 
 @Composable
 fun SkyCatNewsAppBar(
@@ -40,6 +41,7 @@ fun SkyCatNewsAppBar(
                 customTitle?.let {
                     Text(
                         text = customTitle,
+                        color = MaterialTheme.colors.onSurface,
                         style = MaterialTheme.typography.h6,
                     )
                 } ?: Image(
@@ -50,17 +52,19 @@ fun SkyCatNewsAppBar(
                 )
             }
         },
-        backgroundColor = SkyGreyBackground,
+        backgroundColor = MaterialTheme.colors.surface,
         modifier = modifier
     )
 }
 
 @Preview(
     name = "Default image app bar",
-    showBackground = true
+    group = "Light",
+    showBackground = true,
+    uiMode = UI_MODE_NIGHT_NO,
 )
 @Composable
-private fun AppBarPreviewDefaultImage() {
+private fun AppBarPreviewDefaultImageLight() {
     SkyCatNewsTheme {
         SkyCatNewsAppBar(
             customTitle = null
@@ -70,10 +74,42 @@ private fun AppBarPreviewDefaultImage() {
 
 @Preview(
     name = "Custom title app bar",
-    showBackground = true
+    group = "Light",
+    showBackground = true,
+    uiMode = UI_MODE_NIGHT_NO,
 )
 @Composable
-private fun AppBarPreviewCustomTitle() {
+private fun AppBarPreviewCustomTitleLight() {
+    SkyCatNewsTheme {
+        SkyCatNewsAppBar(
+            customTitle = "Some Other News"
+        )
+    }
+}
+
+@Preview(
+    name = "Default image app bar",
+    group = "Dark",
+    showBackground = true,
+    uiMode = UI_MODE_NIGHT_YES,
+)
+@Composable
+private fun AppBarPreviewDefaultImageDark() {
+    SkyCatNewsTheme {
+        SkyCatNewsAppBar(
+            customTitle = null
+        )
+    }
+}
+
+@Preview(
+    name = "Custom title app bar",
+    group = "Dark",
+    showBackground = true,
+    uiMode = UI_MODE_NIGHT_YES,
+)
+@Composable
+private fun AppBarPreviewCustomTitleDark() {
     SkyCatNewsTheme {
         SkyCatNewsAppBar(
             customTitle = "Some Other News"

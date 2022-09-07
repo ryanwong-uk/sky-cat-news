@@ -4,11 +4,15 @@
 
 package uk.ryanwong.skycatnews.newslist.ui.screen
 
+import android.content.res.Configuration.UI_MODE_NIGHT_NO
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -59,7 +63,9 @@ fun NewsListScreenLayout(
     val padding16 = dimensionResource(id = R.dimen.padding_16)
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = MaterialTheme.colors.background),
     ) {
         SkyCatNewsAppBar()
 
@@ -115,11 +121,31 @@ fun NewsListScreenLayout(
 
 @Preview(
     name = "News List Screen",
-    showSystemUi = true,
+    group = "Light",
     showBackground = true,
+    uiMode = UI_MODE_NIGHT_NO,
 )
 @Composable
-private fun NewsListScreenPreview() {
+private fun NewsListScreenPreviewLight() {
+    SkyCatNewsTheme {
+        NewsListScreenLayout(
+            newsList = listOf(),
+            isRefreshing = false,
+            onRefresh = { },
+            onStoryItemClicked = {},
+            onWebLinkItemClicked = {},
+        )
+    }
+}
+
+@Preview(
+    name = "News List Screen",
+    group = "Dark",
+    showBackground = true,
+    uiMode = UI_MODE_NIGHT_YES,
+)
+@Composable
+private fun NewsListScreenPreviewDark() {
     SkyCatNewsTheme {
         NewsListScreenLayout(
             newsList = listOf(),

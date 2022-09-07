@@ -4,6 +4,7 @@
 
 package uk.ryanwong.skycatnews.newslist.ui.screen.component
 
+import android.text.format.DateUtils
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -28,10 +29,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import coil.size.Size
+import io.ktor.util.date.getTimeMillis
 import uk.ryanwong.skycatnews.R
 import uk.ryanwong.skycatnews.app.ui.theme.CustomTextStyle
 import uk.ryanwong.skycatnews.app.ui.theme.SkyCatNewsTheme
 import uk.ryanwong.skycatnews.newslist.domain.model.NewsItem
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
 
 @Composable
 fun RegularStoryHeadline(
@@ -67,6 +73,15 @@ fun RegularWebLinkHeadline(
     )
 }
 
+fun String.toDate(
+    dateFormat: String = "yyyy-MM-dd'T'HH:mm:ss'Z'",
+    timeZone: TimeZone = TimeZone.getTimeZone("UTC"),
+): Date {
+    val parser = SimpleDateFormat(dateFormat, Locale.getDefault())
+    parser.timeZone = timeZone
+    return parser.parse(this)
+}
+
 @Composable
 fun RegularHeadline(
     imageUrl: String?,
@@ -80,6 +95,12 @@ fun RegularHeadline(
     val padding4 = dimensionResource(id = R.dimen.padding_4)
     val padding8 = dimensionResource(id = R.dimen.padding_8)
     val padding16 = dimensionResource(id = R.dimen.padding_16)
+
+    val niceDate = DateUtils.getRelativeTimeSpanString(
+        date.toDate().time,
+        getTimeMillis(),
+        DateUtils.SECOND_IN_MILLIS
+    ).toString()
 
     Card(
         modifier = modifier
@@ -132,21 +153,19 @@ fun RegularHeadline(
                         .wrapContentHeight()
                         .padding(horizontal = padding16, vertical = padding4)
                 )
-                teaserText?.let {
-                    Text(
-                        text = teaserText,
-                        maxLines = 2,
-                        style = CustomTextStyle.regularHeadlineTeaserText,
-                        overflow = TextOverflow.Ellipsis,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .wrapContentHeight()
-                            .weight(weight = 1.0f)
-                            .padding(horizontal = padding16)
-                    )
-                }
                 Text(
-                    text = date,
+                    text = teaserText ?: "",
+                    maxLines = 2,
+                    style = CustomTextStyle.regularHeadlineTeaserText,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight()
+                        .weight(weight = 1.0f)
+                        .padding(horizontal = padding16)
+                )
+                Text(
+                    text = niceDate,
                     maxLines = 1,
                     style = CustomTextStyle.regularHeadlineDate,
                     modifier = Modifier
@@ -171,7 +190,7 @@ fun RegularStoryHeadlinePreview() {
                 newsId = 1,
                 headline = "Story Headline 1 but it is getting really very long",
                 teaserText = "Breakfast agreeable incommode departure it an. By ignorant at on wondered relation. Enough at tastes really so cousin am of. Extensive therefore supported by extremity of contented. Is pursuit compact demesne invited elderly be. View him she roof tell her case has sigh. Moreover is possible he admitted sociable concerns. By in cold no less been sent hard hill.",
-                modifiedDate = "some-date",
+                modifiedDate = "2022-09-01T00:00:00Z",
                 teaserImageUrl = "https://www.google.com/",
                 teaserImageAccessibilityText = "some-accessibility-text",
             ),
@@ -191,7 +210,7 @@ fun RegularWebLinkHeadlinePreview() {
             webLink = NewsItem.WebLink(
                 newsId = 1,
                 headline = "Story WebLink but it is getting really very long",
-                modifiedDate = "some-date",
+                modifiedDate = "2022-09-06T00:00:00Z",
                 teaserImageUrl = "https://www.google.com/",
                 teaserImageAccessibilityText = "some-accessibility-text",
                 url = "https://some.url/"
