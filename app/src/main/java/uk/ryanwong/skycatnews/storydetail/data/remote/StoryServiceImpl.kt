@@ -10,7 +10,7 @@ import io.ktor.client.request.get
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.appendPathSegments
 import kotlinx.coroutines.CancellationException
-import uk.ryanwong.skycatnews.app.except
+import uk.ryanwong.skycatnews.app.util.except
 import uk.ryanwong.skycatnews.storydetail.data.remote.model.StoryDto
 
 class StoryServiceImpl(
