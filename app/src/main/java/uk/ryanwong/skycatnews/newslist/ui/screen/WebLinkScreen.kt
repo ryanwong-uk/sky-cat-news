@@ -15,10 +15,9 @@ import uk.ryanwong.skycatnews.newslist.ui.screen.component.SkyCatNewsAppBar
 
 @Composable
 fun WebLinkScreen(
-    storyId: Int,
     modifier: Modifier = Modifier,
 ) {
-    val webViewState = rememberWebViewState("https://www.rwmobi.com/")
+    val webViewState = rememberWebViewState(url = "https://www.sky.co.uk/")
 
     Column(
         modifier = modifier.fillMaxSize(),
@@ -36,7 +35,5 @@ fun WebLinkScreen(
 @Preview
 @Composable
 private fun WeblinkScreenPreview() {
-    WebLinkScreen(
-        storyId = 1
-    )
+    WebLinkScreen()
 }
