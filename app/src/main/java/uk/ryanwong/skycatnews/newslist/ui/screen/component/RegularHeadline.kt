@@ -4,7 +4,6 @@
 
 package uk.ryanwong.skycatnews.newslist.ui.screen.component
 
-import android.text.format.DateUtils
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -29,15 +28,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import coil.size.Size
-import io.ktor.util.date.getTimeMillis
 import uk.ryanwong.skycatnews.R
 import uk.ryanwong.skycatnews.app.ui.theme.CustomTextStyle
 import uk.ryanwong.skycatnews.app.ui.theme.SkyCatNewsTheme
 import uk.ryanwong.skycatnews.newslist.domain.model.NewsItem
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
-import java.util.TimeZone
 
 @Composable
 fun RegularStoryHeadline(
@@ -50,7 +44,7 @@ fun RegularStoryHeadline(
         imageAccessibilityText = story.teaserImageAccessibilityText,
         headline = story.headline,
         teaserText = story.teaserText,
-        date = story.modifiedDate,
+        date = story.getNiceDate(),
         onItemClicked = onItemClicked,
         modifier = modifier
     )
@@ -65,21 +59,12 @@ fun RegularWebLinkHeadline(
     RegularHeadline(
         headline = webLink.headline,
         teaserText = null,
-        date = webLink.modifiedDate,
+        date = webLink.getNiceDate(),
         imageUrl = webLink.teaserImageUrl,
         imageAccessibilityText = webLink.teaserImageAccessibilityText,
         onItemClicked = onItemClicked,
         modifier = modifier
     )
-}
-
-fun String.toDate(
-    dateFormat: String = "yyyy-MM-dd'T'HH:mm:ss'Z'",
-    timeZone: TimeZone = TimeZone.getTimeZone("UTC"),
-): Date {
-    val parser = SimpleDateFormat(dateFormat, Locale.getDefault())
-    parser.timeZone = timeZone
-    return parser.parse(this)
 }
 
 @Composable
@@ -95,12 +80,6 @@ fun RegularHeadline(
     val padding4 = dimensionResource(id = R.dimen.padding_4)
     val padding8 = dimensionResource(id = R.dimen.padding_8)
     val padding16 = dimensionResource(id = R.dimen.padding_16)
-
-    val niceDate = DateUtils.getRelativeTimeSpanString(
-        date.toDate().time,
-        getTimeMillis(),
-        DateUtils.SECOND_IN_MILLIS
-    ).toString()
 
     Card(
         modifier = modifier
@@ -165,7 +144,7 @@ fun RegularHeadline(
                         .padding(horizontal = padding16)
                 )
                 Text(
-                    text = niceDate,
+                    text = date,
                     maxLines = 1,
                     style = CustomTextStyle.regularHeadlineDate,
                     modifier = Modifier
