@@ -24,7 +24,7 @@ This is a prototype of the app. As the backend isn't developed yet, this prototy
 ## TL;DR - Status
 
 * Fully functional. More tests to complete before submission.
-* 76 Unit tests for repositories, models, and Ktor API services are done.
+* 80 Unit tests for view models, repositories, models, and Ktor API services are done.
 * 18 Unit tests for RoomDB DAOs are done.
 * News list screen: on the `FakeDebug` and `FakeRelease` builds, pull-to-refresh can trigger a simulated random server response.
 * Story detail screen: on the `FakeDebug` and `FakeRelease` builds, it shows the same layout with random images.
@@ -144,3 +144,4 @@ This project can be built using the options provided under the Android Studio `B
 * Applied accent background colour to the top headline entry for a better visual cue.
 * Changed to show headline entries using Card View to better separate each entry.
 * Added a new "try again" layout when there is nothing to show.
+* Added App Bar to all screens, with a back button showing when user can go back to the previous screen.
