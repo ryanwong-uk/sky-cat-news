@@ -22,7 +22,7 @@ This is a prototype of the app. As the backend isn't developed yet, this prototy
 
 ## TL;DR - Status
 
-> __To reviewers:__ Please use the main branch (or in certain case, fall back to tag `v1.0` for review purpose. I am still working on other UI tests under separate branches solely for personal interests.
+> Further UI tests and minor changes are in progress.
 
 * Fully functional. Use `fakeDebug` or `fakeRelease` to have the App retrieve mock data locally.
 * 87 Unit tests for view models, repositories, models, and Ktor API services have been written.
