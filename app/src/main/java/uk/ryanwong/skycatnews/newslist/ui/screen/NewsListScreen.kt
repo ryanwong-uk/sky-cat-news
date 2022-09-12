@@ -24,6 +24,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -97,6 +99,7 @@ fun NewsListScreenLayout(
     navController: NavController,
 ) {
     val padding16 = dimensionResource(id = R.dimen.padding_16)
+    val contentDescriptionNewsList = stringResource(R.string.content_description_news_list)
 
     Column(
         modifier = Modifier
@@ -111,7 +114,9 @@ fun NewsListScreenLayout(
         ) {
             LazyColumn(
                 contentPadding = PaddingValues(vertical = padding16),
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier
+                    .fillMaxSize()
+                    .semantics { contentDescription = contentDescriptionNewsList }
             ) {
                 if (newsList.isEmpty()) {
                     if (!isLoading) {

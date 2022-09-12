@@ -5,4 +5,5 @@
     <string name="ok">OK</string>
     <string name="error_loading_story_detail">Error loading story detail</string>
     <string name="error_loading_web_link">Error loading Web link</string>
+    <string name="content_description_news_list">News list</string>
 </resources>
