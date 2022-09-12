@@ -10,6 +10,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -206,7 +207,7 @@ private fun HeroImageSection(
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxWidth()
-                .wrapContentHeight()
+                .aspectRatio(ratio = 4/3f)
         )
 
         Column(
@@ -238,6 +239,28 @@ private fun HeroImageSection(
                     .wrapContentHeight()
             )
         }
+    }
+}
+
+@Preview(
+    group = "story loaded",
+    showSystemUi = true,
+    showBackground = true,
+    uiMode = UI_MODE_NIGHT_NO,
+    device = androidx.compose.ui.tooling.preview.Devices.NEXUS_5
+)
+@Composable
+private fun StoryDetailScreenLayoutPreviewLightSmallScreen(
+    @PreviewParameter(StoryProvider::class)
+    story: Story,
+) {
+    SkyCatNewsTheme {
+        StoryDetailScreenLayout(
+            isLoading = false,
+            story = story,
+            onRefresh = {},
+            navController = rememberNavController(),
+        )
     }
 }
 
