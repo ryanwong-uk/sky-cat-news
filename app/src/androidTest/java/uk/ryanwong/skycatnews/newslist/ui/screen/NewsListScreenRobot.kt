@@ -121,5 +121,4 @@ internal class NewsListScreenRobot(
             onNodeWithText(text = "some-paragraph-3").assertIsDisplayed()
         }
     }
-
 }

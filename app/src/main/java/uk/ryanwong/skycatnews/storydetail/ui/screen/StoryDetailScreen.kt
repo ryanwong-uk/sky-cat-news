@@ -207,7 +207,7 @@ private fun HeroImageSection(
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(ratio = 4/3f)
+                .aspectRatio(ratio = 4 / 3f)
         )
 
         Column(

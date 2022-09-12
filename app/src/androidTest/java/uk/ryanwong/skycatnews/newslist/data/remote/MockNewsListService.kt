@@ -4,7 +4,6 @@
 
 package uk.ryanwong.skycatnews.newslist.data.remote
 
-import kotlinx.coroutines.delay
 import uk.ryanwong.skycatnews.newslist.data.remote.model.LinksDto
 import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsItemDto
 import uk.ryanwong.skycatnews.newslist.data.remote.model.NewsListDto
