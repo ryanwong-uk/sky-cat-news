@@ -25,13 +25,6 @@ internal class NewsListScreenRobot(
         }
     }
 
-    fun scrollToStoryHeadline1() {
-        with(composeTestRule) {
-            onNodeWithContentDescription(label = "News list").performScrollToIndex(0)
-            waitForIdle()
-        }
-    }
-
     fun storyHeadline1ShowsCorrectLayout() {
         with(composeTestRule) {
             onNodeWithContentDescription(label = "News list").performScrollToIndex(0)
@@ -119,6 +112,22 @@ internal class NewsListScreenRobot(
             onNodeWithText(text = "some-paragraph-1").assertIsDisplayed()
             onNodeWithContentDescription(label = "some-accessibility-text-2").assertIsDisplayed()
             onNodeWithText(text = "some-paragraph-3").assertIsDisplayed()
+        }
+    }
+
+    fun userClicksOnWeblinkHeadline3() {
+        with(composeTestRule) {
+            onNodeWithContentDescription(label = "News list").performScrollToIndex(2).run {
+                waitForIdle()
+                performClick()
+                waitForIdle()
+            }
+        }
+    }
+
+    fun weblinkScreenShowsCorrectLayout() {
+        with(composeTestRule) {
+            onNodeWithContentDescription(label = "Web link web view").assertIsDisplayed()
         }
     }
 }

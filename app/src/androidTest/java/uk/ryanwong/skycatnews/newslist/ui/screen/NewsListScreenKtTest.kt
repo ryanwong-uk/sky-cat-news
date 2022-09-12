@@ -53,10 +53,17 @@ internal class NewsListScreenKtTest {
     fun story_screen_general_layout_is_correct() {
         with(newsListScreenRobot) {
             waitUntilNewsListIsVisible()
-            scrollToStoryHeadline1()
-
             userClicksOnStoryHeadline1()
             storyScreenShowsCorrectLayout()
+        }
+    }
+
+    @Test
+    fun weblink_screen_general_layout_is_correct() {
+        with(newsListScreenRobot) {
+            waitUntilNewsListIsVisible()
+            userClicksOnWeblinkHeadline3()
+            weblinkScreenShowsCorrectLayout()
         }
     }
 }

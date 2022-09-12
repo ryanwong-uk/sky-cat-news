@@ -18,6 +18,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -43,7 +45,7 @@ fun WebLinkScreen(
             CircularProgressIndicator()
         } else {
             uiState.url?.let { webLinkUrl ->
-                NewsListScreenLayout(
+                WebLinkScreenLayout(
                     url = webLinkUrl,
                     navController = navController
                 )
@@ -72,12 +74,14 @@ fun WebLinkScreen(
 }
 
 @Composable
-fun NewsListScreenLayout(
+fun WebLinkScreenLayout(
     modifier: Modifier = Modifier,
     url: String,
     navController: NavController,
 ) {
     val webViewState = rememberWebViewState(url)
+    val contentDescriptionWeblinkWebView =
+        stringResource(R.string.content_descriptoin_weblink_webview)
 
     Column(
         modifier = modifier.fillMaxSize()
@@ -89,7 +93,8 @@ fun NewsListScreenLayout(
             onCreated = { it.settings.javaScriptEnabled = true },
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(1.0f),
+                .weight(1.0f)
+                .semantics { contentDescription = contentDescriptionWeblinkWebView },
         )
     }
 }
