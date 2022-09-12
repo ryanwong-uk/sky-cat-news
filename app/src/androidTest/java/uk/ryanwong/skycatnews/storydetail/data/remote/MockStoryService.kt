@@ -24,25 +24,7 @@ class MockStoryService : StoryService {
                 contents = listOf(
                     ContentDto(
                         accessibilityText = null,
-                        text = "Is at purse tried jokes china ready decay an. Small its shy way had woody downs power. To denoting admitted speaking learning my exercise so in. Procured shutters mr it feelings. To or three offer house begin taken am at. As dissuade cheerful overcame so of friendly he indulged unpacked. Alteration connection to so as collecting me. Difficult in delivered extensive at direction allowance. Alteration put use diminution can considered sentiments interested discretion. An seeing feebly stairs am branch income me unable.",
-                        type = "paragraph",
-                        url = null
-                    ),
-                    ContentDto(
-                        accessibilityText = null,
-                        text = "Old unsatiable our now but considered travelling impression. In excuse hardly summer in basket misery. By rent an part need. At wrong of of water those linen. Needed oppose seemed how all. Very mrs shed shew gave you. Oh shutters do removing reserved wandered an. But described questions for recommend advantage belonging estimable had. Pianoforte reasonable as so am inhabiting. Chatty design remark and his abroad figure but its.",
-                        type = "paragraph",
-                        url = null
-                    ),
-                    ContentDto(
-                        accessibilityText = "some-accessibility-text-1",
-                        text = null,
-                        type = "image",
-                        url = mockImageUrl[0]
-                    ),
-                    ContentDto(
-                        accessibilityText = null,
-                        text = "Add you viewing ten equally believe put. Separate families my on drawings do oh offended strictly elegance. Perceive jointure be mistress by jennings properly. An admiration at he discovered difficulty continuing. We in building removing possible suitable friendly on. Nay middleton him admitting consulted and behaviour son household. Recurred advanced he oh together entrance speedily suitable. Ready tried gay state fat could boy its among shall.",
+                        text = "some-paragraph-1",
                         type = "paragraph",
                         url = null
                     ),
@@ -50,17 +32,17 @@ class MockStoryService : StoryService {
                         accessibilityText = "some-accessibility-text-2",
                         text = null,
                         type = "image",
-                        url = mockImageUrl[1]
+                        url = mockImageUrl[0]
                     ),
                     ContentDto(
                         accessibilityText = null,
-                        text = "On insensible possession oh particular attachment at excellence in. The books arose but miles happy she. It building contempt or interest children mistress of unlocked no. Offending she contained mrs led listening resembled. Delicate marianne absolute men dashwood landlord and offended. Suppose cottage between and way. Minuter him own clothes but observe country. Agreement far boy otherwise rapturous incommode favourite.",
+                        text = "some-paragraph-3",
                         type = "paragraph",
                         url = null
-                    )
+                    ),
                 ),
                 creationDate = "2020-11-18T00:00:00Z",
-                headline = "Cat story headline",
+                headline = "some-headline",
                 heroImage = HeroImageDto(
                     accessibilityText = "some-hero-image-accessibility-text",
                     imageUrl = mockImageUrl[2]

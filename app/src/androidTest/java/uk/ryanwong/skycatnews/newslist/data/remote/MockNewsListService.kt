@@ -21,6 +21,7 @@ class MockNewsListService : NewsListService {
         val randomTimestamp3 = generateRandomPastDate(3)
         val randomTimestamp4 = generateRandomPastDate(4)
         val randomTimestamp5 = generateRandomPastDate(5)
+        val randomTimestamp6 = generateRandomPastDate(6)
 
         return Result.success(
             NewsListDto(
@@ -126,10 +127,10 @@ class MockNewsListService : NewsListService {
                         weblinkUrl = "https://news.sky.com/weblinkUrl5"
                     ),
                     NewsItemDto(
-                        creationDate = randomTimestamp4,
+                        creationDate = randomTimestamp6,
                         headline = "some-story-headline-6",
                         id = 6,
-                        modifiedDate = randomTimestamp4,
+                        modifiedDate = randomTimestamp6,
                         teaserImage = TeaserImageDto(
                             links = LinksDto(
                                 url = UrlDto(
