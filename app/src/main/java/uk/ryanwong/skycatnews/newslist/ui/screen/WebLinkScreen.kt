@@ -81,7 +81,7 @@ fun WebLinkScreenLayout(
 ) {
     val webViewState = rememberWebViewState(url)
     val contentDescriptionWeblinkWebView =
-        stringResource(R.string.content_descriptoin_weblink_webview)
+        stringResource(R.string.content_description_weblink_webview)
 
     Column(
         modifier = modifier.fillMaxSize()

@@ -6,5 +6,6 @@
     <string name="error_loading_story_detail">Error loading story detail</string>
     <string name="error_loading_web_link">Error loading Web link</string>
     <string name="content_description_news_list">News list</string>
-    <string name="content_descriptoin_weblink_webview">Web link web view</string>
+    <string name="content_description_weblink_webview">Web link web view</string>
+    <string name="content_description_story_detail">Story detail</string>
 </resources>

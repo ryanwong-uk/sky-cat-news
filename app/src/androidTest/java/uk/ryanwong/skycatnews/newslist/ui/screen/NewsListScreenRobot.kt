@@ -5,6 +5,7 @@
 package uk.ryanwong.skycatnews.newslist.ui.screen
 
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.test.onChildren
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
@@ -97,37 +98,53 @@ internal class NewsListScreenRobot(
 
     fun userClicksOnStoryHeadline1() {
         with(composeTestRule) {
-            onNodeWithContentDescription(label = "News list").performScrollToIndex(0).run {
-                waitForIdle()
-                performClick()
-                waitForIdle()
-            }
+            onNodeWithContentDescription(label = "News list").performScrollToIndex(0)
+            waitForIdle()
+            onNodeWithText(text = "some-story-headline-1").performClick()
+            waitForIdle()
         }
     }
 
     fun storyScreenShowsCorrectLayout() {
         with(composeTestRule) {
+            waitUntil(timeoutMillis = 3000) {
+                onNodeWithContentDescription(label = "Story detail").onChildren()
+                    .fetchSemanticsNodes().size > 1
+            }
             onNodeWithText(text = "some-headline").assertIsDisplayed()
             onNodeWithContentDescription(label = "some-hero-image-accessibility-text").assertIsDisplayed()
+
+            onNodeWithContentDescription(label = "Story detail").performScrollToIndex(1)
+            waitForIdle()
             onNodeWithText(text = "some-paragraph-1").assertIsDisplayed()
+
+            onNodeWithContentDescription(label = "Story detail").performScrollToIndex(2)
+            waitForIdle()
             onNodeWithContentDescription(label = "some-accessibility-text-2").assertIsDisplayed()
+
+            onNodeWithContentDescription(label = "Story detail").performScrollToIndex(3)
+            waitForIdle()
             onNodeWithText(text = "some-paragraph-3").assertIsDisplayed()
         }
     }
 
     fun userClicksOnWeblinkHeadline3() {
         with(composeTestRule) {
-            onNodeWithContentDescription(label = "News list").performScrollToIndex(2).run {
-                waitForIdle()
-                performClick()
-                waitForIdle()
-            }
+            onNodeWithContentDescription(label = "News list").performScrollToIndex(2)
+            waitForIdle()
+            onNodeWithText(text = "some-weblink-headline-3").performClick()
+            waitForIdle()
         }
     }
 
     fun weblinkScreenShowsCorrectLayout() {
         with(composeTestRule) {
-            onNodeWithContentDescription(label = "Web link web view").assertIsDisplayed()
+            waitUntil(timeoutMillis = 3000) {
+                onAllNodesWithContentDescription(label = "Web link web view")
+                    .fetchSemanticsNodes().isNotEmpty()
+            }
+
+            onNodeWithContentDescription(label = "Web link web view").assertIsDisplayed() // currently redundant due to waitUntil check
         }
     }
 }
