@@ -22,15 +22,14 @@ This is a prototype of the app. As the backend isn't developed yet, this prototy
 
 ## TL;DR - Status
 
-> Further UI tests and minor changes are in progress.
-
 * Fully functional. Use `fakeDebug` or `fakeRelease` to have the App retrieve mock data locally.
 * 87 Unit tests for view models, repositories, models, and Ktor API services have been written.
-* 18 Unit tests for RoomDB DAOs, 2 Composable UI tests have been written.
+* 18 Unit tests for RoomDB DAOs have been written.
+* 2 Composable UI unit tests have been written.
+* 3 Espresso UI tests covering basic layout check for news list, story detail and weblink screens have been written.
 * News list screen: on the `FakeDebug` and `FakeRelease` builds, pull-to-refresh can trigger a simulated random server response.
 * Story detail screen: on the `FakeDebug` and `FakeRelease` builds, it shows the same layout with random images.
 * Basic dark mode supported.
-
 
 ## High-level architecture
 
