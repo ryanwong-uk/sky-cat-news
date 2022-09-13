@@ -31,13 +31,10 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import uk.ryanwong.skycatnews.R
 import uk.ryanwong.skycatnews.app.ui.component.NoDataScreen
-import uk.ryanwong.skycatnews.app.ui.component.SkyCatNewsAppBar
 import uk.ryanwong.skycatnews.app.ui.theme.SkyCatNewsTheme
 import uk.ryanwong.skycatnews.newslist.domain.model.NewsItem
 import uk.ryanwong.skycatnews.newslist.ui.screen.component.LargeStoryHeadline
@@ -51,7 +48,6 @@ import uk.ryanwong.skycatnews.newslist.ui.viewmodel.NewsListViewModel
 @Composable
 fun NewsListScreen(
     newsListViewModel: NewsListViewModel = hiltViewModel(),
-    navController: NavController,
     onStoryItemClicked: (id: Int) -> Unit,
     onWebLinkItemClicked: (id: Int) -> Unit,
 ) {
@@ -65,7 +61,6 @@ fun NewsListScreen(
             onRefresh = { newsListViewModel.refreshNewsList() },
             onStoryItemClicked = onStoryItemClicked,
             onWebLinkItemClicked = onWebLinkItemClicked,
-            navController = navController
         )
 
         SnackbarHost(
@@ -96,7 +91,6 @@ fun NewsListScreenLayout(
     onRefresh: () -> Unit,
     onStoryItemClicked: (id: Int) -> Unit,
     onWebLinkItemClicked: (id: Int) -> Unit,
-    navController: NavController,
 ) {
     val padding16 = dimensionResource(id = R.dimen.padding_16)
     val contentDescriptionNewsList = stringResource(R.string.content_description_news_list)
@@ -106,8 +100,6 @@ fun NewsListScreenLayout(
             .fillMaxSize()
             .background(color = MaterialTheme.colors.background),
     ) {
-        SkyCatNewsAppBar(navController = navController)
-
         SwipeRefresh(
             state = rememberSwipeRefreshState(isRefreshing = isLoading),
             onRefresh = onRefresh,
@@ -185,7 +177,6 @@ private fun NewsListScreenPreviewLight(
             onRefresh = { },
             onStoryItemClicked = {},
             onWebLinkItemClicked = {},
-            navController = rememberNavController(),
         )
     }
 }
@@ -208,7 +199,6 @@ private fun NewsListScreenPreviewDark(
             onRefresh = { },
             onStoryItemClicked = {},
             onWebLinkItemClicked = {},
-            navController = rememberNavController(),
         )
     }
 }
@@ -228,7 +218,6 @@ private fun NewsListScreenNoDataPreviewLight() {
             onRefresh = { },
             onStoryItemClicked = {},
             onWebLinkItemClicked = {},
-            navController = rememberNavController(),
         )
     }
 }
@@ -248,7 +237,6 @@ private fun NewsListScreenNoDataPreviewDark() {
             onRefresh = { },
             onStoryItemClicked = {},
             onWebLinkItemClicked = {},
-            navController = rememberNavController(),
         )
     }
 }

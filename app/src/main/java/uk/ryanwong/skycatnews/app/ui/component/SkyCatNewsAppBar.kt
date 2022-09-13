@@ -23,6 +23,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -40,7 +42,11 @@ fun SkyCatNewsAppBar(
     navController: NavController,
     customTitle: String? = null,
 ) {
-    val canNavigateUp = navController.previousBackStackEntry != null
+    // Reference: https://stackoverflow.com/questions/65079798/scaffold-with-topappbar-integration-with-navigation
+    val (canPop, setCanPop) = remember { mutableStateOf(false) }
+    navController.addOnDestinationChangedListener { controller, _, _ ->
+        setCanPop(controller.previousBackStackEntry != null)
+    }
 
     TopAppBar(
         backgroundColor = MaterialTheme.colors.surface,
@@ -48,8 +54,12 @@ fun SkyCatNewsAppBar(
     ) {
 
         Box(Modifier.height(dimensionResource(id = R.dimen.app_bar_height))) {
+            // TODO: Material-3 will provide a new way to achieve this - pending rewrite.
+            // Doing in this way instead of using the default navigationIcon slot,
+            // because we cannot properly center align our custom image title in that case.
+
             // Navigation Icon
-            if (canNavigateUp) {
+            if (canPop) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     CompositionLocalProvider(
                         LocalContentAlpha provides ContentAlpha.high,

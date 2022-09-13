@@ -42,15 +42,12 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import uk.ryanwong.skycatnews.R
 import uk.ryanwong.skycatnews.app.ui.component.NoDataScreen
-import uk.ryanwong.skycatnews.app.ui.component.SkyCatNewsAppBar
 import uk.ryanwong.skycatnews.app.ui.theme.BlackGradientEnd
 import uk.ryanwong.skycatnews.app.ui.theme.BlackGradientStart
 import uk.ryanwong.skycatnews.app.ui.theme.CustomTextStyle
@@ -63,7 +60,6 @@ import uk.ryanwong.skycatnews.storydetail.ui.viewmodel.StoryDetailViewModel
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun StoryDetailScreen(
-    navController: NavController,
     storyDetailViewModel: StoryDetailViewModel = hiltViewModel(),
 ) {
     val uiState by storyDetailViewModel.uiState.collectAsStateWithLifecycle()
@@ -73,8 +69,7 @@ fun StoryDetailScreen(
         StoryDetailScreenLayout(
             story = uiState.story,
             isLoading = uiState.isLoading,
-            onRefresh = { storyDetailViewModel.refreshStory() },
-            navController = navController
+            onRefresh = { storyDetailViewModel.refreshStory() }
         )
 
         SnackbarHost(
@@ -104,7 +99,6 @@ private fun StoryDetailScreenLayout(
     isLoading: Boolean,
     story: Story?,
     onRefresh: () -> Unit,
-    navController: NavController,
 ) {
     val padding16 = dimensionResource(id = R.dimen.padding_16)
     val shouldAllowSwipeRefresh = (story == null && !isLoading)
@@ -115,8 +109,6 @@ private fun StoryDetailScreenLayout(
             .fillMaxSize()
             .background(color = MaterialTheme.colors.background),
     ) {
-        SkyCatNewsAppBar(navController = navController)
-
         SwipeRefresh(
             state = rememberSwipeRefreshState(isRefreshing = isLoading),
             onRefresh = onRefresh,
@@ -263,7 +255,6 @@ private fun StoryDetailScreenLayoutPreviewLightSmallScreen(
             isLoading = false,
             story = story,
             onRefresh = {},
-            navController = rememberNavController(),
         )
     }
 }
@@ -284,7 +275,6 @@ private fun StoryDetailScreenLayoutPreviewLight(
             isLoading = false,
             story = story,
             onRefresh = {},
-            navController = rememberNavController(),
         )
     }
 }
@@ -305,7 +295,6 @@ private fun StoryDetailScreenLayoutPreviewDark(
             isLoading = false,
             story = story,
             onRefresh = {},
-            navController = rememberNavController(),
         )
     }
 }
@@ -323,7 +312,6 @@ private fun StoryDetailScreenLayoutNoDataPreviewLight() {
             isLoading = false,
             story = null,
             onRefresh = {},
-            navController = rememberNavController(),
         )
     }
 }
@@ -341,7 +329,6 @@ private fun StoryDetailScreenLayoutNoDataPreviewDark() {
             isLoading = false,
             story = null,
             onRefresh = {},
-            navController = rememberNavController(),
         )
     }
 }

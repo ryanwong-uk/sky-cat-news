@@ -5,9 +5,7 @@
 package uk.ryanwong.skycatnews.newslist.ui.screen
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.SnackbarHost
 import androidx.compose.material.SnackbarHostState
@@ -23,18 +21,15 @@ import androidx.compose.ui.semantics.semantics
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
 import com.google.accompanist.web.WebView
 import com.google.accompanist.web.rememberWebViewState
 import uk.ryanwong.skycatnews.R
-import uk.ryanwong.skycatnews.app.ui.component.SkyCatNewsAppBar
 import uk.ryanwong.skycatnews.newslist.ui.viewmodel.WebLinkViewModel
 
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun WebLinkScreen(
     webLinkViewModel: WebLinkViewModel = hiltViewModel(),
-    navController: NavController,
 ) {
     val uiState by webLinkViewModel.uiState.collectAsStateWithLifecycle()
     val snackbarHostState = remember { SnackbarHostState() }
@@ -47,7 +42,6 @@ fun WebLinkScreen(
             uiState.url?.let { webLinkUrl ->
                 WebLinkScreenLayout(
                     url = webLinkUrl,
-                    navController = navController
                 )
             }
         }
@@ -77,24 +71,16 @@ fun WebLinkScreen(
 fun WebLinkScreenLayout(
     modifier: Modifier = Modifier,
     url: String,
-    navController: NavController,
 ) {
     val webViewState = rememberWebViewState(url)
     val contentDescriptionWeblinkWebView =
         stringResource(R.string.content_description_weblink_webview)
 
-    Column(
-        modifier = modifier.fillMaxSize()
-    ) {
-        SkyCatNewsAppBar(navController = navController)
-
-        WebView(
-            state = webViewState,
-            onCreated = { it.settings.javaScriptEnabled = true },
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1.0f)
-                .semantics { contentDescription = contentDescriptionWeblinkWebView },
-        )
-    }
+    WebView(
+        state = webViewState,
+        onCreated = { it.settings.javaScriptEnabled = true },
+        modifier = modifier
+            .fillMaxSize()
+            .semantics { contentDescription = contentDescriptionWeblinkWebView },
+    )
 }
