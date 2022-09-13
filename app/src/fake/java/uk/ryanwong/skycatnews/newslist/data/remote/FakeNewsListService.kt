@@ -21,6 +21,7 @@ class FakeNewsListService : NewsListService {
         val randomTimestamp3 = generateRandomPastDate()
         val randomTimestamp4 = generateRandomPastDate()
         val randomTimestamp5 = generateRandomPastDate()
+        val randomTimestamp6 = generateRandomPastDate()
 
         // simulate some network delay
         delay(1000)
@@ -145,10 +146,10 @@ class FakeNewsListService : NewsListService {
                         weblinkUrl = "https://news.sky.com/story/transport-strikes-more-travel-misery-as-london-underground-and-bus-staff-begin-latest-walkout-12676263"
                     ),
                     NewsItemDto(
-                        creationDate = randomTimestamp4,
+                        creationDate = randomTimestamp6,
                         headline = "Story headline",
                         id = 6,
-                        modifiedDate = randomTimestamp4,
+                        modifiedDate = randomTimestamp6,
                         teaserImage = TeaserImageDto(
                             links = LinksDto(
                                 url = UrlDto(
