@@ -5,6 +5,7 @@
 package uk.ryanwong.skycatnews.weblink.ui.screen
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.SnackbarHost
@@ -77,11 +78,13 @@ fun WebLinkScreenLayout(
     val contentDescriptionWeblinkWebView =
         stringResource(R.string.content_description_weblink_webview)
 
-    WebView(
-        state = webViewState,
-        onCreated = { it.settings.javaScriptEnabled = true },
-        modifier = modifier
-            .fillMaxSize()
-            .semantics { contentDescription = contentDescriptionWeblinkWebView },
-    )
+    Column(modifier = modifier.fillMaxSize()) {
+        WebView(
+            state = webViewState,
+            onCreated = { it.settings.javaScriptEnabled = true },
+            modifier = Modifier
+                .fillMaxSize()
+                .semantics { contentDescription = contentDescriptionWeblinkWebView },
+        )
+    }
 }
