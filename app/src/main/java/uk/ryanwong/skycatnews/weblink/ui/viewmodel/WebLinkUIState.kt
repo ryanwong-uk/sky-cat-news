@@ -2,7 +2,7 @@
  * Copyright (c) 2022. Ryan Wong (hello@ryanwong.co.uk)
  */
 
-package uk.ryanwong.skycatnews.newslist.ui.viewmodel
+package uk.ryanwong.skycatnews.weblink.ui.viewmodel
 
 import uk.ryanwong.skycatnews.app.util.ErrorMessage
 

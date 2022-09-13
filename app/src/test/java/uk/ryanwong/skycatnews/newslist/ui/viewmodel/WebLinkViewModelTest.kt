@@ -18,6 +18,8 @@ import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import uk.ryanwong.skycatnews.R
 import uk.ryanwong.skycatnews.newslist.data.repository.MockNewsListRepository
+import uk.ryanwong.skycatnews.weblink.ui.viewmodel.WebLinkUIState
+import uk.ryanwong.skycatnews.weblink.ui.viewmodel.WebLinkViewModel
 
 @OptIn(ExperimentalCoroutinesApi::class)
 internal class WebLinkViewModelTest : FreeSpec() {

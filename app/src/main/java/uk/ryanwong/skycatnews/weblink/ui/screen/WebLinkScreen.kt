@@ -2,7 +2,7 @@
  * Copyright (c) 2022. Ryan Wong (hello@ryanwong.co.uk)
  */
 
-package uk.ryanwong.skycatnews.newslist.ui.screen
+package uk.ryanwong.skycatnews.weblink.ui.screen
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,7 +24,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.web.WebView
 import com.google.accompanist.web.rememberWebViewState
 import uk.ryanwong.skycatnews.R
-import uk.ryanwong.skycatnews.newslist.ui.viewmodel.WebLinkViewModel
+import uk.ryanwong.skycatnews.weblink.ui.viewmodel.WebLinkViewModel
 
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable

@@ -22,8 +22,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import uk.ryanwong.skycatnews.app.ui.component.SkyCatNewsAppBar
 import uk.ryanwong.skycatnews.app.ui.theme.SkyCatNewsTheme
 import uk.ryanwong.skycatnews.newslist.ui.screen.NewsListScreen
-import uk.ryanwong.skycatnews.newslist.ui.screen.WebLinkScreen
 import uk.ryanwong.skycatnews.storydetail.ui.screen.StoryDetailScreen
+import uk.ryanwong.skycatnews.weblink.ui.screen.WebLinkScreen
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
