@@ -29,12 +29,13 @@ import uk.ryanwong.skycatnews.newslist.ui.viewmodel.WebLinkViewModel
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun WebLinkScreen(
+    modifier: Modifier = Modifier,
     webLinkViewModel: WebLinkViewModel = hiltViewModel(),
 ) {
     val uiState by webLinkViewModel.uiState.collectAsStateWithLifecycle()
     val snackbarHostState = remember { SnackbarHostState() }
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = modifier.fillMaxSize()) {
 
         if (uiState.isLoading) {
             CircularProgressIndicator()

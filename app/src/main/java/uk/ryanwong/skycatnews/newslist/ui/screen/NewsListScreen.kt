@@ -47,6 +47,7 @@ import uk.ryanwong.skycatnews.newslist.ui.viewmodel.NewsListViewModel
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun NewsListScreen(
+    modifier: Modifier = Modifier,
     newsListViewModel: NewsListViewModel = hiltViewModel(),
     onStoryItemClicked: (id: Int) -> Unit,
     onWebLinkItemClicked: (id: Int) -> Unit,
@@ -54,7 +55,7 @@ fun NewsListScreen(
     val uiState by newsListViewModel.uiState.collectAsStateWithLifecycle()
     val snackbarHostState = remember { SnackbarHostState() }
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = modifier.fillMaxSize()) {
         NewsListScreenLayout(
             newsList = uiState.newsList,
             isLoading = uiState.isLoading,

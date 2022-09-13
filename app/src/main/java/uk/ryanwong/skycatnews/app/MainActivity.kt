@@ -7,9 +7,11 @@ package uk.ryanwong.skycatnews.app
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -34,9 +36,12 @@ class MainActivity : ComponentActivity() {
             SkyCatNewsTheme {
                 Scaffold(
                     scaffoldState = scaffoldState,
-                    topBar = { SkyCatNewsAppBar(navController = navController) }
-                ) {
-                    SkyCatNewsApp(navController = navController)
+                    topBar = { SkyCatNewsAppBar(navController = navController) },
+                ) { padding ->
+                    SkyCatNewsApp(
+                        navController = navController,
+                        modifier = Modifier.padding(padding)
+                    )
                 }
             }
         }
@@ -44,11 +49,15 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun SkyCatNewsApp(navController: NavHostController) {
+private fun SkyCatNewsApp(
+    modifier: Modifier = Modifier,
+    navController: NavHostController,
+) {
 
     NavHost(navController = navController, startDestination = "newslist") {
         composable(route = "newslist") {
             NewsListScreen(
+                modifier = modifier,
                 onStoryItemClicked = { listId -> navController.navigate("newslist/story/$listId") },
                 onWebLinkItemClicked = { listId -> navController.navigate("newslist/weblink/$listId") },
             )
@@ -61,7 +70,7 @@ private fun SkyCatNewsApp(navController: NavHostController) {
                 }
             )
         ) {
-            StoryDetailScreen()
+            StoryDetailScreen(modifier = modifier)
         }
 
         composable(
@@ -72,7 +81,7 @@ private fun SkyCatNewsApp(navController: NavHostController) {
                 }
             )
         ) {
-            WebLinkScreen()
+            WebLinkScreen(modifier = modifier)
         }
     }
 }

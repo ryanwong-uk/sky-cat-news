@@ -60,12 +60,13 @@ import uk.ryanwong.skycatnews.storydetail.ui.viewmodel.StoryDetailViewModel
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun StoryDetailScreen(
+    modifier: Modifier = Modifier,
     storyDetailViewModel: StoryDetailViewModel = hiltViewModel(),
 ) {
     val uiState by storyDetailViewModel.uiState.collectAsStateWithLifecycle()
     val snackbarHostState = remember { SnackbarHostState() }
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = modifier.fillMaxSize()) {
         StoryDetailScreenLayout(
             story = uiState.story,
             isLoading = uiState.isLoading,
