@@ -22,6 +22,11 @@ This is a prototype of the app. As the backend isn't developed yet, this prototy
 
 ## TL;DR - Status
 
+```
+This project has been reviewed and no longer in active development. 
+I would like to thank everyone at Sky for the positive feedback.
+```
+
 * Fully functional. Use `fakeDebug` or `fakeRelease` to have the App retrieve mock data locally.
 * 87 Unit tests for view models, repositories, models, and Ktor API services have been written.
 * 18 Unit tests for RoomDB DAOs have been written.
@@ -45,19 +50,20 @@ This is a prototype of the app. As the backend isn't developed yet, this prototy
 * [`Kotlin Flow`](https://kotlinlang.org/docs/flow.html)
 * [`Jetpack Room`](https://developer.android.com/jetpack/androidx/releases/room) - Database
 * [`Accompanist - WebView wrapper for Jetpack Compose`](https://github.com/google/accompanist/tree/main/web)
-* [`Acoompanist - Swipe Refresh layout for Jetpack Compose`](https://github.com/google/accompanist/tree/main/swiperefresh)
+* [`Accompanist - Swipe Refresh layout for Jetpack Compose`](https://github.com/google/accompanist/tree/main/swiperefresh)
 * [`Coil`](https://coil-kt.github.io/coil/) - Image loading
 * [`Ktor`](https://ktor.io/) - HTTP Client
 * [`Kotlin Serialization`](https://kotlinlang.org/docs/serialization.html) - For JSON parsing
 * [`Timber`](https://github.com/JakeWharton/timber) - Logging
 * [`LeakCanary`](https://github.com/square/leakcanary) - Memory leak detection
-* [`JUnit 4`](https://github.com/junit-team/junit4) - Instrumented tests
-* [`KOTest`](https://kotest.io/) - Test framework and assertion library
-* [`MockK`](https://mockk.io/) - Mocking library
+* [`JUnit 4`](https://github.com/junit-team/junit4) - tests
+* [`Espresso`](https://developer.android.com/training/testing/espresso) - Instrumented tests
+* [`KOTest`](https://kotest.io/) - Test framework and assertion
+* [`MockK`](https://mockk.io/) - Mocking
 * [`Bitrise`](https://app.bitrise.io/) - CI
 * [`Kover`](https://github.com/Kotlin/kotlinx-kover) - code coverage
 * [`codecov`](https://codecov.io/) - code coverage
-* [`Ktlint Gradle`](https://github.com/jlleitschuh/ktlint-gradle) - ktlint plugin to check and apply code formatting
+* [`Ktlint Gradle`](https://github.com/jlleitschuh/ktlint-gradle) - lint and automatic formatting
 
 ## Requirements
 
