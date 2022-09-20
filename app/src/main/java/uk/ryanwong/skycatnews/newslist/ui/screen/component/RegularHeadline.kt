@@ -44,7 +44,7 @@ fun RegularStoryHeadline(
         imageAccessibilityText = story.teaserImageAccessibilityText,
         headline = story.headline,
         teaserText = story.teaserText,
-        date = story.getNiceDate(),
+        date = story.niceDate,
         onItemClicked = onItemClicked,
         modifier = modifier
     )
@@ -59,7 +59,7 @@ fun RegularWebLinkHeadline(
     RegularHeadline(
         headline = webLink.headline,
         teaserText = null,
-        date = webLink.getNiceDate(),
+        date = webLink.niceDate,
         imageUrl = webLink.teaserImageUrl,
         imageAccessibilityText = webLink.teaserImageAccessibilityText,
         onItemClicked = onItemClicked,
@@ -170,6 +170,7 @@ fun RegularStoryHeadlinePreview() {
                 headline = "Story Headline 1 but it is getting really very long",
                 teaserText = "Breakfast agreeable incommode departure it an. By ignorant at on wondered relation. Enough at tastes really so cousin am of. Extensive therefore supported by extremity of contented. Is pursuit compact demesne invited elderly be. View him she roof tell her case has sigh. Moreover is possible he admitted sociable concerns. By in cold no less been sent hard hill.",
                 modifiedDate = "2022-09-01T00:00:00Z",
+                niceDate = "2 days ago",
                 teaserImageUrl = "https://www.google.com/",
                 teaserImageAccessibilityText = "some-accessibility-text",
             ),
@@ -190,6 +191,7 @@ fun RegularWebLinkHeadlinePreview() {
                 newsId = 1,
                 headline = "Story WebLink but it is getting really very long",
                 modifiedDate = "2022-09-06T00:00:00Z",
+                niceDate = "2 days ago",
                 teaserImageUrl = "https://www.google.com/",
                 teaserImageAccessibilityText = "some-accessibility-text",
                 url = "https://some.url/"

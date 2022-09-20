@@ -4,12 +4,10 @@
 
 package uk.ryanwong.skycatnews.newslist.domain.model
 
-import android.text.format.DateUtils
 import io.ktor.util.date.getTimeMillis
 import timber.log.Timber
+import uk.ryanwong.skycatnews.app.util.nicedateformatter.NiceDateFormatter
 import uk.ryanwong.skycatnews.newslist.data.local.entity.NewsItemEntity
-import java.time.Instant
-import java.time.format.DateTimeFormatter
 
 sealed class NewsItem {
     data class Story(
@@ -17,13 +15,10 @@ sealed class NewsItem {
         val headline: String,
         val teaserText: String,
         val modifiedDate: String,
+        val niceDate: String,
         val teaserImageUrl: String,
         val teaserImageAccessibilityText: String?,
-    ) : NewsItem() {
-        fun getNiceDate(currentTimeMills: Long = getTimeMillis()): String {
-            return getNiceDate(dateString = modifiedDate, currentTimeMills = currentTimeMills)
-        }
-    }
+    ) : NewsItem()
 
     data class WebLink(
         val newsId: Int,
@@ -32,31 +27,20 @@ sealed class NewsItem {
         // val teaserText: String,
         val url: String,
         val modifiedDate: String,
+        val niceDate: String,
         val teaserImageUrl: String,
         val teaserImageAccessibilityText: String?,
-    ) : NewsItem() {
-        fun getNiceDate(currentTimeMills: Long = getTimeMillis()): String {
-            return getNiceDate(dateString = modifiedDate, currentTimeMills = currentTimeMills)
-        }
-    }
+    ) : NewsItem()
 
     // TODO: Advert is not implemented as we do not need it in this prototype.
 
-    protected fun getNiceDate(
-        dateString: String,
-        currentTimeMills: Long,
-    ): String {
-        val instant = Instant.from(DateTimeFormatter.ISO_INSTANT.parse(dateString))
-        return DateUtils.getRelativeTimeSpanString(
-            instant.toEpochMilli(),
-            currentTimeMills,
-            DateUtils.SECOND_IN_MILLIS
-        ).toString()
-    }
-
     companion object {
 
-        fun fromEntity(newsItemEntities: List<NewsItemEntity>): List<NewsItem> {
+        fun fromEntity(
+            newsItemEntities: List<NewsItemEntity>,
+            niceDateFormatter: NiceDateFormatter,
+            currentTimeMills: Long = getTimeMillis(),
+        ): List<NewsItem> {
             return newsItemEntities.mapNotNull { newsItemEntity ->
 
                 val newsItemType = NewsType.parse(newsItemEntity.type ?: "")
@@ -67,6 +51,10 @@ sealed class NewsItem {
                             headline = newsItemEntity.headline ?: "",
                             teaserText = newsItemEntity.teaserText ?: "",
                             modifiedDate = newsItemEntity.modifiedDate,
+                            niceDate = niceDateFormatter.getNiceDate(
+                                dateString = newsItemEntity.modifiedDate,
+                                currentTimeMills = currentTimeMills
+                            ),
                             teaserImageUrl = newsItemEntity.teaserImageHref ?: "",
                             teaserImageAccessibilityText = newsItemEntity.teaserImageAccessibilityText,
                         )
@@ -79,6 +67,10 @@ sealed class NewsItem {
                                 newsId = newsItemEntity.newsId,
                                 headline = newsItemEntity.headline ?: "",
                                 modifiedDate = newsItemEntity.modifiedDate,
+                                niceDate = niceDateFormatter.getNiceDate(
+                                    dateString = newsItemEntity.modifiedDate,
+                                    currentTimeMills = currentTimeMills
+                                ),
                                 teaserImageUrl = newsItemEntity.teaserImageHref ?: "",
                                 teaserImageAccessibilityText = newsItemEntity.teaserImageAccessibilityText,
                                 url = weblink

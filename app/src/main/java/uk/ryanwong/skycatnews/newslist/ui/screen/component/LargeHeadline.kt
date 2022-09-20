@@ -40,7 +40,7 @@ fun LargeStoryHeadline(
         imageAccessibilityText = story.teaserImageAccessibilityText,
         headline = story.headline,
         teaserText = story.teaserText,
-        date = story.getNiceDate(),
+        date = story.niceDate,
         onItemClicked = onItemClicked,
         modifier = modifier
     )
@@ -57,7 +57,7 @@ fun LargeWebLinkHeadline(
         imageAccessibilityText = webLink.teaserImageAccessibilityText,
         headline = webLink.headline,
         teaserText = null,
-        date = webLink.getNiceDate(),
+        date = webLink.niceDate,
         onItemClicked = onItemClicked,
         modifier = modifier
     )
@@ -164,6 +164,7 @@ fun LargeStoryHeadlinePreview() {
                 headline = "Story Headline 1",
                 teaserText = "Breakfast agreeable incommode departure it an. By ignorant at on wondered relation. Enough at tastes really so cousin am of. Extensive therefore supported by extremity of contented. Is pursuit compact demesne invited elderly be. View him she roof tell her case has sigh. Moreover is possible he admitted sociable concerns. By in cold no less been sent hard hill.",
                 modifiedDate = "2022-09-06T00:00:00Z",
+                niceDate = "2 days ago",
                 teaserImageUrl = "https://ryanwong.co.uk/sample-resources/skycatnews/cat1_hero.jpg",
                 teaserImageAccessibilityText = "some-accessibility-text",
             ),
@@ -186,6 +187,7 @@ fun LargeWebLinkHeadlinePreview() {
                 headline = "Story Headline 1",
                 url = "https://some.url/",
                 modifiedDate = "2022-09-06T00:00:00Z",
+                niceDate = "2 days ago",
                 teaserImageUrl = "https://ryanwong.co.uk/sample-resources/skycatnews/cat1_hero.jpg",
                 teaserImageAccessibilityText = "some-accessibility-text",
             ),

@@ -11,6 +11,7 @@ import kotlinx.coroutines.withContext
 import uk.ryanwong.skycatnews.app.di.DispatcherModule
 import uk.ryanwong.skycatnews.app.exception.RemoteSourceFailedWithNoCacheException
 import uk.ryanwong.skycatnews.app.util.except
+import uk.ryanwong.skycatnews.app.util.nicedateformatter.NiceDateFormatter
 import uk.ryanwong.skycatnews.newslist.data.local.NewsListDao
 import uk.ryanwong.skycatnews.newslist.data.local.entity.NewsItemEntity
 import uk.ryanwong.skycatnews.newslist.data.local.entity.NewsListEntity
@@ -24,6 +25,7 @@ import java.net.UnknownHostException
 class NewsListRepositoryImpl(
     private val newsListService: NewsListService,
     private val newsListDao: NewsListDao,
+    private val niceDateFormatter: NiceDateFormatter,
     @DispatcherModule.IoDispatcher private val dispatcher: CoroutineDispatcher,
 ) : NewsListRepository {
 
@@ -71,7 +73,11 @@ class NewsListRepositoryImpl(
                 val newsItemEntity = newsListDao.getNewsItem(listId = listId, newsId = newsId)
 
                 newsItemEntity?.let {
-                    val newsItemList = NewsItem.fromEntity(listOf(newsItemEntity))
+                    val newsItemList =
+                        NewsItem.fromEntity(
+                            newsItemEntities = listOf(newsItemEntity),
+                            niceDateFormatter = niceDateFormatter,
+                        )
                     newsItemList.getOrNull(0)
                 }
             }
@@ -82,7 +88,11 @@ class NewsListRepositoryImpl(
         val newsItemEntities = newsListDao.getNewsList(listId = listId)
         val title = newsListDao.getNewsListTitle(listId = listId)
 
-        return NewsList.fromEntity(title = title, newsItemEntities = newsItemEntities)
+        return NewsList.fromEntity(
+            title = title,
+            newsItemEntities = newsItemEntities,
+            niceDateFormatter = niceDateFormatter,
+        )
     }
 
     private suspend fun updateLocalDatabase(newsListDto: NewsListDto) {
