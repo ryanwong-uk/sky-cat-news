@@ -12,10 +12,10 @@ import uk.ryanwong.skycatnews.newslist.data.local.entity.NewsItemEntity
 
 internal class NewsItemTest : FreeSpec() {
 
-    private lateinit var niceDateFormatter: MockNiceDateFormatter
+    private lateinit var mockNiceDateFormatter: MockNiceDateFormatter
 
     private fun setupNiceDateFormatter() {
-        niceDateFormatter = MockNiceDateFormatter()
+        mockNiceDateFormatter = MockNiceDateFormatter()
     }
 
     init {
@@ -23,12 +23,13 @@ internal class NewsItemTest : FreeSpec() {
             "Should return an empty list if newsItemEntities is empty" {
                 // Given
                 setupNiceDateFormatter()
+                mockNiceDateFormatter.mockGetNiceDateResponse = "2 days ago"
                 val newsItemEntities = listOf<NewsItemEntity>()
 
                 // When
                 val newsItem = NewsItem.fromEntity(
                     newsItemEntities = newsItemEntities,
-                    niceDateFormatter = niceDateFormatter
+                    niceDateFormatter = mockNiceDateFormatter
                 )
 
                 // then
@@ -38,6 +39,7 @@ internal class NewsItemTest : FreeSpec() {
             "Should convert and keep only known types from multiple newsItemEntities" {
                 // Given
                 setupNiceDateFormatter()
+                mockNiceDateFormatter.mockGetNiceDateResponse = "2 days ago"
                 val newsItemEntities = listOf(
                     NewsItemTestData.mockNewsItemEntity1,
                     NewsItemTestData.mockNewsItemEntity2,
@@ -47,7 +49,7 @@ internal class NewsItemTest : FreeSpec() {
                 // When
                 val newsItem = NewsItem.fromEntity(
                     newsItemEntities = newsItemEntities,
-                    niceDateFormatter = niceDateFormatter
+                    niceDateFormatter = mockNiceDateFormatter
                 )
 
                 // then
@@ -60,13 +62,14 @@ internal class NewsItemTest : FreeSpec() {
             "Should fill headline with empty string if it comes as null" {
                 // Given
                 setupNiceDateFormatter()
+                mockNiceDateFormatter.mockGetNiceDateResponse = "2 days ago"
                 val newsItemEntities =
                     listOf(NewsItemTestData.mockNewsItemEntity1.copy(headline = null))
 
                 // When
                 val newsItem = NewsItem.fromEntity(
                     newsItemEntities = newsItemEntities,
-                    niceDateFormatter = niceDateFormatter
+                    niceDateFormatter = mockNiceDateFormatter
                 )
 
                 // then
@@ -86,13 +89,14 @@ internal class NewsItemTest : FreeSpec() {
             "Should fill teaserText with empty string if it comes as null" {
                 // Given
                 setupNiceDateFormatter()
+                mockNiceDateFormatter.mockGetNiceDateResponse = "2 days ago"
                 val newsItemEntities =
                     listOf(NewsItemTestData.mockNewsItemEntity1.copy(teaserText = null))
 
                 // When
                 val newsItem = NewsItem.fromEntity(
                     newsItemEntities = newsItemEntities,
-                    niceDateFormatter = niceDateFormatter
+                    niceDateFormatter = mockNiceDateFormatter
                 )
 
                 // then
@@ -112,13 +116,14 @@ internal class NewsItemTest : FreeSpec() {
             "Should fill teaserImageUrl with empty string if teaserImageHref comes as null" {
                 // Given
                 setupNiceDateFormatter()
+                mockNiceDateFormatter.mockGetNiceDateResponse = "2 days ago"
                 val newsItemEntities =
                     listOf(NewsItemTestData.mockNewsItemEntity1.copy(teaserImageHref = null))
 
                 // When
                 val newsItem = NewsItem.fromEntity(
                     newsItemEntities = newsItemEntities,
-                    niceDateFormatter = niceDateFormatter
+                    niceDateFormatter = mockNiceDateFormatter
                 )
 
                 // then
@@ -138,13 +143,14 @@ internal class NewsItemTest : FreeSpec() {
             "Should keep url as null if it comes as null" {
                 // Given
                 setupNiceDateFormatter()
+                mockNiceDateFormatter.mockGetNiceDateResponse = "2 days ago"
                 val newsItemEntities =
                     listOf(NewsItemTestData.mockNewsItemEntity1.copy(advertUrl = null))
 
                 // When
                 val newsItem = NewsItem.fromEntity(
                     newsItemEntities = newsItemEntities,
-                    niceDateFormatter = niceDateFormatter
+                    niceDateFormatter = mockNiceDateFormatter
                 )
 
                 // then

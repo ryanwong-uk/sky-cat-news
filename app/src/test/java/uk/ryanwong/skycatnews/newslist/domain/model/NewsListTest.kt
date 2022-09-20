@@ -11,10 +11,10 @@ import uk.ryanwong.skycatnews.newslist.data.local.entity.NewsItemEntity
 
 internal class NewsListTest : FreeSpec() {
 
-    lateinit var niceDateFormatter: MockNiceDateFormatter
+    lateinit var mockNiceDateFormatter: MockNiceDateFormatter
 
     private fun setupNiceDateFormatter() {
-        niceDateFormatter = MockNiceDateFormatter()
+        mockNiceDateFormatter = MockNiceDateFormatter()
     }
 
     init {
@@ -49,6 +49,7 @@ internal class NewsListTest : FreeSpec() {
             "Should fill title with empty string if it comes as null" {
                 // Given
                 setupNiceDateFormatter()
+                mockNiceDateFormatter.mockGetNiceDateResponse = "2 days ago"
                 val title = null
                 val newsItemEntities = emptyList<NewsItemEntity>()
 
@@ -56,7 +57,7 @@ internal class NewsListTest : FreeSpec() {
                 val newsList = NewsList.fromEntity(
                     title = title,
                     newsItemEntities = newsItemEntities,
-                    niceDateFormatter = niceDateFormatter
+                    niceDateFormatter = mockNiceDateFormatter
                 )
 
                 // Then
@@ -66,6 +67,7 @@ internal class NewsListTest : FreeSpec() {
             "Should return NewsList correctly if newsItemEntities contains one item" {
                 // Given
                 setupNiceDateFormatter()
+                mockNiceDateFormatter.mockGetNiceDateResponse = "2 days ago"
                 val title = "some-title"
                 val newsItemEntities = listOf(NewsListTestData.mockNewsItemEntityStory)
 
@@ -73,7 +75,7 @@ internal class NewsListTest : FreeSpec() {
                 val newsList = NewsList.fromEntity(
                     title = title,
                     newsItemEntities = newsItemEntities,
-                    niceDateFormatter = niceDateFormatter
+                    niceDateFormatter = mockNiceDateFormatter
                 )
 
                 // Then
@@ -86,6 +88,7 @@ internal class NewsListTest : FreeSpec() {
             "Should convert and keep only known types from multiple newsItemEntities" {
                 // Given
                 setupNiceDateFormatter()
+                mockNiceDateFormatter.mockGetNiceDateResponse = "2 days ago"
                 val title = "some-title"
                 val newsItemEntities = listOf(
                     NewsListTestData.mockNewsItemEntityStory,
@@ -97,7 +100,7 @@ internal class NewsListTest : FreeSpec() {
                 val newsList = NewsList.fromEntity(
                     title = title,
                     newsItemEntities = newsItemEntities,
-                    niceDateFormatter = niceDateFormatter
+                    niceDateFormatter = mockNiceDateFormatter
                 )
 
                 // Then

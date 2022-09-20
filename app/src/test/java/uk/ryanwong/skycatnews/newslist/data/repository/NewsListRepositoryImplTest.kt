@@ -78,6 +78,7 @@ internal class NewsListRepositoryImplTest : FreeSpec() {
                     scope.runTest {
                         // Given
                         val listId = 1
+                        mockNiceDateFormatter.mockGetNiceDateResponse = "2 days ago"
 
                         // Only to trigger a success response,
                         // actual data to be tested is from mockNewsListDao.mockGetNewsListResponse
@@ -153,6 +154,7 @@ internal class NewsListRepositoryImplTest : FreeSpec() {
                                 listOf(NewsListRepositoryImplTestData.getMockNewsItemEntity(listId = listId))
                             mockNewsListService.mockGetAllItemsResponse =
                                 Result.failure(exception = UnknownHostException())
+                            mockNiceDateFormatter.mockGetNiceDateResponse = "2 days ago"
 
                             // When
                             val newsList = newsListRepository.getNewsList()
@@ -172,6 +174,7 @@ internal class NewsListRepositoryImplTest : FreeSpec() {
                                 listOf(NewsListRepositoryImplTestData.getMockNewsItemEntity(listId = listId))
                             mockNewsListService.mockGetAllItemsResponse =
                                 Result.failure(exception = ConnectException())
+                            mockNiceDateFormatter.mockGetNiceDateResponse = "2 days ago"
 
                             // When
                             val newsList = newsListRepository.getNewsList()
@@ -196,6 +199,7 @@ internal class NewsListRepositoryImplTest : FreeSpec() {
                                         1200L
                                     )
                                 )
+                            mockNiceDateFormatter.mockGetNiceDateResponse = "2 days ago"
 
                             // When
                             val newsList = newsListRepository.getNewsList()
@@ -286,6 +290,7 @@ internal class NewsListRepositoryImplTest : FreeSpec() {
                     mockNewsListService.mockGetAllItemsResponse = Result.success(newsListDto)
                     mockNewsListDao.mockGetNewsListTitleResponse = "some-title"
                     mockNewsListDao.mockGetNewsItemResponse = newsItemEntity
+                    mockNiceDateFormatter.mockGetNiceDateResponse = "2 days ago"
 
                     // When
                     val newsList = newsListRepository.getNewsItem(newsId = 1234)
