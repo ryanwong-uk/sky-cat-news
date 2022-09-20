@@ -6,9 +6,16 @@ package uk.ryanwong.skycatnews.newslist.domain.model
 
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
+import uk.ryanwong.skycatnews.app.util.nicedateformatter.MockNiceDateFormatter
 import uk.ryanwong.skycatnews.newslist.data.local.entity.NewsItemEntity
 
 internal class NewsListTest : FreeSpec() {
+
+    lateinit var niceDateFormatter: MockNiceDateFormatter
+
+    private fun setupNiceDateFormatter() {
+        niceDateFormatter = MockNiceDateFormatter()
+    }
 
     init {
         "isEmpty" - {
@@ -41,13 +48,15 @@ internal class NewsListTest : FreeSpec() {
         "fromEntity" - {
             "Should fill title with empty string if it comes as null" {
                 // Given
+                setupNiceDateFormatter()
                 val title = null
                 val newsItemEntities = emptyList<NewsItemEntity>()
 
                 // When
                 val newsList = NewsList.fromEntity(
                     title = title,
-                    newsItemEntities = newsItemEntities
+                    newsItemEntities = newsItemEntities,
+                    niceDateFormatter = niceDateFormatter
                 )
 
                 // Then
@@ -56,13 +65,15 @@ internal class NewsListTest : FreeSpec() {
 
             "Should return NewsList correctly if newsItemEntities contains one item" {
                 // Given
+                setupNiceDateFormatter()
                 val title = "some-title"
                 val newsItemEntities = listOf(NewsListTestData.mockNewsItemEntityStory)
 
                 // When
                 val newsList = NewsList.fromEntity(
                     title = title,
-                    newsItemEntities = newsItemEntities
+                    newsItemEntities = newsItemEntities,
+                    niceDateFormatter = niceDateFormatter
                 )
 
                 // Then
@@ -74,6 +85,7 @@ internal class NewsListTest : FreeSpec() {
 
             "Should convert and keep only known types from multiple newsItemEntities" {
                 // Given
+                setupNiceDateFormatter()
                 val title = "some-title"
                 val newsItemEntities = listOf(
                     NewsListTestData.mockNewsItemEntityStory,
@@ -84,7 +96,8 @@ internal class NewsListTest : FreeSpec() {
                 // When
                 val newsList = NewsList.fromEntity(
                     title = title,
-                    newsItemEntities = newsItemEntities
+                    newsItemEntities = newsItemEntities,
+                    niceDateFormatter = niceDateFormatter
                 )
 
                 // Then

@@ -12,6 +12,7 @@ import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import uk.ryanwong.skycatnews.app.exception.RemoteSourceFailedWithNoCacheException
+import uk.ryanwong.skycatnews.app.util.nicedateformatter.MockNiceDateFormatter
 import uk.ryanwong.skycatnews.newslist.data.local.MockNewsListDao
 import uk.ryanwong.skycatnews.newslist.data.local.entity.NewsListEntity
 import uk.ryanwong.skycatnews.newslist.data.remote.MockNewsListService
@@ -27,6 +28,7 @@ internal class NewsListRepositoryImplTest : FreeSpec() {
     private lateinit var newsListRepository: NewsListRepository
     private lateinit var mockNewsListService: MockNewsListService
     private lateinit var mockNewsListDao: MockNewsListDao
+    private lateinit var mockNiceDateFormatter: MockNiceDateFormatter
 
     private fun setupRepository() {
 
@@ -35,9 +37,12 @@ internal class NewsListRepositoryImplTest : FreeSpec() {
 
         mockNewsListService = MockNewsListService()
         mockNewsListDao = MockNewsListDao()
+        mockNiceDateFormatter = MockNiceDateFormatter()
+
         newsListRepository = NewsListRepositoryImpl(
             newsListService = mockNewsListService,
             newsListDao = mockNewsListDao,
+            niceDateFormatter = mockNiceDateFormatter,
             dispatcher = dispatcher
         )
     }
@@ -292,6 +297,7 @@ internal class NewsListRepositoryImplTest : FreeSpec() {
                             headline = "some-headline",
                             teaserText = "some-teaser-text",
                             modifiedDate = "2020-11-19T00:00:00Z",
+                            niceDate = "2 days ago",
                             teaserImageUrl = "https://some.url/href",
                             teaserImageAccessibilityText = "some-accessibility-text",
                         )

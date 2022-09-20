@@ -18,6 +18,7 @@ internal object NewsListViewModelTestData {
                     headline = "some-headline",
                     teaserText = "some-teaser-text",
                     modifiedDate = "2020-11-19T00:00:00Z",
+                    niceDate = "2 days ago",
                     teaserImageUrl = "https://some.url/href",
                     teaserImageAccessibilityText = "some-accessibility-text",
                 )
@@ -31,6 +32,7 @@ internal object NewsListViewModelTestData {
             headline = "some-headline",
             teaserText = "some-teaser-text",
             modifiedDate = "2020-11-19T00:00:00Z",
+            niceDate = "2 days ago",
             teaserImageUrl = "https://some.url/href",
             teaserImageAccessibilityText = "some-accessibility-text",
         )
