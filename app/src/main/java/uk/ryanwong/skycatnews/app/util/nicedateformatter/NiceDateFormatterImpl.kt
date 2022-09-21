@@ -11,6 +11,8 @@ import java.time.format.DateTimeFormatter
 class NiceDateFormatterImpl : NiceDateFormatter {
     override fun getNiceDate(dateString: String, currentTimeMills: Long): String {
         val instant = Instant.from(DateTimeFormatter.ISO_INSTANT.parse(dateString))
+
+        // android.text.format.DateUtils.getRelativeTimeSpanString not unit-testable (error: Stub!)
         return DateUtils.getRelativeTimeSpanString(
             instant.toEpochMilli(),
             currentTimeMills,
