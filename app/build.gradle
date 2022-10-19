@@ -195,6 +195,20 @@ dependencies {
     androidTestImplementation "io.mockk:mockk-android:$mockk_version"
 }
 
+
+ktlint {
+    android = true
+    ignoreFailures = false
+    disabledRules = ["max-line-length"]
+    reporters {
+        reporter "plain"
+        reporter "checkstyle"
+        reporter "sarif"
+    }
+}
+
+tasks.getByPath("preBuild").dependsOn("ktlintFormat")
+
 tasks.koverMergedHtmlReport {
     excludes = [
             'dagger.hilt.internal.aggregatedroot.codegen.*',

@@ -7,6 +7,7 @@ package uk.ryanwong.skycatnews.newslist.ui.viewmodel
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
+import java.io.IOException
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.TestDispatcher
@@ -15,7 +16,6 @@ import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import uk.ryanwong.skycatnews.R
 import uk.ryanwong.skycatnews.newslist.data.repository.MockNewsListRepository
-import java.io.IOException
 
 @OptIn(ExperimentalCoroutinesApi::class)
 internal class NewsListViewModelTest : FreeSpec() {

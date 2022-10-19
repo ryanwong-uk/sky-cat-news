@@ -7,6 +7,8 @@ package uk.ryanwong.skycatnews.storydetail.data.repository
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 import io.ktor.client.plugins.HttpRequestTimeoutException
+import java.net.ConnectException
+import java.net.UnknownHostException
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
@@ -17,8 +19,6 @@ import uk.ryanwong.skycatnews.storydetail.data.local.MockStoryDao
 import uk.ryanwong.skycatnews.storydetail.data.local.entity.StoryEntity
 import uk.ryanwong.skycatnews.storydetail.data.remote.MockStoryService
 import uk.ryanwong.skycatnews.storydetail.domain.model.Story
-import java.net.ConnectException
-import java.net.UnknownHostException
 
 @OptIn(ExperimentalCoroutinesApi::class)
 internal class StoryDetailRepositoryImplTest : FreeSpec() {
