@@ -12,6 +12,7 @@ import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestDispatcher
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -35,7 +36,7 @@ internal class StoryDetailViewModelTest : FreeSpec() {
      */
 
     private fun setupTest() {
-        dispatcher = UnconfinedTestDispatcher()
+        dispatcher = StandardTestDispatcher()
         scope = TestScope(dispatcher)
         mockStateHandle = mockk()
         mockStoryDetailRepository = MockStoryDetailRepository()
@@ -61,6 +62,7 @@ internal class StoryDetailViewModelTest : FreeSpec() {
 
                     // When
                     setupViewModel()
+                    dispatcher.scheduler.advanceUntilIdle()
 
                     // Then
                     mockStoryDetailRepository.mockGetStoryStoryId shouldBe 521
@@ -79,6 +81,7 @@ internal class StoryDetailViewModelTest : FreeSpec() {
 
                     // When
                     setupViewModel()
+                    dispatcher.scheduler.advanceUntilIdle()
 
                     // Then
                     val uiState = storyDetailViewModel.uiState.first()
@@ -99,6 +102,7 @@ internal class StoryDetailViewModelTest : FreeSpec() {
 
                     // When
                     setupViewModel()
+                    dispatcher.scheduler.advanceUntilIdle()
 
                     // Then
                     val uiState = storyDetailViewModel.uiState.first()
@@ -118,6 +122,7 @@ internal class StoryDetailViewModelTest : FreeSpec() {
                     every { mockStateHandle.get<Int>("list_id") } returns 1
                     mockStoryDetailRepository.mockGetStoryResponse = Result.failure(exception = StoryNotFoundException())
                     setupViewModel()
+                    dispatcher.scheduler.advanceUntilIdle()
 
                     val originalUiState = storyDetailViewModel.uiState.first()
                     originalUiState.errorMessages shouldHaveSize 1
