@@ -26,8 +26,11 @@ This is a prototype of the app. As the backend isn't developed yet, this prototy
 This project has been reviewed and no longer in active development. 
 I would like to thank everyone at Sky for the positive feedback.
 
-Since I am now a Sky employee, I guess I have a need to thank Greg A. here for being my teammate in the past.
-This project concludes what I have learnt and improved after working closly with Greg for nearly 7 months.
+Since I have been awarded a role at Sky, 
+I believe I should thank Greg A. here for being my teammate in the past.
+This project concludes what I have learnt, reflected and improved,
+after working closly with Greg for nearly 7 months.
+
 Greg changed my life for the better. 
 ```
 
