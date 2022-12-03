@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    compileSdk libs.versions.compileSdk.get().toInteger()
+    compileSdk libs.versions.compileSdk.get().toInt()
 
     signingConfigs {
         release
