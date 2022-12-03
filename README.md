@@ -49,6 +49,7 @@ Greg changed my life for the better.
 * MVVM architecture (without use-cases as this app is too simple)
 * Single activity
 * Jetpack Compose UI
+* Gradle Version Catalogue
 
 ### Major libraries used
 
@@ -74,7 +75,7 @@ Greg changed my life for the better.
 
 ## Requirements
 
-* Android Studio Chipmunk | 2021.2.1 Patch 2
+* Android Studio Dolphin | 2021.3.1 Patch 1
 * Android device or simulator running Android 8.0+ (API 26)
 
 ## Setting up the Keystore

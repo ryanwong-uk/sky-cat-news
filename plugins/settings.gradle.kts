@@ -1,10 +1,6 @@
-/*
- * Copyright (c) 2022. Ryan Wong (hello@ryanwong.co.uk)
- */
-
 dependencyResolutionManagement {
-    enableFeaturePreview("VERSION_CATALOGS")
     repositories {
+        google()
         mavenCentral()
     }
     versionCatalogs {
