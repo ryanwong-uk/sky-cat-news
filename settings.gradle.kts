@@ -1,5 +1,4 @@
 pluginManagement {
-    includeBuild("plugins")
     repositories {
         gradlePluginPortal()
         google()
@@ -11,8 +10,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://jitpack.io' }
+        maven("https://jitpack.io")
     }
 }
 rootProject.name = "Sky Cat News"
-include ':app'
+include(":app")
