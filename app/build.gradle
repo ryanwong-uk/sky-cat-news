@@ -8,6 +8,7 @@ plugins {
 }
 
 android {
+    namespace 'uk.ryanwong.skycatnews'
     compileSdk libs.versions.compileSdk.get().toInteger()
 
     signingConfigs {
