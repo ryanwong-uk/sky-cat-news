@@ -17,10 +17,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.SnackbarHost
 import androidx.compose.material.SnackbarHostState
 import androidx.compose.material.Text
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -44,8 +48,6 @@ import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import uk.ryanwong.skycatnews.R
 import uk.ryanwong.skycatnews.app.ui.component.NoDataScreen
 import uk.ryanwong.skycatnews.app.ui.theme.BlackGradientEnd
@@ -94,6 +96,7 @@ fun StoryDetailScreen(
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun StoryDetailScreenLayout(
     modifier: Modifier = Modifier,
@@ -104,75 +107,82 @@ private fun StoryDetailScreenLayout(
     val padding16 = dimensionResource(id = R.dimen.padding_16)
     val shouldAllowSwipeRefresh = (story == null && !isLoading)
     val contentDescriptionStoryDetail = stringResource(R.string.content_description_story_detail)
+    val pullRefreshState = rememberPullRefreshState(refreshing = isLoading, onRefresh = onRefresh)
 
-    Column(
-        modifier = modifier
+    val pullRefreshModifier = if (shouldAllowSwipeRefresh) {
+        modifier.pullRefresh(pullRefreshState)
+    } else {
+        modifier
+    }
+
+    Box(
+        modifier = pullRefreshModifier
             .fillMaxSize()
             .background(color = MaterialTheme.colors.background),
     ) {
-        SwipeRefresh(
-            state = rememberSwipeRefreshState(isRefreshing = isLoading),
-            onRefresh = onRefresh,
-            swipeEnabled = shouldAllowSwipeRefresh,
+        LazyColumn(
+            contentPadding = PaddingValues(bottom = padding16),
+            modifier = Modifier
+                .fillMaxSize()
+                .semantics { contentDescription = contentDescriptionStoryDetail },
         ) {
-            LazyColumn(
-                contentPadding = PaddingValues(bottom = padding16),
-                modifier = modifier
-                    .fillMaxSize()
-                    .semantics { contentDescription = contentDescriptionStoryDetail },
-            ) {
 
-                if (story == null) {
-                    if (!isLoading) {
-                        item {
-                            NoDataScreen(modifier = Modifier.fillParentMaxHeight())
-                        }
+            if (story == null) {
+                if (!isLoading) {
+                    item {
+                        NoDataScreen(modifier = Modifier.fillParentMaxHeight())
                     }
-                    return@LazyColumn
                 }
+                return@LazyColumn
+            }
 
-                item {
-                    HeroImageSection(
-                        headline = story.headline,
-                        heroImageUrl = story.heroImageUrl,
-                        heroImageAccessibilityText = story.heroImageAccessibilityText
-                    )
-                }
+            item {
+                HeroImageSection(
+                    headline = story.headline,
+                    heroImageUrl = story.heroImageUrl,
+                    heroImageAccessibilityText = story.heroImageAccessibilityText
+                )
+            }
 
-                itemsIndexed(story.contents) { _, content ->
-                    when (content) {
-                        is Content.Paragraph -> {
-                            Text(
-                                text = content.text,
-                                color = MaterialTheme.colors.onBackground,
-                                style = CustomTextStyle.storyDetailParagraph,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(all = padding16)
-                            )
-                        }
-                        is Content.Image -> {
-                            AsyncImage(
-                                model = ImageRequest
-                                    .Builder(LocalContext.current)
-                                    .data(content.url)
-                                    .crossfade(true)
-                                    .build(),
-                                fallback = painterResource(R.drawable.placeholder),
-                                error = painterResource(R.drawable.placeholder),
-                                placeholder = painterResource(R.drawable.placeholder),
-                                contentDescription = content.accessibilityText,
-                                contentScale = ContentScale.FillWidth,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(all = padding16)
-                                    .wrapContentHeight()
-                            )
-                        }
+            itemsIndexed(story.contents) { _, content ->
+                when (content) {
+                    is Content.Paragraph -> {
+                        Text(
+                            text = content.text,
+                            color = MaterialTheme.colors.onBackground,
+                            style = CustomTextStyle.storyDetailParagraph,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(all = padding16)
+                        )
+                    }
+                    is Content.Image -> {
+                        AsyncImage(
+                            model = ImageRequest
+                                .Builder(LocalContext.current)
+                                .data(content.url)
+                                .crossfade(true)
+                                .build(),
+                            fallback = painterResource(R.drawable.placeholder),
+                            error = painterResource(R.drawable.placeholder),
+                            placeholder = painterResource(R.drawable.placeholder),
+                            contentDescription = content.accessibilityText,
+                            contentScale = ContentScale.FillWidth,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(all = padding16)
+                                .wrapContentHeight()
+                        )
                     }
                 }
             }
         }
+
+        PullRefreshIndicator(
+            refreshing = isLoading,
+            state = pullRefreshState,
+            modifier = Modifier.align(Alignment.TopCenter)
+        )
     }
 }
 
