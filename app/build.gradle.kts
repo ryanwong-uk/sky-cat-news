@@ -8,7 +8,8 @@ plugins {
 }
 
 android {
-    compileSdk libs.versions.compileSdk.get().toInt()
+    namespace 'uk.ryanwong.skycatnews'
+    compileSdk libs.versions.compileSdk.get().toInteger()
 
     signingConfigs {
         release
