@@ -53,7 +53,6 @@ for applying some later techs and keep the tech stack updated.
 * [`Kotlin Flow`](https://kotlinlang.org/docs/flow.html)
 * [`Jetpack Room`](https://developer.android.com/jetpack/androidx/releases/room) - Database
 * [`Accompanist - WebView wrapper for Jetpack Compose`](https://github.com/google/accompanist/tree/main/web)
-* [`Accompanist - Swipe Refresh layout for Jetpack Compose`](https://github.com/google/accompanist/tree/main/swiperefresh)
 * [`Coil`](https://coil-kt.github.io/coil/) - Image loading
 * [`Ktor`](https://ktor.io/) - HTTP Client
 * [`Kotlin Serialization`](https://kotlinlang.org/docs/serialization.html) - For JSON parsing
