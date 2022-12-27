@@ -8,14 +8,17 @@ import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.SnackbarHost
 import androidx.compose.material.SnackbarHostState
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -31,8 +34,6 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import uk.ryanwong.skycatnews.R
 import uk.ryanwong.skycatnews.app.ui.component.NoDataScreen
 import uk.ryanwong.skycatnews.app.ui.theme.SkyCatNewsTheme
@@ -85,6 +86,7 @@ fun NewsListScreen(
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun NewsListScreenLayout(
     newsList: List<NewsItem>,
@@ -95,68 +97,71 @@ fun NewsListScreenLayout(
 ) {
     val padding16 = dimensionResource(id = R.dimen.padding_16)
     val contentDescriptionNewsList = stringResource(R.string.content_description_news_list)
+    val pullRefreshState = rememberPullRefreshState(refreshing = isLoading, onRefresh = onRefresh)
 
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = MaterialTheme.colors.background),
+            .background(color = MaterialTheme.colors.background)
+            .pullRefresh(pullRefreshState),
     ) {
-        SwipeRefresh(
-            state = rememberSwipeRefreshState(isRefreshing = isLoading),
-            onRefresh = onRefresh,
+        LazyColumn(
+            contentPadding = PaddingValues(vertical = padding16),
+            modifier = Modifier
+                .fillMaxSize()
+                .semantics { contentDescription = contentDescriptionNewsList }
         ) {
-            LazyColumn(
-                contentPadding = PaddingValues(vertical = padding16),
-                modifier = Modifier
-                    .fillMaxSize()
-                    .semantics { contentDescription = contentDescriptionNewsList }
-            ) {
-                if (newsList.isEmpty()) {
-                    if (!isLoading) {
-                        item {
-                            NoDataScreen(modifier = Modifier.fillParentMaxHeight())
-                        }
-                    }
-                    return@LazyColumn
-                }
-
-                item {
-                    val firstItem = newsList.first()
-                    when (firstItem) {
-                        is NewsItem.Story -> {
-                            LargeStoryHeadline(
-                                story = firstItem,
-                                onItemClicked = { onStoryItemClicked(firstItem.newsId) },
-                            )
-                        }
-                        is NewsItem.WebLink -> {
-                            LargeWebLinkHeadline(
-                                webLink = firstItem,
-                                onItemClicked = { onWebLinkItemClicked(firstItem.newsId) },
-                            )
-                        }
+            if (newsList.isEmpty()) {
+                if (!isLoading) {
+                    item {
+                        NoDataScreen(modifier = Modifier.fillParentMaxHeight())
                     }
                 }
+                return@LazyColumn
+            }
 
-                val regularItemsList = newsList.subList(1, newsList.size)
-                itemsIndexed(regularItemsList) { _, newsItem ->
-                    when (newsItem) {
-                        is NewsItem.Story -> {
-                            RegularStoryHeadline(
-                                story = newsItem,
-                                onItemClicked = { onStoryItemClicked(newsItem.newsId) },
-                            )
-                        }
-                        is NewsItem.WebLink -> {
-                            RegularWebLinkHeadline(
-                                webLink = newsItem,
-                                onItemClicked = { onWebLinkItemClicked(newsItem.newsId) },
-                            )
-                        }
+            item {
+                val firstItem = newsList.first()
+                when (firstItem) {
+                    is NewsItem.Story -> {
+                        LargeStoryHeadline(
+                            story = firstItem,
+                            onItemClicked = { onStoryItemClicked(firstItem.newsId) },
+                        )
+                    }
+                    is NewsItem.WebLink -> {
+                        LargeWebLinkHeadline(
+                            webLink = firstItem,
+                            onItemClicked = { onWebLinkItemClicked(firstItem.newsId) },
+                        )
+                    }
+                }
+            }
+
+            val regularItemsList = newsList.subList(1, newsList.size)
+            itemsIndexed(regularItemsList) { _, newsItem ->
+                when (newsItem) {
+                    is NewsItem.Story -> {
+                        RegularStoryHeadline(
+                            story = newsItem,
+                            onItemClicked = { onStoryItemClicked(newsItem.newsId) },
+                        )
+                    }
+                    is NewsItem.WebLink -> {
+                        RegularWebLinkHeadline(
+                            webLink = newsItem,
+                            onItemClicked = { onWebLinkItemClicked(newsItem.newsId) },
+                        )
                     }
                 }
             }
         }
+
+        PullRefreshIndicator(
+            refreshing = isLoading,
+            state = pullRefreshState,
+            modifier = Modifier.align(Alignment.TopCenter)
+        )
     }
 }
 
