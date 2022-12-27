@@ -139,7 +139,6 @@ dependencies {
     implementation libs.bundles.coil
     implementation libs.bundles.coroutines
     implementation libs.accompanist.webview
-    implementation libs.accompanist.swiperefresh
 
     // compose
     def composeBom = platform(libs.androidx.compose.bom)
