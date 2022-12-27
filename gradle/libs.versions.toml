@@ -104,7 +104,7 @@ coroutines = ["kotlinx-coroutines-core", "kotlinx-coroutines-android"]
 android-application = { id = "com.android.application", version.ref = "gradleplugin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 hilt-android-plugin = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
-kover-plugin = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
+kotlinx-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "gradleplugin" }

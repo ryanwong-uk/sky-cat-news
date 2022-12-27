@@ -2,7 +2,7 @@ plugins {
     alias libs.plugins.android.application
     alias libs.plugins.kotlin.android
     alias libs.plugins.hilt.android.plugin
-    alias libs.plugins.kover.plugin
+    alias libs.plugins.kotlinx.kover
     alias libs.plugins.kotlin.kapt
     alias libs.plugins.kotlin.serialization
 }
@@ -196,40 +196,35 @@ ktlint {
 
 tasks.getByPath("preBuild").dependsOn("ktlintFormat")
 
-tasks.koverMergedHtmlReport {
-    excludes = ['dagger.hilt.internal.aggregatedroot.codegen.*',
-                'hilt_aggregated_deps.*',
-                'uk.ryanwong.skycatnews.app.ui.*',
-                'uk.ryanwong.skycatnews.*.ui.screen.*',
-                'uk.ryanwong.skycatnews.*.di.*',
-                'uk.ryanwong.skycatnews.*.Hilt_*',
-                'uk.ryanwong.skycatnews.*.*_Factory*',
-                'uk.ryanwong.skycatnews.*.*_HiltModules*',
-                'uk.ryanwong.skycatnews.*.*Module_*',
-                'uk.ryanwong.skycatnews.*.*MembersInjector*',
-                'uk.ryanwong.skycatnews.*.*_Impl*',
-                'uk.ryanwong.skycatnews.ComposableSingletons*',
-                'uk.ryanwong.skycatnews.BuildConfig*',
-                'uk.ryanwong.skycatnews.*.Fake*',
-                'uk.ryanwong.skycatnews.*.previewparameter*',
-                'uk.ryanwong.skycatnews.app.ComposableSingletons*']
-}
+koverMerged {
+    enable()
 
-tasks.koverMergedXmlReport {
-    excludes = ['dagger.hilt.internal.aggregatedroot.codegen.*',
-                'hilt_aggregated_deps.*',
-                'uk.ryanwong.skycatnews.app.ui.*',
-                'uk.ryanwong.skycatnews.*.ui.screen.*',
-                'uk.ryanwong.skycatnews.*.di.*',
-                'uk.ryanwong.skycatnews.*.Hilt_*',
-                'uk.ryanwong.skycatnews.*.*_Factory*',
-                'uk.ryanwong.skycatnews.*.*_HiltModules*',
-                'uk.ryanwong.skycatnews.*.*Module_*',
-                'uk.ryanwong.skycatnews.*.*MembersInjector*',
-                'uk.ryanwong.skycatnews.*.*_Impl*',
-                'uk.ryanwong.skycatnews.ComposableSingletons*',
-                'uk.ryanwong.skycatnews.BuildConfig*',
-                'uk.ryanwong.skycatnews.*.Fake*',
-                'uk.ryanwong.skycatnews.*.previewparameter*',
-                'uk.ryanwong.skycatnews.app.ComposableSingletons*']
+    filters { // common filters for all default Kover tasks
+        classes { // common class filter for all default Kover tasks
+            excludes.addAll("dagger.hilt.internal.aggregatedroot.codegen.*",
+                    "hilt_aggregated_deps.*",
+                    "uk.ryanwong.skycatnews.app.ui.*",
+                    "uk.ryanwong.skycatnews.*.ui.screen.*",
+                    "uk.ryanwong.skycatnews.*.di.*",
+                    "uk.ryanwong.skycatnews.*.Hilt_*",
+                    "uk.ryanwong.skycatnews.*.*_Factory*",
+                    "uk.ryanwong.skycatnews.*.*_HiltModules*",
+                    "uk.ryanwong.skycatnews.*.*Module_*",
+                    "uk.ryanwong.skycatnews.*.*MembersInjector*",
+                    "uk.ryanwong.skycatnews.*.*_Impl*",
+                    "uk.ryanwong.skycatnews.ComposableSingletons*",
+                    "uk.ryanwong.skycatnews.BuildConfig*",
+                    "uk.ryanwong.skycatnews.*.Fake*",
+                    "uk.ryanwong.skycatnews.*.previewparameter*",
+                    "uk.ryanwong.skycatnews.app.ComposableSingletons*")
+        }
+    }
+
+    xmlReport {
+        onCheck.set(true)
+    }
+
+    htmlReport {
+        onCheck.set(true)
+    }
 }
