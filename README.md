@@ -37,6 +37,7 @@ for applying some later techs and keep the tech stack updated.
 * News list screen: on the `FakeDebug` and `FakeRelease` builds, pull-to-refresh can trigger a simulated random server response.
 * Story detail screen: on the `FakeDebug` and `FakeRelease` builds, it shows the same layout with random images.
 * Basic dark mode supported.
+* Gradle build scripts in Kotlin DTS instead of Groovy
 
 ## High-level architecture
 
