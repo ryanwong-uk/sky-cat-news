@@ -213,30 +213,32 @@ tasks.named("preBuild") {
     dependsOn(tasks.named("ktlintFormat"))
 }
 
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
+
 koverMerged {
     enable()
 
     filters { // common filters for all default Kover tasks
         classes { // common class filter for all default Kover tasks
-            excludes.addAll(
-                listOf(
-                    "dagger.hilt.internal.aggregatedroot.codegen.*",
-                    "hilt_aggregated_deps.*",
-                    "uk.ryanwong.skycatnews.app.ui.*",
-                    "uk.ryanwong.skycatnews.*.ui.screen.*",
-                    "uk.ryanwong.skycatnews.*.di.*",
-                    "uk.ryanwong.skycatnews.*.Hilt_*",
-                    "uk.ryanwong.skycatnews.*.*_Factory*",
-                    "uk.ryanwong.skycatnews.*.*_HiltModules*",
-                    "uk.ryanwong.skycatnews.*.*Module_*",
-                    "uk.ryanwong.skycatnews.*.*MembersInjector*",
-                    "uk.ryanwong.skycatnews.*.*_Impl*",
-                    "uk.ryanwong.skycatnews.ComposableSingletons*",
-                    "uk.ryanwong.skycatnews.BuildConfig*",
-                    "uk.ryanwong.skycatnews.*.Fake*",
-                    "uk.ryanwong.skycatnews.*.previewparameter*",
-                    "uk.ryanwong.skycatnews.app.ComposableSingletons*"
-                )
+            excludes += listOf(
+                "dagger.hilt.internal.aggregatedroot.codegen.*",
+                "hilt_aggregated_deps.*",
+                "uk.ryanwong.skycatnews.app.ui.*",
+                "uk.ryanwong.skycatnews.*.ui.screen.*",
+                "uk.ryanwong.skycatnews.*.di.*",
+                "uk.ryanwong.skycatnews.*.Hilt_*",
+                "uk.ryanwong.skycatnews.*.*_Factory*",
+                "uk.ryanwong.skycatnews.*.*_HiltModules*",
+                "uk.ryanwong.skycatnews.*.*Module_*",
+                "uk.ryanwong.skycatnews.*.*MembersInjector*",
+                "uk.ryanwong.skycatnews.*.*_Impl*",
+                "uk.ryanwong.skycatnews.ComposableSingletons*",
+                "uk.ryanwong.skycatnews.BuildConfig*",
+                "uk.ryanwong.skycatnews.*.Fake*",
+                "uk.ryanwong.skycatnews.*.previewparameter*",
+                "uk.ryanwong.skycatnews.app.ComposableSingletons*"
             )
         }
     }
