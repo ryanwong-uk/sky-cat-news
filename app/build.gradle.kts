@@ -1,206 +1,226 @@
+import java.io.FileInputStream
+import java.io.InputStreamReader
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Properties
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
+
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    alias libs.plugins.android.application
-    alias libs.plugins.kotlin.android
-    alias libs.plugins.hilt.android.plugin
-    alias libs.plugins.kotlinx.kover
-    alias libs.plugins.kotlin.kapt
-    alias libs.plugins.kotlin.serialization
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.hilt.android.plugin)
+    alias(libs.plugins.kotlinx.kover)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.gradle.ktlint)
 }
 
 android {
-    namespace 'uk.ryanwong.skycatnews'
-    compileSdk libs.versions.compileSdk.get().toInteger()
+    namespace = "uk.ryanwong.skycatnews"
 
     signingConfigs {
-        release
+        create("release") {
+            val isRunningOnBitrise = System.getenv("BITRISE") == "true"
+            if (isRunningOnBitrise) {
+                keyAlias = System.getenv("BITRISEIO_ANDROID_KEYSTORE_ALIAS")
+                keyPassword = System.getenv("BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
+                storeFile = file(System.getenv("HOME") + "/keystores/release.jks")
+                storePassword = System.getenv("BITRISEIO_ANDROID_KEYSTORE_PASSWORD")
+            } else {
+                val properties = Properties()
+                val localProperties = File("../../keystore.properties")
+                InputStreamReader(FileInputStream(localProperties), Charsets.UTF_8).use { reader ->
+                    properties.load(reader)
+                }
+
+                keyAlias = properties.getProperty("alias")
+                keyPassword = properties.getProperty("pass")
+                storeFile = file(properties.getProperty("store"))
+                storePassword = properties.getProperty("storePass")
+            }
+        }
     }
 
-    def isRunningOnBitrise = System.getenv("BITRISE") == "true"
-    if (isRunningOnBitrise) {
-        signingConfigs.release.storeFile = file(System.getenv("HOME") + "/keystores/release.jks")
-        signingConfigs.release.storePassword = System.getenv("BITRISEIO_ANDROID_KEYSTORE_PASSWORD")
-        signingConfigs.release.keyAlias = System.getenv("BITRISEIO_ANDROID_KEYSTORE_ALIAS")
-        signingConfigs.release.keyPassword = System.getenv("BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
-
-    } else {
-        Properties keyProps = new Properties()
-        keyProps.load(new FileInputStream(file('../../keystore.properties')))
-        signingConfigs.release.storeFile = file(keyProps["store"])
-        signingConfigs.release.keyAlias = keyProps["alias"]
-        signingConfigs.release.storePassword = keyProps["storePass"]
-        signingConfigs.release.keyPassword = keyProps["pass"]
-    }
-
+    compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
-        applicationId "uk.ryanwong.skycatnews"
-        minSdk libs.versions.minSdk.get().toInteger()
-        targetSdk libs.versions.targetSdk.get().toInteger()
-        versionCode 1
-        versionName "1.0"
+        applicationId = "uk.ryanwong.skycatnews"
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
+        versionCode = 1
+        versionName = "1.0"
 
-        testInstrumentationRunner "uk.ryanwong.skycatnews.app.ui.CustomTestRunner"
+        testInstrumentationRunner = "uk.ryanwong.skycatnews.app.ui.CustomTestRunner"
         vectorDrawables {
-            useSupportLibrary true
+            useSupportLibrary = true
         }
 
         // Bundle output filename
-        setProperty("archivesBaseName", "skycatnews-" + versionName + "-" + new Date().format('yyyyMMdd-HHmmss'))
+        val timestamp = SimpleDateFormat("yyyyMMdd-HHmmss").format(Date())
+        setProperty("archivesBaseName", "skycatnews-$versionName-$timestamp")
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+                arguments["room.schemaLocation"] = "$projectDir/schemas"
             }
         }
     }
 
     buildTypes {
-        debug {
-            applicationIdSuffix '.debug'
-            minifyEnabled false
+        getByName("debug") {
+            applicationIdSuffix = ".debug"
+            isMinifyEnabled = false
+            isDebuggable = true
 
-            signingConfig signingConfigs.release
-            applicationVariants.all { variant ->
-                variant.outputs.all { output ->
-                    def date = new Date()
-                    def formattedDate = date.format('yyyyMMdd-HHmmss')
-                    outputFileName = "skycatnews-${variant.name}-${variant.versionName}-${formattedDate}.apk"
-                }
+            signingConfig = signingConfigs.getByName("release")
+            applicationVariants.all {
+                val variant = this
+                variant.outputs
+                    .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
+                    .forEach { output ->
+                        val timestamp = SimpleDateFormat("yyyyMMdd-HHmmss").format(Date())
+                        val outputFileName =
+                            "skycatnews-${variant.name}-${variant.versionName}-$timestamp.apk"
+                        output.outputFileName = outputFileName
+                    }
             }
         }
 
-        release {
-            shrinkResources true
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        getByName("release") {
+            isShrinkResources = true
+            isMinifyEnabled = true
+            isDebuggable = false
 
-            signingConfig signingConfigs.release
-            applicationVariants.all { variant ->
-                variant.outputs.all { output ->
-                    def date = new Date()
-                    def formattedDate = date.format('yyyyMMdd-HHmmss')
-                    outputFileName = "skycatnews-${variant.name}-${variant.versionName}-${formattedDate}.apk"
-                }
+            setProguardFiles(
+                listOf(
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro"
+                )
+            )
+
+            signingConfig = signingConfigs.getByName("release")
+            applicationVariants.all {
+                val variant = this
+                variant.outputs
+                    .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
+                    .forEach { output ->
+                        val timestamp = SimpleDateFormat("yyyyMMdd-HHmmss").format(Date())
+                        val outputFileName =
+                            "skycatnews-${variant.name}-${variant.versionName}-$timestamp.apk"
+                        output.outputFileName = outputFileName
+                    }
             }
         }
     }
 
-    flavorDimensions "datasource"
+    flavorDimensions.add("datasource")
     productFlavors {
-        fake {
-            dimension 'datasource'
-            buildConfigField "String", "DEFAULT_BASE_URL", '""'
+        create("fake") {
+            dimension = "datasource"
+            buildConfigField("String", "DEFAULT_BASE_URL", "\"\"")
         }
-        prod {
-            dimension 'datasource'
-            buildConfigField "String", "DEFAULT_BASE_URL", '"https://ryanwong.co.uk/restapis"'
+        create("prod") {
+            dimension = "datasource"
+            buildConfigField("String", "DEFAULT_BASE_URL", "\"https://ryanwong.co.uk/restapis\"")
         }
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-    buildFeatures {
-        compose true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion libs.versions.compose.compiler.get()
     }
     packagingOptions {
         resources {
-            excludes += "/META-INF/*"
+            excludes.add("/META-INF/*")
         }
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
+    }
     testOptions {
-        animationsDisabled true
+        animationsDisabled = true
 
         unitTests {
-            includeAndroidResources = true
-        }
-
-        unitTests.all {
-            useJUnitPlatform()
+            isIncludeAndroidResources = true
         }
     }
 }
 
 dependencies {
 
-    implementation libs.androidx.core.ktx
-    implementation libs.androidx.lifecycle.runtime.compose
-    implementation libs.androidx.activity.compose
-    implementation libs.kotlin.reflect
-    implementation libs.androidx.navigation.compose
-    implementation libs.timber
-    debugImplementation libs.leakcanary.android
-    implementation libs.bundles.coil
-    implementation libs.bundles.coroutines
-    implementation libs.accompanist.webview
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.kotlin.reflect)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.timber)
+    debugImplementation(libs.leakcanary.android)
+    implementation(libs.bundles.coil)
+    implementation(libs.bundles.coroutines)
+    implementation(libs.accompanist.webview)
 
     // compose
-    def composeBom = platform(libs.androidx.compose.bom)
-    implementation composeBom
-    androidTestImplementation composeBom
-    implementation libs.androidx.compose.material
-    implementation libs.androidx.compose.ui.tooling.preview
-    debugImplementation libs.androidx.compose.ui.tooling
-    androidTestImplementation libs.androidx.compose.ui.test.junit4
-    debugImplementation libs.androidx.compose.ui.test.manifest
+    val composeBom = platform(libs.androidx.compose.bom)
+    implementation(composeBom)
+    androidTestImplementation(composeBom)
+    implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
 
-    testImplementation libs.junit
-    testImplementation libs.bundles.kotest
-    androidTestImplementation libs.androidx.test.junit4
-    androidTestImplementation libs.androidx.test.rules
-    androidTestImplementation libs.androidx.test.espresso.core
-    androidTestImplementation libs.androidx.test.espresso.idling.resource
-    androidTestImplementation libs.kotest.assertions.core
+    testImplementation(libs.junit)
+    testImplementation(libs.bundles.kotest)
+    androidTestImplementation(libs.androidx.test.junit4)
+    androidTestImplementation(libs.androidx.test.rules)
+    androidTestImplementation(libs.androidx.test.espresso.core)
+    androidTestImplementation(libs.androidx.test.espresso.idling.resource)
+    androidTestImplementation(libs.kotest.assertions.core)
 
     // Dagger-Hilt
-    implementation libs.hilt.android
-    kapt libs.hilt.compiler
-    implementation libs.hilt.navigation.compose
-    kaptAndroidTest libs.hilt.android.compiler
-    androidTestImplementation libs.hilt.android.testing
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    implementation(libs.hilt.navigation.compose)
+    kaptAndroidTest(libs.hilt.android.compiler)
+    androidTestImplementation(libs.hilt.android.testing)
 
     // Ktor
-    implementation libs.bundles.ktor
-    testImplementation libs.ktor.client.mock
-    implementation libs.kotlinx.serialization.json
+    implementation(libs.bundles.ktor)
+    testImplementation(libs.ktor.client.mock)
+    implementation(libs.kotlinx.serialization.json)
 
     // RoomDB
-    implementation libs.bundles.room
-    kapt libs.androidx.room.compiler
-    testImplementation libs.androidx.room.testing
+    implementation(libs.bundles.room)
+    kapt(libs.androidx.room.compiler)
+    testImplementation(libs.androidx.room.testing)
 
     // Mockk
-    testImplementation libs.mockk
-    testImplementation libs.mockk.agent.jvm
-    androidTestImplementation libs.mockk.android
+    testImplementation(libs.mockk)
+    testImplementation(libs.mockk.agent.jvm)
+    androidTestImplementation(libs.mockk.android)
 }
 
-
-ktlint {
-    android = true
-    ignoreFailures = false
-    disabledRules = ["max-line-length"]
+configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+    android.set(true)
+    ignoreFailures.set(true)
+    disabledRules.set(setOf("max-line-length"))
     reporters {
-        reporter "plain"
-        reporter "checkstyle"
-        reporter "sarif"
+        reporter(ReporterType.PLAIN)
+        reporter(ReporterType.CHECKSTYLE)
+        reporter(ReporterType.SARIF)
     }
 }
 
-tasks.getByPath("preBuild").dependsOn("ktlintFormat")
+tasks.named("preBuild") {
+    dependsOn(tasks.named("ktlintFormat"))
+}
 
 koverMerged {
     enable()
 
     filters { // common filters for all default Kover tasks
         classes { // common class filter for all default Kover tasks
-            excludes.addAll("dagger.hilt.internal.aggregatedroot.codegen.*",
+            excludes.addAll(
+                listOf(
+                    "dagger.hilt.internal.aggregatedroot.codegen.*",
                     "hilt_aggregated_deps.*",
                     "uk.ryanwong.skycatnews.app.ui.*",
                     "uk.ryanwong.skycatnews.*.ui.screen.*",
@@ -215,7 +235,9 @@ koverMerged {
                     "uk.ryanwong.skycatnews.BuildConfig*",
                     "uk.ryanwong.skycatnews.*.Fake*",
                     "uk.ryanwong.skycatnews.*.previewparameter*",
-                    "uk.ryanwong.skycatnews.app.ComposableSingletons*")
+                    "uk.ryanwong.skycatnews.app.ComposableSingletons*"
+                )
+            )
         }
     }
 
