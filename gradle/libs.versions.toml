@@ -28,7 +28,7 @@ leakcanary = "2.10"
 mockk = "1.13.3"
 room = "2.4.3"
 test-rules = "1.5.0"
-text-ext = "1.1.4"
+text-ext = "1.1.5"
 timber = "5.0.1"
 
 [libraries]
