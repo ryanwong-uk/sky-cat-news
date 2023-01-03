@@ -28,7 +28,7 @@ leakcanary = "2.10"
 mockk = "1.13.3"
 room = "2.4.3"
 test-rules = "1.5.0"
-text-ext = "1.1.5"
+test-ext = "1.1.5"
 timber = "5.0.1"
 
 [libraries]
@@ -43,7 +43,7 @@ androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 androidx-room-testing = { module = "androidx.room:room-testing", version.ref = "room" }
 
 junit = { module = "junit:junit", version.ref = "junit" }
-androidx-test-junit4 = { module = "androidx.test.ext:junit", version.ref = "text-ext" }
+androidx-test-junit4 = { module = "androidx.test.ext:junit", version.ref = "test-ext" }
 androidx-test-rules = { module = "androidx.test:rules", version.ref = "test-rules" }
 androidx-test-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
 androidx-test-espresso-idling-resource = { module = "androidx.test.espresso:espresso-idling-resource", version.ref = "espresso" }
