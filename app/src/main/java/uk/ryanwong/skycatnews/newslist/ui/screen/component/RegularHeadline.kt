@@ -20,8 +20,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,6 +32,7 @@ import uk.ryanwong.skycatnews.R
 import uk.ryanwong.skycatnews.app.ui.theme.CustomTextStyle
 import uk.ryanwong.skycatnews.app.ui.theme.SkyCatNewsTheme
 import uk.ryanwong.skycatnews.newslist.domain.model.NewsItem
+import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.app.ui.theme.getDimension
 
 @Composable
 fun RegularStoryHeadline(
@@ -77,17 +78,15 @@ fun RegularHeadline(
     date: String,
     onItemClicked: () -> Unit,
 ) {
-    val padding4 = dimensionResource(id = R.dimen.padding_4)
-    val padding8 = dimensionResource(id = R.dimen.padding_8)
-    val padding16 = dimensionResource(id = R.dimen.padding_16)
+    val dimension = LocalConfiguration.current.getDimension()
 
     Card(
         modifier = modifier
-            .padding(horizontal = padding16)
-            .padding(bottom = padding16)
+            .padding(horizontal = dimension.grid_2)
+            .padding(bottom = dimension.grid_2)
             .fillMaxWidth()
             .wrapContentHeight()
-            .defaultMinSize(minHeight = dimensionResource(id = R.dimen.minimum_list_item_height))
+            .defaultMinSize(minHeight = dimension.minListItemHeight)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -113,7 +112,7 @@ fun RegularHeadline(
                 contentScale = ContentScale.FillWidth,
                 modifier = Modifier
                     .weight(0.3f)
-                    .padding(all = padding4)
+                    .padding(all = dimension.grid_0_5)
             )
 
             Column(
@@ -130,7 +129,7 @@ fun RegularHeadline(
                     modifier = Modifier
                         .fillMaxWidth()
                         .wrapContentHeight()
-                        .padding(horizontal = padding16, vertical = padding4)
+                        .padding(horizontal = dimension.grid_2, vertical = dimension.grid_0_5)
                 )
                 Text(
                     text = teaserText ?: "",
@@ -141,7 +140,7 @@ fun RegularHeadline(
                         .fillMaxWidth()
                         .wrapContentHeight()
                         .weight(weight = 1.0f)
-                        .padding(horizontal = padding16)
+                        .padding(horizontal = dimension.grid_2)
                 )
                 Text(
                     text = date,
@@ -150,7 +149,7 @@ fun RegularHeadline(
                     modifier = Modifier
                         .fillMaxWidth()
                         .wrapContentHeight()
-                        .padding(horizontal = padding16, vertical = padding8)
+                        .padding(horizontal = dimension.grid_2, vertical = dimension.grid_1)
                 )
             }
         }
