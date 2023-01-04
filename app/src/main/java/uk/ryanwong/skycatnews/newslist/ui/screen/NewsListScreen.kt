@@ -25,7 +25,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -44,6 +44,7 @@ import uk.ryanwong.skycatnews.newslist.ui.screen.component.RegularStoryHeadline
 import uk.ryanwong.skycatnews.newslist.ui.screen.component.RegularWebLinkHeadline
 import uk.ryanwong.skycatnews.newslist.ui.screen.previewparameter.NewsListProvider
 import uk.ryanwong.skycatnews.newslist.ui.viewmodel.NewsListViewModel
+import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.app.ui.theme.getDimension
 
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
@@ -95,7 +96,7 @@ fun NewsListScreenLayout(
     onStoryItemClicked: (id: Int) -> Unit,
     onWebLinkItemClicked: (id: Int) -> Unit,
 ) {
-    val padding16 = dimensionResource(id = R.dimen.padding_16)
+    val dimension = LocalConfiguration.current.getDimension()
     val contentDescriptionNewsList = stringResource(R.string.content_description_news_list)
     val pullRefreshState = rememberPullRefreshState(refreshing = isLoading, onRefresh = onRefresh)
 
@@ -106,7 +107,7 @@ fun NewsListScreenLayout(
             .pullRefresh(pullRefreshState),
     ) {
         LazyColumn(
-            contentPadding = PaddingValues(vertical = padding16),
+            contentPadding = PaddingValues(vertical = dimension.grid_2),
             modifier = Modifier
                 .fillMaxSize()
                 .semantics { contentDescription = contentDescriptionNewsList }

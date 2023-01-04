@@ -27,7 +27,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,6 +35,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import uk.ryanwong.skycatnews.R
 import uk.ryanwong.skycatnews.app.ui.theme.SkyCatNewsTheme
+import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.app.ui.theme.getDimension
 
 @Composable
 fun SkyCatNewsAppBar(
@@ -48,12 +49,14 @@ fun SkyCatNewsAppBar(
         setCanPop(controller.previousBackStackEntry != null)
     }
 
+    val dimension = LocalConfiguration.current.getDimension()
+
     TopAppBar(
         backgroundColor = MaterialTheme.colors.surface,
         modifier = modifier
     ) {
 
-        Box(Modifier.height(dimensionResource(id = R.dimen.app_bar_height))) {
+        Box(Modifier.height(dimension.appBarHeight)) {
             // TODO: Material-3 will provide a new way to achieve this - pending rewrite.
             // Doing in this way instead of using the default navigationIcon slot,
             // because we cannot properly center align our custom image title in that case.

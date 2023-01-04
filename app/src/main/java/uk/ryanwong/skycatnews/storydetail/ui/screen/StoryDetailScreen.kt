@@ -34,8 +34,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
@@ -58,6 +58,7 @@ import uk.ryanwong.skycatnews.storydetail.domain.model.Content
 import uk.ryanwong.skycatnews.storydetail.domain.model.Story
 import uk.ryanwong.skycatnews.storydetail.ui.previewparameter.StoryProvider
 import uk.ryanwong.skycatnews.storydetail.ui.viewmodel.StoryDetailViewModel
+import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.app.ui.theme.getDimension
 
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
@@ -104,7 +105,7 @@ private fun StoryDetailScreenLayout(
     story: Story?,
     onRefresh: () -> Unit,
 ) {
-    val padding16 = dimensionResource(id = R.dimen.padding_16)
+    val dimension = LocalConfiguration.current.getDimension()
     val shouldAllowSwipeRefresh = (story == null && !isLoading)
     val contentDescriptionStoryDetail = stringResource(R.string.content_description_story_detail)
     val pullRefreshState = rememberPullRefreshState(refreshing = isLoading, onRefresh = onRefresh)
@@ -121,7 +122,7 @@ private fun StoryDetailScreenLayout(
             .background(color = MaterialTheme.colors.background),
     ) {
         LazyColumn(
-            contentPadding = PaddingValues(bottom = padding16),
+            contentPadding = PaddingValues(bottom = dimension.grid_2),
             modifier = Modifier
                 .fillMaxSize()
                 .semantics { contentDescription = contentDescriptionStoryDetail },
@@ -153,7 +154,7 @@ private fun StoryDetailScreenLayout(
                             style = CustomTextStyle.storyDetailParagraph,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(all = padding16)
+                                .padding(all = dimension.grid_2)
                         )
                     }
                     is Content.Image -> {
@@ -170,7 +171,7 @@ private fun StoryDetailScreenLayout(
                             contentScale = ContentScale.FillWidth,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(all = padding16)
+                                .padding(all = dimension.grid_2)
                                 .wrapContentHeight()
                         )
                     }
@@ -193,7 +194,7 @@ private fun HeroImageSection(
     heroImageUrl: String?,
     heroImageAccessibilityText: String?,
 ) {
-    val padding16 = dimensionResource(id = R.dimen.padding_16)
+    val dimension = LocalConfiguration.current.getDimension()
 
     Box(
         modifier = modifier
@@ -231,7 +232,7 @@ private fun HeroImageSection(
                 )
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .padding(all = padding16)
+                .padding(all = dimension.grid_2)
                 .align(alignment = Alignment.BottomStart)
 
         ) {

@@ -14,13 +14,14 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import uk.ryanwong.skycatnews.R
 import uk.ryanwong.skycatnews.app.ui.theme.CustomTextStyle
+import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.app.ui.theme.getDimension
 
 @Preview(
     showBackground = true,
@@ -29,7 +30,7 @@ import uk.ryanwong.skycatnews.app.ui.theme.CustomTextStyle
 @Composable
 fun NoDataScreen(modifier: Modifier = Modifier) {
 
-    val padding16 = dimensionResource(id = R.dimen.padding_16)
+    val dimension = LocalConfiguration.current.getDimension()
 
     Column(
         verticalArrangement = Arrangement.Center,
@@ -48,7 +49,7 @@ fun NoDataScreen(modifier: Modifier = Modifier) {
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(all = padding16)
+                .padding(all = dimension.grid_2)
         )
     }
 }

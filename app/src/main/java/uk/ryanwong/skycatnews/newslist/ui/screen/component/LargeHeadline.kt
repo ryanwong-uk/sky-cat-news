@@ -17,8 +17,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,6 +28,7 @@ import uk.ryanwong.skycatnews.R
 import uk.ryanwong.skycatnews.app.ui.theme.CustomTextStyle
 import uk.ryanwong.skycatnews.app.ui.theme.SkyCatNewsTheme
 import uk.ryanwong.skycatnews.newslist.domain.model.NewsItem
+import uk.ryanwong.skycatnews.uk.ryanwong.skycatnews.app.ui.theme.getDimension
 
 @Composable
 fun LargeStoryHeadline(
@@ -73,13 +74,12 @@ fun LargeHeadline(
     date: String,
     onItemClicked: () -> Unit,
 ) {
-    val padding8 = dimensionResource(id = R.dimen.padding_8)
-    val padding16 = dimensionResource(id = R.dimen.padding_16)
+    val dimension = LocalConfiguration.current.getDimension()
 
     Card(
         modifier = modifier
-            .padding(horizontal = padding16)
-            .padding(bottom = padding16)
+            .padding(horizontal = dimension.grid_2)
+            .padding(bottom = dimension.grid_2)
             .fillMaxWidth()
             .aspectRatio(ratio = 1f, matchHeightConstraintsFirst = true)
     ) {
@@ -119,7 +119,7 @@ fun LargeHeadline(
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentHeight()
-                    .padding(horizontal = padding16, vertical = padding8)
+                    .padding(horizontal = dimension.grid_2, vertical = dimension.grid_1)
             )
 
             teaserText?.let {
@@ -132,7 +132,7 @@ fun LargeHeadline(
                     modifier = Modifier
                         .fillMaxWidth()
                         .wrapContentHeight()
-                        .padding(horizontal = padding16)
+                        .padding(horizontal = dimension.grid_2)
                 )
             }
 
@@ -144,7 +144,7 @@ fun LargeHeadline(
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentHeight()
-                    .padding(horizontal = padding16, vertical = padding8)
+                    .padding(horizontal = dimension.grid_2, vertical = dimension.grid_1)
             )
         }
     }
